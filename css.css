@@ -1,0 +1,81 @@
+.navbar {
+  overflow: hidden;
+  background-color: #f0f0f0; /* HEX Value */
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2; /* this is for text */
+  text-align: center;
+  padding: 14px 29px;
+  text-decoration: none;
+  margin-top: 10px;
+}
+/* What is this shit probable to clear everything and add a fking block*/
+.w3-container:after,.w3-container:before,.w3-panel:after,.w3-panel:before,.w3-row:after,.w3-row:before,.w3-row-padding:after,.w3-row-padding:before,
+.w3-cell-row:before,.w3-cell-row:after,.w3-clear:after,.w3-clear:before,.w3-bar:before,.w3-bar:after{content:"";display:table;clear:both}
+#totop {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #f0f0f0;
+  padding: 14px 29px;
+}
+#totop:hover{
+    background-color: #b4b4b4;
+}
+
+
+
+
+
+/* Change background on mouse-over */
+.navbar a:hover {
+  background: #ddd;
+  color: #000000; /* this is for text */
+}
+
+/* Main content */
+.main {
+  padding: 16px;
+  margin-top: 60px; /* stay out of the top */
+  height: 1500px; /* Used in this example to enable scrolling */
+}
+/* Display recommened menu */
+.Rdisplay{
+  padding: 10px 10px;
+  margin-top: 70px;
+  margin-left: 10px;
+}
+
+#logo2{
+    margin-left: 40px;
+}
+#logo1{
+    margin-top: 10px;
+}
+#text1{
+    margin-left: 40px;
+}
+.hblock{
+    float:left;
+    width:50%;
+}
+.button{
+    padding: 70px 20px;
+    text-align:center   
+}
+.imcolour{
+    color:#000000!important;background-color:#f0f0f0!important
+}
+.ldisplay{
+    padding: 10px 10px;
+ }
+#btext{
+    margin-left: 100px;
+}
