@@ -7,7 +7,7 @@ session_start();
                   $Username = $_POST['Username'];
                   $Password = md5($_POST['Password']);
 				//query 
-                  $sql="SELECT * FROM user WHERE 'user_name'='".$Username."' and user_password='".$Password."' ";
+                  $sql="SELECT * FROM user WHERE user_name='".$Username."' and user_password='".$Password."' ";
 
                   $result = mysqli_query($conn,$sql);
 				
@@ -35,8 +35,8 @@ session_start();
 
                   }else{
                     echo "<script>";
-                        echo "alert(\"Incorrect user or password\");"; 
-                        echo "window.history.back()";
+                        echo "alert(\".$sql.\");";
+                        //echo "window.history.back()";
                     echo "</script>";
 
                   }
