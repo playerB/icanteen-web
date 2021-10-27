@@ -1,18 +1,18 @@
 <?php session_start();?>
 <?php 
 
-if (!$_SESSION["UserID"]){  //check session
+if (!$_SESSION["user_name"]){  //check session
 		Header("Location: form_login.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า login form 
 
 }else{
-	if ($_SESSION["Userlevel"]=="M"){  //ถ้าเป็น member ให้กลับ
+	if ($_SESSION["user_role"]!="admin"){  //ถ้าเป็น member ให้กลับ
 		echo "<script>";
         echo "alert(\"You do not have access to this page\");"; 
         echo "window.history.back()";
         echo "</script>";
 
     }
-	if ($_SESSION["Userlevel"]=="A"){ ?>
+	if ($_SESSION["user_role"]=="admin"){ ?>
 <!doctype html>
 <html>
 <head>
@@ -24,7 +24,7 @@ if (!$_SESSION["UserID"]){  //check session
 </head>
 <body>
     <div class="container-fluid" style="display: inline;">
-	Logged in as : <?php print_r($_SESSION["User"]);?> <a class='btn btn-danger' href='logout.php' role='button'>Log out</a><br/>
+	Logged in as : <?php print_r($_SESSION["user_name"]);?> <a class='btn btn-danger' href='logout.php' role='button'>Log out</a><br/>
 	</div>
 	<div class="container-fluid" style="display: inline;">
 	Admin options

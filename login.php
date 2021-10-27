@@ -7,7 +7,7 @@ session_start();
                   $Username = $_POST['Username'];
                   $Password = md5($_POST['Password']);
 				//query 
-                  $sql="SELECT * FROM user WHERE 'user_id'='".$Username."' and user_password='".$Password."' ";
+                  $sql="SELECT * FROM user WHERE 'user_name'='".$Username."' and user_password='".$Password."' ";
 
                   $result = mysqli_query($conn,$sql);
 				
@@ -19,17 +19,17 @@ session_start();
                       $_SESSION["user_name"] = $row["user_name"];
                       $_SESSION["user_role"] = $row["user_role"];
 
-                      if($_SESSION["user_role"]=="admin"){ //ถ้าเป็น admin ให้กระโดดไปหน้า showmenu.php
+                      if($_SESSION["user_role"]=="admin"){ //ถ้าเป็น admin ให้กระโดดไปหน้า admin_page.php
 
                         Header("Location: admin_page.php");
-						$_SESSION["Loggedin"] = true;
+						            $_SESSION["Loggedin"] = true;
 
                       }
 
-                      if ($_SESSION["user_role"]=="member"){  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
+                      if ($_SESSION["user_role"]=="member"){  //ถ้าเป็น member ให้กระโดดไปหน้า usermenu.php
 
                         Header("Location: usermenu.php");
-						$_SESSION["Loggedin"] = true;
+						            $_SESSION["Loggedin"] = true;
 
                       }
 
