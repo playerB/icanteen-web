@@ -1,5 +1,5 @@
 <?php session_start(); error_reporting(~E_NOTICE );
-if ($_SESSION["UserID"]){
+if ($_SESSION["user_name"]){
 	echo "<script>";
 	echo "alert(\"You are already logged in!\");";
 	echo "window.history.back()";

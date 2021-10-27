@@ -2,18 +2,18 @@
 <?php session_start();?>
 <?php 
 
-if (!$_SESSION["UserID"]){  //check session
-		Header("Location: form_login.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า login form 
+if (!$_SESSION["user_name"]){  //check session
+	Header("Location: form_login.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า form_login.php 
 
 }else{
-	if ($_SESSION["Userlevel"]=="M"){  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
-		echo "<script>";
-        echo "alert(\"You do not have access to this page\");"; 
-        echo "window.history.back()";
-        echo "</script>";
+if ($_SESSION["user_role"]!="admin"){
+	echo "<script>";
+	echo "alert(\"You do not have access to this page\");"; 
+	echo "window.history.back()";
+	echo "</script>";
 
-    }
-	if ($_SESSION["Userlevel"]=="A"){
+}
+if ($_SESSION["user_role"]=="admin"){
 //1. เชื่อมต่อ database: 
 include('Connections/condb.php');  //ไฟล์เชื่อมต่อกับ database ที่เราได้สร้างไว้ก่อนหน้าน้ี
 //สร้างตัวแปรสำหรับรับค่า m_id จากไฟล์แสดงข้อมูล
