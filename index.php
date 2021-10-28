@@ -18,6 +18,17 @@ $result1 = mysqli_query($conn, $query);
 			font-size: '20pt';
 			background-color: #dddddd;
 		}
+		.showusername {
+			position: absolute;
+			right: 20px;
+			color: #ffffff;
+		}
+		.dropdown-menu {
+			background-color: #7f1d17;
+		}
+		.dropdown-item {
+			color: white;
+		}
 		.textbgred {
 			background-color: #7f1d17;
 		}
@@ -99,21 +110,49 @@ $result1 = mysqli_query($conn, $query);
 
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-			<?php if($_SESSION["Loggedin"]){ ?>
-			  <li class="nav-item active">
-				<a class="btn btn-danger" href="logout.php" style="color: white">Logout</a>
-			  </li>
-			<?php } else{ ?>
-			  <li class="nav-item">
-				<a class="btn btn-danger" href="form_login.php" style="color: white">Login</a>
-			  </li>
-			<?php } ?>
-			  <li class="nav-item">
-				<a class="nav-link" href="usermenu.php" style="color: #7f1d17">Menu</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="newspage.php" style="color: #7f1d17">News</a>
-			  </li>
+				<li class="nav-item">
+					<a class="nav-link" href="index.php" style="color: #7f1d17">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="usermenu.php" style="color: #7f1d17">Menu</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="newspage.php" style="color: #7f1d17">News</a>
+				</li>
+				<?php if($_SESSION["user_role"]=="member") {?>
+				<li class="nav-item">
+					<a class="nav-link" href="#" style="color: #7f1d17">Order</a>
+				</li>
+				<?php } elseif($_SESSION["user_role"]=="admin") {?>
+				<li class="nav-item">
+					<a class="nav-link" href="#" style="color: #7f1d17">Report</a>
+				</li>
+				<?php } elseif($_SESSION["user_role"]=="vendor") {?>
+				<li class="nav-item">
+					<a class="nav-link" href="#" style="color: #7f1d17">Manage</a>
+				</li>
+				<?php } ?>
+
+				<?php if($_SESSION["Loggedin"]){ ?>
+
+				<li class="nav-item showusername">
+				<div class="dropdown">
+					<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<?php print_r($_SESSION["user_name"]); ?>
+					</button>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="#">Balance: <?php print_r($_SESSION["user_balance"]); ?> ฿</a>
+						<a class="dropdown-item" href="#">Topup</a>
+						<a class="dropdown-item" href="#">Report problem</a>
+						<a class="dropdown-item" href="logout.php">Logout</a>
+					</div>
+				</div>
+				</li>
+				<?php } else{ ?>
+				<li class="nav-item showusername">
+					<a class="btn btn-danger" href="form_login.php" style="color: white">Login</a>
+				</li>
+				<?php } ?>
 			</ul>
 		  </div>
 		</nav>

@@ -18,13 +18,13 @@ echo "</script>";
 	$menu_price = $_POST["menu_price"];
 	$menu_category = $_POST["menu_category"];
 	$menu_detail = $_POST["menu_detail"];
-	if(!empty($_FILES['image']['name'])) {
-			$filename = md5($_FILES['image']['name'].time());
-			$ext = explode('.',$_FILES['image']['name']);
+	if(!empty($_FILES['menu_picture']['name'])) {
+			$filename = md5($_FILES['menu_picture']['name'].time());
+			$ext = explode('.',$_FILES['menu_picture']['name']);
 			$path = "menu_picture/";
 			$path_copy = $path.$filename;
 
-			move_uploaded_file($_FILES['image']['tmp_name'],$path_copy);  	
+			move_uploaded_file($_FILES['menu_picture']['tmp_name'],$path_copy);  	
 		$sql = "UPDATE menu SET " 
 			."menu_name='$menu_name', "
 			."restaurant_id='$restaurant_id', "

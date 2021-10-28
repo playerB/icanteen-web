@@ -18,6 +18,8 @@ session_start();
                       $_SESSION["user_id"] = $row["user_id"];
                       $_SESSION["user_name"] = $row["user_name"];
                       $_SESSION["user_role"] = $row["user_role"];
+                      $_SESSION["user_balance"] = $row["user_balance"];
+
 
                       if($_SESSION["user_role"]=="admin"){ //ถ้าเป็น admin ให้กระโดดไปหน้า admin_page.php
 
