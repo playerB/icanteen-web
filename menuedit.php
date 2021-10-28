@@ -41,8 +41,8 @@ $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_err
 $row = mysqli_fetch_array($result);
 $menu_name = $row["menu_name"];
 $restaurant_id = $row["restaurant_id"];
-$menu_price = $row["menu_price"];
-$meu_category = $row["menu_category"];
+$menu_menu_price = $row["menu_menu_price"];
+$meu_menu_categorygory = $row["menu_menu_categorygory"];
 $menu_detail = $row["menu_detail"];
 $menu_picture = $row["menu_picture"];
 extract($row);
@@ -56,12 +56,12 @@ extract($row);
 					<input type="hidden" name="menu_id" value="<?php echo $menu_id; ?>" />
 			</div>
 			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="menuname">Menu name :</label>
-					<input type="text" class="form-control" name="menuname" id="menuname" placeholder="<?php echo $menu_name; ?>" value="<?php echo $menu_name; ?>" required="required"/><br/><br/>
+				<label for="menu_name">Menu name :</label>
+					<input type="text" class="form-control" name="menu_name" id="menu_name" placeholder="<?php echo $menu_name; ?>" value="<?php echo $menu_name; ?>" required="required"/><br/><br/>
 	enu		</div>
 			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="resname">Restaurant :</label>
-					<select type="text" class="custom-select" name="resname" id="resname" required="required">
+				<label for="restaurant_id">Restaurant :</label>
+					<select type="text" class="custom-select" name="restaurant_id" id="restaurant_id" required="required">
 					<option selected value="0">เลือก</option>
 					<option value="1">1.สุชาดา น้ำผลไม้</option>
 					<option value="2">2.ส้ม อาหารชุด</option>
@@ -79,16 +79,16 @@ extract($row);
 			</div>
 			<div style="width: 300px; height: 60px;">
 			<div class="input-group">
-				<label for="price">Price :</label>
-					<input type="float" class="form-control" name="price" id="price" placeholder="<?php echo $menu_price; ?>" value="<?php echo $menu_price; ?>" required="required"/>
+				<label for="menu_price">Price :</label>
+					<input type="float" class="form-control" name="menu_price" id="menu_price" placeholder="<?php echo $menu_menu_price; ?>" value="<?php echo $menu_menu_price; ?>" required="required"/>
 				<div class="input-group-append">
 					<span class="input-group-text">฿</span>
 				</div>
 			</div>
 			</div>
 			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="cate">Category :</label>
-				<select type="text" class="custom-select" name="cate" id="cate" required="required">
+				<label for="menu_category">Category :</label>
+				<select type="text" class="custom-select" name="menu_category" id="menu_category" required="required">
 					<option selected value="เลือก">เลือก</option>
 					<option value="ข้าว">ข้าว</option>
 					<option value="เส้น">เส้น</option>
@@ -102,12 +102,12 @@ extract($row);
 					<br /><br />
 			</div>
 			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="info">Description :</label>
-					<input type="text" class="form-control" name="info" id="info" placeholder="<?php echo $menu_detail; ?>" value="<?php echo $menu_detail; ?>" /><br/><br/>
+				<label for="menu_detail">Description :</label>
+					<input type="text" class="form-control" name="menu_detail" id="menu_detail" placeholder="<?php echo $menu_detail; ?>" value="<?php echo $menu_detail; ?>" /><br/><br/>
 			</div>
 			<div style="width: 300px; height: 60px;" class="form-group">
-				<!--<label for="image">Picture :</label>-->
-					<input type="file" class="form-control-file" name="image" id="image" /><br/><br/>
+				<!--<label for="menu_picture">Picture :</label>-->
+					<input type="file" class="form-control-file" name="menu_picture" id="menu_picture" /><br/><br/>
 			</div>
 			<div style="height: 200px;" class="form-group">
 				<?php

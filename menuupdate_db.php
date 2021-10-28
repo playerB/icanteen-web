@@ -4,7 +4,7 @@
 include('Connections/condb.php');  //ไฟล์เชื่อมต่อกับ database ที่เราได้สร้างไว้ก่อนหน้าน้ี
  
 //ตรวจสอบถ้าว่างให้เด้งไปหน้าหลักและไม่แก้ไขข้อมูล
-if($_POST["m_id"]==''){
+if($_POST["menu_id"]==''){
 echo "<script type='text/javascript'>"; 
 echo "alert('Error Contact Admin !!');"; 
 echo "window.location = 'showmenu.php'; "; 
@@ -12,35 +12,35 @@ echo "</script>";
 }
  
 //สร้างตัวแปรสำหรับรับค่าที่นำมาแก้ไขจากฟอร์ม
-	$m_id = $_POST["m_id"];
-	$menuname = $_POST["menuname"];
-	$resname = $_POST["resname"];
-	$price = $_POST["price"];
-	$cate = $_POST["cate"];
-	$info = $_POST["info"];
+	$menu_id = $_POST["menu_id"];
+	$menu_name = $_POST["menu_name"];
+	$restaurant_id = $_POST["restaurant_id"];
+	$menu_price = $_POST["menu_price"];
+	$menu_category = $_POST["menu_category"];
+	$menu_detail = $_POST["menu_detail"];
 	if(!empty($_FILES['image']['name'])) {
 			$filename = md5($_FILES['image']['name'].time());
 			$ext = explode('.',$_FILES['image']['name']);
-			$path = "m_image/";
+			$path = "menu_picture/";
 			$path_copy = $path.$filename;
 
 			move_uploaded_file($_FILES['image']['tmp_name'],$path_copy);  	
 		$sql = "UPDATE icanteen_menu SET " 
-			."m_name='$menuname', "
-			."m_resname='$resname', "
-			."m_price='$price', "
-			."m_cate='$cate', "
-			."m_info='$info', "
-			."m_image='$filename'
-			WHERE m_id='$m_id'";
+			."menu_name='$menu_name', "
+			."restaurant_id='$restaurant_id', "
+			."menu_price='$menu_price', "
+			."menu_category='$menu_category', "
+			."menu_detail='$menu_detail', "
+			."menu_picture='$filename'
+			WHERE menu_id='$menu_id'";
 	} else { //ทำการปรับปรุงข้อมูลที่จะแก้ไขลงใน database
 		$sql = "UPDATE icanteen_menu SET " 
-			."m_name='$menuname', "
-			."m_resname='$resname', "
-			."m_price='$price', "
-			."m_cate='$cate', "
-			."m_info='$info'
-			WHERE m_id='$m_id'";
+			."m_name='$menu_name', "
+			."m_restaurant_id='$restaurant_id', "
+			."m_menu_price='$menu_price', "
+			."m_menu_category='$menu_category', "
+			."m_menu_detail='$menu_detail'
+			WHERE menu_id='$menu_id'";
 	}
 #error_reporting(~E_NOTICE );
  
