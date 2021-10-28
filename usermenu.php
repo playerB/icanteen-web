@@ -9,10 +9,10 @@ for ($x = 1; $x <= 11; $x++) {
 }
 
 ?>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>I-CANTEEN</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <style>

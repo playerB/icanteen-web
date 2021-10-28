@@ -1,15 +1,15 @@
 <?php session_start(); error_reporting(~E_NOTICE);
 include('Connections/condb.php');
 
-if($_GET['m_id']==''){ 
+if($_GET['menu_id']==''){ 
 echo "<script type='text/javascript'>"; 
 echo "alert('Error Contact Admin !!');"; 
-echo "window.location = 'showmenu.php'; "; 
+echo "window.location = 'index.php'; "; 
 echo "</script>"; 
 }
 
-$m_id = mysqli_real_escape_string($conn,$_GET['m_id']);
-$sql = "SELECT * FROM icanteen_menu WHERE m_id='$m_id' " or die("Error:" . mysqli_error()); 
+$menu_id = mysqli_real_escape_string($conn,$_GET['menu_id']);
+$sql = "SELECT * FROM menu WHERE menu_id='$menu_id' " or die("Error:" . mysqli_error()); 
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 
@@ -77,15 +77,15 @@ $row = mysqli_fetch_array($result);
 		<?php
 		echo "<div class='row'>";
 		echo "<div class='col-12 col-md-4'>";
-		echo "<h1 class='display-5'>" .$row["m_name"] .  "</h1>";
-	  	echo "<img src='m_image/".$row["m_image"]." 'class='menu-img'>";
+		echo "<h1 class='display-5'>" .$row["menu_name"] .  "</h1>";
+	  	echo "<img src='menu_picture/".$row["menu_picture"]." 'class='menu-img'>";
 		echo "</div>";
 		echo "<div class='col-12 col-md-8'>";
-	  	echo "<h2 style='padding-top: 10px;'>ร้าน " .$row["m_resname"] .  "</h2> ";
-		echo "<h2 style='padding-top: 10px;'>ราคา <span class='price-badge'>".$row["m_price"]." ฿</span></h2> ";
-		echo "<h4 style='padding-top: 10px;'>ประเภท : " .$row["m_cate"] .  "</h4> ";
-		echo "<p style='padding-top: 10px;'>รีวิว : " .$row["m_info"] .  "</p> ";
-		echo "<div style='padding-top: 20px;'><a class='btn btn-success btn-lg'  href='line://oaMessage/@045jpvio/?สั่ง ".$row["m_name"]." ร้าน ".$row["m_resname"]."' role='button'>สั่งเลย! <img src='Materials/homepage/LINE_SOCIAL_Circle.png' style='width: 1.5rem;'></a></div>";
+	  	echo "<h2 style='padding-top: 10px;'>ร้าน " .$row["restaurant_id"] .  "</h2> ";
+		echo "<h2 style='padding-top: 10px;'>ราคา <span class='price-badge'>".$row["menu_price"]." ฿</span></h2> ";
+		echo "<h4 style='padding-top: 10px;'>ประเภท : " .$row["menu_category"] .  "</h4> ";
+		echo "<p style='padding-top: 10px;'>รีวิว : " .$row["menu_detail"] .  "</p> ";
+		echo "<div style='padding-top: 20px;'><a class='btn btn-success btn-lg'  href='line://oaMessage/@045jpvio/?สั่ง ".$row["menu_name"]." ร้าน ".$row["m_resname"]."' role='button'>สั่งเลย! <img src='Materials/homepage/LINE_SOCIAL_Circle.png' style='width: 1.5rem;'></a></div>";
 		echo "</div></div>";?>
 	  	
 	</div>
