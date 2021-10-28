@@ -1,10 +1,5 @@
 <?php session_start(); error_reporting(~E_NOTICE );
-include('Connections/condb.php');
-
-$query = "SELECT * FROM icanteen_menu ORDER BY m_id asc" or die("Error:" . mysqli_error()); 
-$result1 = mysqli_query($conn, $query);
-
-?>
+include('Connections/condb.php');?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -18,7 +13,7 @@ $result1 = mysqli_query($conn, $query);
 			font-size: '20pt';
 			background-color: #dddddd;
 		}
-		.showusername {
+		.rightaligned {
 			position: absolute;
 			right: 20px;
 			color: #ffffff;
@@ -121,35 +116,35 @@ $result1 = mysqli_query($conn, $query);
 				</li>
 				<?php if($_SESSION["user_role"]=="member") {?>
 				<li class="nav-item">
-					<a class="nav-link" href="#" style="color: #7f1d17">Order</a>
+					<a class="nav-link" href="myorder.php" style="color: #7f1d17">Order</a>
 				</li>
 				<?php } elseif($_SESSION["user_role"]=="admin") {?>
 				<li class="nav-item">
-					<a class="nav-link" href="#" style="color: #7f1d17">Report</a>
+					<a class="nav-link" href="showreport.php" style="color: #7f1d17">Report</a>
 				</li>
 				<?php } elseif($_SESSION["user_role"]=="vendor") {?>
 				<li class="nav-item">
-					<a class="nav-link" href="#" style="color: #7f1d17">Manage</a>
+					<a class="nav-link" href="restaurantmanage.php" style="color: #7f1d17">Manage</a>
 				</li>
 				<?php } ?>
 
 				<?php if($_SESSION["Loggedin"]){ ?>
 
-				<li class="nav-item showusername">
+				<li class="nav-item rightaligned">
 				<div class="dropdown">
 					<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<?php print_r($_SESSION["user_name"]); ?>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 						<a class="dropdown-item" href="#">Balance: <?php print_r($_SESSION["user_balance"]); ?> ฿</a>
-						<a class="dropdown-item" href="#">Topup</a>
-						<a class="dropdown-item" href="#">Report problem</a>
+						<a class="dropdown-item" href="topup.php">Topup</a>
+						<a class="dropdown-item" href="userreport.php">Report problem</a>
 						<a class="dropdown-item" href="logout.php">Logout</a>
 					</div>
 				</div>
 				</li>
 				<?php } else{ ?>
-				<li class="nav-item showusername">
+				<li class="nav-item rightaligned">
 					<a class="btn btn-danger" href="form_login.php" style="color: white">Login</a>
 				</li>
 				<?php } ?>
@@ -303,11 +298,6 @@ $result1 = mysqli_query($conn, $query);
 				</div>
 			</div>
         </div>
-		<div class="chat-button">
-			<a href="line://oaMessage/@045jpvio/?">
-				<img src="Materials/homepage/LINE_SOCIAL_Circle.png" class="chat-button"></a>
-				<p style="position: relative; bottom: 4rem; font-size: 0.65rem;">I-CANTEEN BOT</p>
-		</div>
         <footer style="background-color: #cccccc">
 			<div class="container">
 				<p id = "btext"><br>
