@@ -22,16 +22,21 @@ session_start();
                       if($_SESSION["user_role"]=="admin"){ //ถ้าเป็น admin ให้กระโดดไปหน้า admin_page.php
 
                         Header("Location: admin_page.php");
-						            $_SESSION["Loggedin"] = true;
 
                       }
 
-                      if ($_SESSION["user_role"]=="member"){  //ถ้าเป็น member ให้กระโดดไปหน้า usermenu.php
+                      else if ($_SESSION["user_role"]=="member"){  //ถ้าเป็น member ให้กระโดดไปหน้า usermenu.php
 
                         Header("Location: usermenu.php");
-						            $_SESSION["Loggedin"] = true;
 
                       }
+
+                      else if ($_SESSION["user_role"]=="vendor"){  //ถ้าเป็น vendor ให้กระโดดไปหน้า usermenu.php
+
+                        Header("Location: usermenu.php");
+
+                      }
+                      $_SESSION["Loggedin"] = true;
 
                   }else{
                     echo "<script>";
