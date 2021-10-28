@@ -18,9 +18,8 @@ if ($_SESSION["user_role"]=="admin"){ ?>
 <head></head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta charset="utf-8">
-<link href="css/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
-<style>
-</style>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<link href="css.css" rel="stylesheet">
 <?php
 //1. เชื่อมต่อ database: 
 include('Connections/condb.php');  //ไฟล์เชื่อมต่อกับ database ที่เราได้สร้างไว้ก่อนหน้าน้ี

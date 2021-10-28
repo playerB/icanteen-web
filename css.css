@@ -1,81 +1,84 @@
-.navbar {
-  overflow: hidden;
-  background-color: #f0f0f0; /* HEX Value */
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
+@import url('https://fonts.googleapis.com/css?family=Mitr&display=swap');
+body {
+    font-family: 'Mitr', serif;
+    font-size: '20pt';
+    background-color: #dddddd;
 }
-
-/* Links inside the navbar */
-.navbar a {
-  float: left;
-  display: block;
-  color: #f2f2f2; /* this is for text */
-  text-align: center;
-  padding: 14px 29px;
-  text-decoration: none;
-  margin-top: 10px;
+.rightaligned {
+    position: absolute;
+    right: 20px;
+    color: #ffffff;
 }
-/* What is this shit probable to clear everything and add a fking block*/
-.w3-container:after,.w3-container:before,.w3-panel:after,.w3-panel:before,.w3-row:after,.w3-row:before,.w3-row-padding:after,.w3-row-padding:before,
-.w3-cell-row:before,.w3-cell-row:after,.w3-clear:after,.w3-clear:before,.w3-bar:before,.w3-bar:after{content:"";display:table;clear:both}
-#totop {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: #f0f0f0;
-  padding: 14px 29px;
+.dropdown-menu {
+    background-color: #7f1d17;
 }
-#totop:hover{
-    background-color: #b4b4b4;
+.dropdown-item {
+    color: white;
 }
-
-
-
-
-
-/* Change background on mouse-over */
-.navbar a:hover {
-  background: #ddd;
-  color: #000000; /* this is for text */
+.textbgred {
+    background-color: #7f1d17;
 }
-
-/* Main content */
-.main {
-  padding: 16px;
-  margin-top: 60px; /* stay out of the top */
-  height: 1500px; /* Used in this example to enable scrolling */
+.carousel-caption {
+    text-align: left;
 }
-/* Display recommened menu */
-.Rdisplay{
-  padding: 10px 10px;
-  margin-top: 70px;
-  margin-left: 10px;
+.card {
+    width: 18.5rem;
+    height: 23rem;
 }
-
-#logo2{
-    margin-left: 40px;
+.card-hz {
+    width: 22rem;
+    height: 12rem;
 }
-#logo1{
-    margin-top: 10px;
+.card-img-top {
+    width: 18.5rem;
+    height: 12rem;
+    object-fit: cover;
 }
-#text1{
-    margin-left: 40px;
+.card-img {
+    width: 10rem;
+    height: 12rem;
+    object-fit: cover;
 }
-.hblock{
-    float:left;
-    width:50%;
+.card-body-hz {
+    width: 12rem;
+    height: 12rem;
 }
-.button{
-    padding: 70px 20px;
-    text-align:center   
+.card-title {
+    height: 1.5rem;
+    overflow: hidden;
 }
-.imcolour{
-    color:#000000!important;background-color:#f0f0f0!important
+.card-text {
+    height: 3rem;
+    overflow: hidden;
 }
-.ldisplay{
-    padding: 10px 10px;
- }
-#btext{
-    margin-left: 100px;
+.card-caption {
+    height: 2rem;
+    overflow: hidden;
+}
+.chat-button {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 4rem;
+}
+@media (min-width: 576px) {
+    .card-hz {
+    width: 38.5rem;
+    height: 12rem;
+    }
+    .card-img {
+    width: 16rem;
+    height: 12rem;
+    object-fit: cover;
+    }
+    .card-body-hz {
+        width: 20rem;
+        height: 12rem;
+    }
+    .chat-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 1rem;
+    width: 5rem;
+    }
 }

@@ -11,68 +11,11 @@ $result1 = mysqli_query($conn, $query);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>I-CANTEEN</title>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <style>
-		@import url('https://fonts.googleapis.com/css?family=Mitr&display=swap');
-		body {
-			font-family: 'Mitr', serif;
-			font-size: '20pt';
-			background-color: #dddddd;
-		}
-		.card {
-			width: 18.5rem;
-			height: 23rem;
-		}
-		.card-hz {
-			width: 22rem;
-			height: 12rem;
-		}
-		.card-img-top {
-			width: 18.5rem;
-			height: 12rem;
-			object-fit: cover;
-		}
-		.card-img {
-			width: 10rem;
-			height: 12rem;
-			object-fit: cover;
-		}
-		.card-body-hz {
-			width: 12rem;
-			height: 12rem;
-		}
-		.card-title {
-			height: 1.5rem;
-			overflow: hidden;
-		}
-		.card-text {
-			height: 3rem;
-			overflow: hidden;
-		}
-		.card-caption {
-			height: 2rem;
-			overflow: hidden;
-		}
-		@media (min-width: 576px) {
-			.card-hz {
-			width: 38.5rem;
-			height: 12rem;
-			}
-			.card-img {
-			width: 16rem;
-			height: 12rem;
-			object-fit: cover;
-			}
-			.card-body-hz {
-				width: 20rem;
-				height: 12rem;
-			}
-		}
-		
-    </style>
+	<link href="css.css" rel="stylesheet">
 </head>
 
 <body>
-	<nav class="navbar navbar-expand">
+<nav class="navbar navbar-expand">
 		  <a class="navbar-brand" href="index.php">
 			<img src="Materials/homepage/cropped-cu-eng-logo.png" width="130" height="18" class="d-inline-block align-top" alt="">
 		  </a>
@@ -82,24 +25,52 @@ $result1 = mysqli_query($conn, $query);
 
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-			<?php if($_SESSION["Loggedin"]){ ?>
-			  <li class="nav-item active">
-				<a class="btn btn-danger" href="logout.php" style="color: white">Logout</a>
-			  </li>
-			<?php } else{ ?>
-			  <li class="nav-item">
-				<a class="btn btn-danger" href="form_login.php" style="color: white">Login</a>
-			  </li>
-			<?php } ?>
-			  <li class="nav-item">
-				<a class="nav-link" href="usermenu.php" style="color: #7f1d17">Menu</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="newspage.php" style="color: #7f1d17">News</a>
-			  </li>
+				<li class="nav-item">
+					<a class="nav-link" href="index.php" style="color: #7f1d17">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="usermenu.php" style="color: #7f1d17">Menu</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="newspage.php" style="color: #7f1d17">News</a>
+				</li>
+				<?php if($_SESSION["user_role"]=="member") {?>
+				<li class="nav-item">
+					<a class="nav-link" href="myorder.php" style="color: #7f1d17">Order</a>
+				</li>
+				<?php } elseif($_SESSION["user_role"]=="admin") {?>
+				<li class="nav-item">
+					<a class="nav-link" href="showreport.php" style="color: #7f1d17">Report</a>
+				</li>
+				<?php } elseif($_SESSION["user_role"]=="vendor") {?>
+				<li class="nav-item">
+					<a class="nav-link" href="restaurantmanage.php" style="color: #7f1d17">Manage</a>
+				</li>
+				<?php } ?>
+
+				<?php if($_SESSION["Loggedin"]){ ?>
+
+				<li class="nav-item rightaligned">
+				<div class="dropdown">
+					<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<?php print_r($_SESSION["user_name"]); ?>
+					</button>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="#">Balance: <?php print_r($_SESSION["user_balance"]); ?> ฿</a>
+						<a class="dropdown-item" href="topup.php">Topup</a>
+						<a class="dropdown-item" href="userreport.php">Report problem</a>
+						<a class="dropdown-item" href="logout.php">Logout</a>
+					</div>
+				</div>
+				</li>
+				<?php } else{ ?>
+				<li class="nav-item rightaligned">
+					<a class="btn btn-danger" href="form_login.php" style="color: white">Login</a>
+				</li>
+				<?php } ?>
 			</ul>
 		  </div>
-	</nav>
+		</nav>
 	<div class="container-fluid row">
 		<div class="container-fluid d-block" style="font-size: 2rem">News</div>
 		<div class="col-12 col-md-6">
