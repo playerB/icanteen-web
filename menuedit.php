@@ -41,8 +41,8 @@ $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_err
 $row = mysqli_fetch_array($result);
 $menu_name = $row["menu_name"];
 $restaurant_id = $row["restaurant_id"];
-$menu_menu_price = $row["menu_menu_price"];
-$meu_menu_categorygory = $row["menu_menu_categorygory"];
+$menu_price = $row["menu_price"];
+$menu_category = $row["menu_category"];
 $menu_detail = $row["menu_detail"];
 $menu_picture = $row["menu_picture"];
 extract($row);
@@ -62,7 +62,7 @@ extract($row);
 			<div style="width: 300px; height: 80px;" class="form-group">
 				<label for="restaurant_id">Restaurant :</label>
 					<select type="text" class="custom-select" name="restaurant_id" id="restaurant_id" required="required">
-					<option selected value="0">เลือก</option>
+					<option selected value="<?php echo $restaurant_id; ?>"><?php echo $restaurant_id; ?></option>
 					<option value="1">1.สุชาดา น้ำผลไม้</option>
 					<option value="2">2.ส้ม อาหารชุด</option>
 					<option value="3">3.รุจิศรี เส้นเล็กต้มยำ</option>
@@ -80,7 +80,7 @@ extract($row);
 			<div style="width: 300px; height: 60px;">
 			<div class="input-group">
 				<label for="menu_price">Price :</label>
-					<input type="float" class="form-control" name="menu_price" id="menu_price" placeholder="<?php echo $menu_menu_price; ?>" value="<?php echo $menu_menu_price; ?>" required="required"/>
+					<input type="float" class="form-control" name="menu_price" id="menu_price" placeholder="<?php echo $menu_price; ?>" value="<?php echo $menu_price; ?>" required="required"/>
 				<div class="input-group-append">
 					<span class="input-group-text">฿</span>
 				</div>
@@ -89,7 +89,7 @@ extract($row);
 			<div style="width: 300px; height: 80px;" class="form-group">
 				<label for="menu_category">Category :</label>
 				<select type="text" class="custom-select" name="menu_category" id="menu_category" required="required">
-					<option selected value="เลือก">เลือก</option>
+					<option selected value="<?php echo $menu_category; ?>"><?php echo $menu_category; ?></option>
 					<option value="ข้าว">ข้าว</option>
 					<option value="เส้น">เส้น</option>
 					<option value="ของทอด">ของทอด</option>

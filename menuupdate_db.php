@@ -25,7 +25,7 @@ echo "</script>";
 			$path_copy = $path.$filename;
 
 			move_uploaded_file($_FILES['image']['tmp_name'],$path_copy);  	
-		$sql = "UPDATE icanteen_menu SET " 
+		$sql = "UPDATE menu SET " 
 			."menu_name='$menu_name', "
 			."restaurant_id='$restaurant_id', "
 			."menu_price='$menu_price', "
@@ -34,12 +34,12 @@ echo "</script>";
 			."menu_picture='$filename'
 			WHERE menu_id='$menu_id'";
 	} else { //ทำการปรับปรุงข้อมูลที่จะแก้ไขลงใน database
-		$sql = "UPDATE icanteen_menu SET " 
-			."m_name='$menu_name', "
-			."m_restaurant_id='$restaurant_id', "
-			."m_menu_price='$menu_price', "
-			."m_menu_category='$menu_category', "
-			."m_menu_detail='$menu_detail'
+		$sql = "UPDATE menu SET " 
+			."menu_name='$menu_name', "
+			."restaurant_id='$restaurant_id', "
+			."menu_price='$menu_price', "
+			."menu_category='$menu_category', "
+			."menu_detail='$menu_detail'
 			WHERE menu_id='$menu_id'";
 	}
 #error_reporting(~E_NOTICE );
