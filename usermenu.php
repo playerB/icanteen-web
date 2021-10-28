@@ -2,7 +2,7 @@
 		
 include('Connections/condb.php');
 
-$query = "SELECT * FROM icanteen_menu ORDER BY m_id asc" or die("Error:" . mysqli_error()); 
+$query = "SELECT * FROM menu ORDER BY menu_id asc" or die("Error:" . mysqli_error()); 
 
 for ($x = 1; $x <= 11; $x++) {
   $result[$x] = mysqli_query($conn, $query);
@@ -129,14 +129,14 @@ for ($x = 1; $x <= 11; $x++) {
 		<div class="container-fluid">
 		  <label style="font-size: 1.5rem">1.สุชาดา น้ำผลไม้</label>
 			<div class="scrolling-wrapper">
-			<?php while($row = mysqli_fetch_array($result[1])) { if($row["m_resname"]=='1.สุชาดา น้ำผลไม้') {?>
+			<?php while($row = mysqli_fetch_array($result[1])) { if($row["restaurant_id"]==1) {?>
 			  <div class="card card-box mr-2 mb-2">
 				  <?php
-				  echo "<a href='selectmenu.php?m_id=$row[0]'>";
-				  echo "<img src='m_image/".$row["m_image"]."' class='card-img card-img-box' alt=''>";
-				  echo "<span class='price-badge'>".$row["m_price"].".-</span></a>";
+				  echo "<a href='selectmenu.php?menu_id=$row[0]'>";
+				  echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
+				  echo "<span class='price-badge'>".$row["menu_price"].".-</span></a>";
 				  echo "<div class='card-body'>";
-				  echo "<p class='card-title'>".$row["m_name"]."</p>";
+				  echo "<p class='card-title'>".$row["menu_name"]."</p>";
 				  echo "</div>";
 				  ?>
 			  </div>
@@ -146,14 +146,14 @@ for ($x = 1; $x <= 11; $x++) {
 		<div class="container-fluid">
 		  <label style="font-size: 1.5rem">2.ส้ม อาหารชุด</label>
 			<div class="scrolling-wrapper">
-			<?php while($row = mysqli_fetch_array($result[2])) { if($row["m_resname"]=='2.ส้ม อาหารชุด') {?>
+			<?php while($row = mysqli_fetch_array($result[2])) { if($row["restaurant_id"]==2) {?>
 			  <div class="card card-box mr-2 mb-2">
 				  <?php
-				  echo "<a href='selectmenu.php?m_id=$row[0]'>";
-				  echo "<img src='m_image/".$row["m_image"]."' class='card-img card-img-box' alt=''>";
-				  echo "<span class='price-badge'>".$row["m_price"].".-</span></a>";
+				  echo "<a href='selectmenu.php?menu_id=$row[0]'>";
+				  echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
+				  echo "<span class='price-badge'>".$row["menu_price"].".-</span></a>";
 				  echo "<div class='card-body'>";
-				  echo "<p class='card-title'>".$row["m_name"]."</p>";
+				  echo "<p class='card-title'>".$row["menu_name"]."</p>";
 				  echo "</div>";
 				  ?>
 			  </div>
@@ -163,14 +163,14 @@ for ($x = 1; $x <= 11; $x++) {
 		<div class="container-fluid">
 		  <label style="font-size: 1.5rem">3.รุจิศรี เส้นเล็กต้มยำ</label>
 			<div class="scrolling-wrapper">
-			<?php while($row = mysqli_fetch_array($result[3])) { if($row["m_resname"]=='3.รุจิศรี เส้นเล็กต้มยำ') {?>
+			<?php while($row = mysqli_fetch_array($result[3])) { if($row["restaurant_id"]==3) {?>
 			  <div class="card card-box mr-2 mb-2">
 				  <?php
-				  echo "<a href='selectmenu.php?m_id=$row[0]'>";
-				  echo "<img src='m_image/".$row["m_image"]."' class='card-img card-img-box' alt=''>";
-				  echo "<span class='price-badge'>".$row["m_price"].".-</span></a>";
+				  echo "<a href='selectmenu.php?menu_id=$row[0]'>";
+				  echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
+				  echo "<span class='price-badge'>".$row["menu_price"].".-</span></a>";
 				  echo "<div class='card-body'>";
-				  echo "<p class='card-title'>".$row["m_name"]."</p>";
+				  echo "<p class='card-title'>".$row["menu_name"]."</p>";
 				  echo "</div>";
 				  ?>
 			  </div>
@@ -180,13 +180,13 @@ for ($x = 1; $x <= 11; $x++) {
 		<div class="container-fluid">
 		  <label style="font-size: 1.5rem">4.อรวรรณ</label>
 			<div class="scrolling-wrapper">
-			<?php while($row = mysqli_fetch_array($result[4])) { if($row["m_resname"]=='4.อรวรรณ') {?>
+			<?php while($row = mysqli_fetch_array($result[4])) { if($row["restaurant_id"]==4) {?>
 			  <div class="card card-box mr-2 mb-2">
 				  <?php
-				  echo "<img src='m_image/".$row["m_image"]."' class='card-img card-img-box' alt=''>";
-				  echo "<span class='price-badge'>".$row["m_price"].".-</span>";
+				  echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
+				  echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
 				  echo "<div class='card-body'>";
-				  echo "<p class='card-title'>".$row["m_name"]."</p>";
+				  echo "<p class='card-title'>".$row["menu_name"]."</p>";
 				  echo "</div>";
 				  ?>
 			  </div>
@@ -196,13 +196,13 @@ for ($x = 1; $x <= 11; $x++) {
 		<div class="container-fluid">
 		  <label style="font-size: 1.5rem">5.ข้าวเหนียวอักษร สาขา2</label>
 			<div class="scrolling-wrapper">
-			<?php while($row = mysqli_fetch_array($result[5])) { if($row["m_resname"]=='5.ข้าวเหนียวอักษร สาขา2') {?>
+			<?php while($row = mysqli_fetch_array($result[5])) { if($row["restaurant_id"]==5) {?>
 			  <div class="card card-box mr-2 mb-2">
 				  <?php
-				  echo "<img src='m_image/".$row["m_image"]."' class='card-img card-img-box' alt=''>";
-				  echo "<span class='price-badge'>".$row["m_price"].".-</span>";
+				  echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
+				  echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
 				  echo "<div class='card-body'>";
-				  echo "<p class='card-title'>".$row["m_name"]."</p>";
+				  echo "<p class='card-title'>".$row["menu_name"]."</p>";
 				  echo "</div>";
 				  ?>
 			  </div>
@@ -212,13 +212,13 @@ for ($x = 1; $x <= 11; $x++) {
 		<div class="container-fluid">
 		  <label style="font-size: 1.5rem">6.รัตน์ จานด่วน</label>
 			<div class="scrolling-wrapper">
-			<?php while($row = mysqli_fetch_array($result[6])) { if($row["m_resname"]=='6.รัตน์ จานด่วน') {?>
+			<?php while($row = mysqli_fetch_array($result[6])) { if($row["restaurant_id"]==6) {?>
 			  <div class="card card-box mr-2 mb-2">
 				  <?php
-				  echo "<img src='m_image/".$row["m_image"]."' class='card-img card-img-box' alt=''>";
-				  echo "<span class='price-badge'>".$row["m_price"].".-</span>";
+				  echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
+				  echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
 				  echo "<div class='card-body'>";
-				  echo "<p class='card-title'>".$row["m_name"]."</p>";
+				  echo "<p class='card-title'>".$row["menu_name"]."</p>";
 				  echo "</div>";
 				  ?>
 			  </div>
@@ -228,13 +228,13 @@ for ($x = 1; $x <= 11; $x++) {
 		<div class="container-fluid">
 		  <label style="font-size: 1.5rem">7.ลุงเหนอ ก๋วยเตี๋ยวทรงเครื่อง</label>
 			<div class="scrolling-wrapper">
-			<?php while($row = mysqli_fetch_array($result[7])) { if($row["m_resname"]=='7.ลุงเหนอ ก๋วยเตี๋ยวทรงเครื่อง') {?>
+			<?php while($row = mysqli_fetch_array($result[7])) { if($row["restaurant_id"]==7) {?>
 			  <div class="card card-box mr-2 mb-2">
 				  <?php
-				  echo "<img src='m_image/".$row["m_image"]."' class='card-img card-img-box' alt=''>";
-				  echo "<span class='price-badge'>".$row["m_price"].".-</span>";
+				  echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
+				  echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
 				  echo "<div class='card-body'>";
-				  echo "<p class='card-title'>".$row["m_name"]."</p>";
+				  echo "<p class='card-title'>".$row["menu_name"]."</p>";
 				  echo "</div>";
 				  ?>
 			  </div>
@@ -244,13 +244,13 @@ for ($x = 1; $x <= 11; $x++) {
 		<div class="container-fluid">
 		  <label style="font-size: 1.5rem">8.ข้าวราดแกงป้าหลง</label>
 			<div class="scrolling-wrapper">
-			<?php while($row = mysqli_fetch_array($result[8])) { if($row["m_resname"]=='8.ข้าวราดแกงป้าหลง') {?>
+			<?php while($row = mysqli_fetch_array($result[8])) { if($row["restaurant_id"]==8) {?>
 			  <div class="card card-box mr-2 mb-2">
 				  <?php
-				  echo "<img src='m_image/".$row["m_image"]."' class='card-img card-img-box' alt=''>";
-				  echo "<span class='price-badge'>".$row["m_price"].".-</span>";
+				  echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
+				  echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
 				  echo "<div class='card-body'>";
-				  echo "<p class='card-title'>".$row["m_name"]."</p>";
+				  echo "<p class='card-title'>".$row["menu_name"]."</p>";
 				  echo "</div>";
 				  ?>
 			  </div>
@@ -260,13 +260,13 @@ for ($x = 1; $x <= 11; $x++) {
 		<div class="container-fluid">
 		  <label style="font-size: 1.5rem">9.ข้าว-มัน-ไก่ น้ากวาง</label>
 			<div class="scrolling-wrapper">
-			<?php while($row = mysqli_fetch_array($result[9])) { if($row["m_resname"]=='9.ข้าว-มัน-ไก่ น้ากวาง') {?>
+			<?php while($row = mysqli_fetch_array($result[9])) { if($row["restaurant_id"]==9) {?>
 			  <div class="card card-box mr-2 mb-2">
 				  <?php
-				  echo "<img src='m_image/".$row["m_image"]."' class='card-img card-img-box' alt=''>";
-				  echo "<span class='price-badge'>".$row["m_price"].".-</span>";
+				  echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
+				  echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
 				  echo "<div class='card-body'>";
-				  echo "<p class='card-title'>".$row["m_name"]."</p>";
+				  echo "<p class='card-title'>".$row["menu_name"]."</p>";
 				  echo "</div>";
 				  ?>
 			  </div>
@@ -276,13 +276,13 @@ for ($x = 1; $x <= 11; $x++) {
 		<div class="container-fluid">
 		  <label style="font-size: 1.5rem">10.ขนมหวานเย็น</label>
 			<div class="scrolling-wrapper">
-			<?php while($row = mysqli_fetch_array($result[10])) { if($row["m_resname"]=='10.ขนมหวานเย็น') {?>
+			<?php while($row = mysqli_fetch_array($result[10])) { if($row["restaurant_id"]==10) {?>
 			  <div class="card card-box mr-2 mb-2">
 				  <?php
-				  echo "<img src='m_image/".$row["m_image"]."' class='card-img card-img-box' alt=''>";
-				  echo "<span class='price-badge'>".$row["m_price"].".-</span>";
+				  echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
+				  echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
 				  echo "<div class='card-body'>";
-				  echo "<p class='card-title'>".$row["m_name"]."</p>";
+				  echo "<p class='card-title'>".$row["menu_name"]."</p>";
 				  echo "</div>";
 				  ?>
 			  </div>
@@ -292,13 +292,13 @@ for ($x = 1; $x <= 11; $x++) {
 		<div class="container-fluid">
 		  <label style="font-size: 1.5rem">11.ทูเดย์สเต็ก</label>
 			<div class="scrolling-wrapper">
-			<?php while($row = mysqli_fetch_array($result[11])) { if($row["m_resname"]=='11.ทูเดย์สเต็ก') {?>
+			<?php while($row = mysqli_fetch_array($result[11])) { if($row["restaurant_id"]==11) {?>
 			  <div class="card card-box mr-2 mb-2">
 				  <?php
-				  echo "<img src='m_image/".$row["m_image"]."' class='card-img card-img-box' alt=''>";
-				  echo "<span class='price-badge'>".$row["m_price"].".-</span>";
+				  echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
+				  echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
 				  echo "<div class='card-body'>";
-				  echo "<p class='card-title'>".$row["m_name"]."</p>";
+				  echo "<p class='card-title'>".$row["menu_name"]."</p>";
 				  echo "</div>";
 				  ?>
 			  </div>
