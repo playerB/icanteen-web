@@ -14,21 +14,17 @@ if ($_SESSION["user_role"]!="admin"){
 
 }
 if ($_SESSION["user_role"]=="admin"){
-//1. เชื่อมต่อ database: 
-include('Connections/condb.php');  //ไฟล์เชื่อมต่อกับ database ที่เราได้สร้างไว้ก่อนหน้าน้ี
-//สร้างตัวแปรสำหรับรับค่า m_id จากไฟล์แสดงข้อมูล
-$m_id = $_REQUEST["m_id"];
+include('Connections/condb.php');  
+$menu_id = $_REQUEST["menu_id"];
 
-//ลบข้อมูลออกจาก database ตาม m_id ที่ส่งมา
+//ลบข้อมูลออกจาก database ตาม menu_id ที่ส่งมา
 
-$sql = "DELETE FROM icanteen_menu WHERE m_id='$m_id' ";
+$sql = "DELETE FROM menu WHERE menu_id='$menu_id' ";
 $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_error());
 
-//จาวาสคริปแสดงข้อความเมื่อบันทึกเสร็จและกระโดดกลับไปหน้าฟอร์ม
-	
 	if($result){
 	echo "<script type='text/javascript'>";
-	echo "alert('Succesfully removed record no. $m_id');";
+	echo "alert('Succesfully removed record no. $menu_id');";
 	echo "window.location = 'showmenu.php'; ";
 	echo "</script>";
 	}

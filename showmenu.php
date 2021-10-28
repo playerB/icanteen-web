@@ -25,12 +25,12 @@ if ($_SESSION["user_role"]=="admin"){ ?>
 		
 include('Connections/condb.php');
 
-$query = "SELECT * FROM icanteen_menu ORDER BY m_id asc" or die("Error:" . mysqli_error()); 
+$query = "SELECT * FROM menu ORDER BY menu_id asc" or die("Error:" . mysqli_error()); 
 $result = mysqli_query($conn, $query); 
 
 ?>
 <div class="container-fluid" style="display: inline;">
-	Logged in as : <?php print_r($_SESSION["User"]);?> <a class='btn btn-danger' href='logout.php' role='button'>Log out</a> <a class='btn btn-primary' href='insertmenu.php' role='button'>+Menu</a>
+	Logged in as : <?php print_r($_SESSION["user_name"]);?> <a class='btn btn-danger' href='logout.php' role='button'>Log out</a> <a class='btn btn-primary' href='insertmenu.php' role='button'>+Menu</a>
 </div>
 <div class='table-responsive'>
 <table class='table table-striped table-hover'>
@@ -39,18 +39,18 @@ $result = mysqli_query($conn, $query);
 <?php
 while($row = mysqli_fetch_array($result)) { 
   echo "<tbody>";
-  echo "<th scope='row'>" .$row["m_id"] .  "</th> "; 
-  echo "<td align='center'>" .$row["m_name"] .  "</td> ";
-  echo "<td align='center'>" .$row["m_resname"] .  "</td> ";
-  echo "<td align='center'>" .$row["m_price"] .  "</td> ";
-  echo "<td align='center'>" .$row["m_cate"] .  "</td> ";
-  echo "<td align='center'>" .$row["m_info"] .  "</td> ";
-  echo "<td align='center'>" ."<img src='m_image/".$row["m_image"]." 'width='150'>". "</td>";
+  echo "<th scope='row'>" .$row["menu_id"] .  "</th> "; 
+  echo "<td align='center'>" .$row["menu_name"] .  "</td> ";
+  echo "<td align='center'>" .$row["restaurant_id"] .  "</td> ";
+  echo "<td align='center'>" .$row["menu_price"] .  "</td> ";
+  echo "<td align='center'>" .$row["menu_category"] .  "</td> ";
+  echo "<td align='center'>" .$row["menu_detail"] .  "</td> ";
+  echo "<td align='center'>" ."<img src='menu_picture/".$row["menu_picture"]." 'width='150'>". "</td>";
   //แก้ไขข้อมูล
-  echo "<td align='center'><a href='menuedit.php?m_id=$row[0]' class='btn btn-outline-warning btn-sm'>edit</a></td> ";
+  echo "<td align='center'><a href='menuedit.php?menu_id=$row[0]' class='btn btn-outline-warning btn-sm'>edit</a></td> ";
   
   //ลบข้อมูล
-  echo "<td align='center'><a href='menudelete.php?m_id=$row[0]' class='btn btn-outline-danger btn-sm' onclick=\"return confirm('Do you want to delete this record?')\">delete</a></td> ";
+  echo "<td align='center'><a href='menudelete.php?menu_id=$row[0]' class='btn btn-outline-danger btn-sm' onclick=\"return confirm('Do you want to delete this record?')\">delete</a></td> ";
   echo "</tbody>";
 }?>
 </table>
