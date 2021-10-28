@@ -130,14 +130,14 @@ $result1 = mysqli_query($conn, $query);
 				  </ol>
 				  <div class="carousel-inner">
 				  <div class="carousel-item active">
-					<img src="m_image/20b2a45e15e915848f88fbbe3bf00e31" class="d-block w-100" alt="">
+					<img src="menu_picture/20b2a45e15e915848f88fbbe3bf00e31" class="d-block w-100" alt="">
 					<div class="carousel-caption d-none d-block">
 					  <h5><span style="background-color: #7f1d17;">&nbsp;ข้าวเหนียวไก่ทอด&nbsp;</span></h5>
 					  <p>ร้านข้าวเหนียวไก่อักษร สาขา 2</p>
 					</div>
 				  </div>
 				  <div class="carousel-item">
-					<img src="m_image/	
+					<img src="menu_picture/	
 		db7bb7c5507b5f3421d96323b609ac2c" class="d-block w-100" alt="">
 					<div class="carousel-caption d-none d-block">
 					  <h5><span style="background-color: #7f1d17;">&nbsp;สปาเก็ตตี้คาโบนารา&nbsp;</span></h5>
@@ -145,21 +145,21 @@ $result1 = mysqli_query($conn, $query);
 					</div>
 				  </div>
 				  <div class="carousel-item">
-					<img src="m_image/329e045ba08e9254008ad7a1b241688d" class="d-block w-100" alt="">
+					<img src="menu_picture/329e045ba08e9254008ad7a1b241688d" class="d-block w-100" alt="">
 					<div class="carousel-caption d-none d-block">
 					  <h5><span style="background-color: #7f1d17;">&nbsp;น้ำตกหมู&nbsp;</span></h5>
 					  <p>ร้านข้าวเหนียวไก่อักษร สาขา 2</p>
 					</div>
 				  </div>
 				  <div class="carousel-item">
-					<img src="m_image/a10f29e7720ccd8d609d10b57772b231" class="d-block w-100" alt="">
+					<img src="menu_picture/a10f29e7720ccd8d609d10b57772b231" class="d-block w-100" alt="">
 					<div class="carousel-caption d-none d-block">
 					  <h5><span style="background-color: #7f1d17;">&nbsp;เสต็กหมูพริกไทยดำ&nbsp;</span></h5>
 					  <p>ร้านทูเดย์เสต็ก</p>
 					</div>
 				  </div>
 				  <div class="carousel-item">
-					<img src="m_image/294d92ff2acf64813cd569560b376955" class="d-block w-100" alt="">
+					<img src="menu_picture/294d92ff2acf64813cd569560b376955" class="d-block w-100" alt="">
 					<div class="carousel-caption d-none d-block">
 					  <h5><span style="background-color: #7f1d17;">&nbsp;ไข่กระทะ&nbsp;</span></h5>
 					  <p>ร้านส้ม อาหารชุด</p>
