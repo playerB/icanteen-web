@@ -1,3 +1,5 @@
+<?php session_start(); error_reporting(~E_NOTICE );
+include('Connections/condb.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

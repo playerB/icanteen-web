@@ -18,9 +18,10 @@ if (!$_SESSION["user_name"]){  //check session
 <head>
 	<meta charset="UTF-8">
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<title>Admin page</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css.css" rel="stylesheet">
+	<title>Admin page</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <div class="container-fluid" style="display: inline;">
