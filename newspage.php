@@ -1,7 +1,7 @@
 <?php session_start(); error_reporting(~E_NOTICE );
 include('Connections/condb.php');
 
-$query = "SELECT * FROM icanteen_menu ORDER BY m_id asc" or die("Error:" . mysqli_error()); 
+$query = "SELECT * FROM menu ORDER BY menu_id asc" or die("Error:" . mysqli_error()); 
 $result1 = mysqli_query($conn, $query);
 
 ?>
@@ -101,44 +101,7 @@ $result1 = mysqli_query($conn, $query);
 		  </div>
 	</nav>
 	<div class="container-fluid row">
-		<div class="container-fluid d-block" style="font-size: 2rem">Promotion</div>
-		<div class="col-12 col-md-6">
-			<div class="card card-hz mb-3">
-			  <div class="row no-gutters">
-				<div class="col-5">
-				  <img src="m_image/a01f973f32f8f5ffaa8fa740925e24b2" class="card-img " alt="">
-				</div>
-				<div class="col-7">
-				  <div class="card-body card-body-hz">
-					<h5 class="card-title">ลด 10% ทุกเมนู!</h5>
-					<div class="card-text">ร้านส้ม อาหารชุด จัดโปรเด็ดเอาใจเหล่าวิศวะ อิ่มอร่อยกันได้ตั้งแต่วันนี้</div>
-					<div class="card-caption"><small class="text-muted">1 ต.ค. 62-30 พ.ย. 62</small></div>
-					<a href="#" class="btn btn-success">รับเลย</a>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		</div>
-		<div class="col-12 col-md-6">
-			<div class="card card-hz mb-3">
-			  <div class="row no-gutters">
-				<div class="col-5">
-				  <img src="m_image/39bc5bb73fc571fda1fae134b93d118d" class="card-img" alt="">
-				</div>
-				<div class="col-7">
-				  <div class="card-body card-body-hz">
-					<h5 class="card-title">รับโค้ดส่วนลดฟรี ที่นี่!</h5>
-					<div class="card-text">แจกส่วนลดสำหรับร้านรัตน์ จานด่วน ใช้ได้กับเมนูไก่</div>
-					<div class="card-caption"><small class="text-muted">1 ต.ค. 62-31 ธ.ค. 62</small></div>
-					<a href="#" class="btn btn-success">รับเลย</a>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		</div>
-	</div>
-	<div class="container-fluid row">
-		<div class="container-fluid d-block" style="font-size: 2rem">Other news</div>
+		<div class="container-fluid d-block" style="font-size: 2rem">News</div>
 		<div class="col-12 col-md-6">
 			<div class="card card-hz mb-3">
 			  <div class="row no-gutters">

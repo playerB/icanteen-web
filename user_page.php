@@ -1,9 +1,8 @@
 <?php session_start();?>
 <?php 
 
-if (!$_SESSION["UserID"]){
-
-	  Header("Location: form_login.php");
+if (!$_SESSION["user_name"]){  //check session
+	Header("Location: form_login.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า form_login.php 
 
 }else{?>
 <!doctype html>
