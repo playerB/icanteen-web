@@ -1,6 +1,6 @@
 <?php
 
-$dbservername = "127.0.0.1";
+$dbservername = "127.0.0.1"; //localhost
 $dbusername = "friday2";
 $dbpassword = "fd2";
 $dbname = "friday2";

@@ -16,11 +16,10 @@ $row = mysqli_fetch_array($result);
 ?>
 <html>
 <head>
-<meta charset="utf-8">
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>I-CANTEEN</title>
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link href="css.css" rel="stylesheet">
 	<style>
 		@import url('https://fonts.googleapis.com/css?family=Mitr&display=swap');
 		body {
@@ -43,12 +42,13 @@ $row = mysqli_fetch_array($result);
 			object-fit: cover;
 		}
 	</style>
+	<link href="css.css" rel="stylesheet">
 </head>
 
 <body>
 	<nav class="navbar navbar-expand">
 		<a class="navbar-brand" href="index.php">
-		<img src="Materials/homepage/cropped-cu-eng-logo.png" width="130" height="18" class="d-inline-block align-top" alt="">
+			<img src="Materials/homepage/cropped-cu-eng-logo.png" width="130" height="18" class="d-inline-block align-top" alt="">
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -114,9 +114,16 @@ $row = mysqli_fetch_array($result);
 		echo "<h2 style='padding-top: 10px;'>ราคา <span class='price-badge'>".$row["menu_price"]." ฿</span></h2> ";
 		echo "<h4 style='padding-top: 10px;'>ประเภท : " .$row["menu_category"] .  "</h4> ";
 		echo "<p style='padding-top: 10px;'>รีวิว : " .$row["menu_detail"] .  "</p> ";
-		echo "<div style='padding-top: 20px;'><a class='btn btn-success btn-lg'  href='line://oaMessage/@045jpvio/?สั่ง ".$row["menu_name"]." ร้าน ".$row["m_resname"]."' role='button'>สั่งเลย! <img src='Materials/homepage/LINE_SOCIAL_Circle.png' style='width: 1.5rem;'></a></div>";
-		echo "</div></div>";?>
+		if ($_SESSION["user_role"]=="member") {
+		echo "<div style='padding-top: 20px;'><a class='btn btn-success btn-lg'  href='#' role='button'>สั่งเลย! </a></div>";
+		}
+		echo "</div></div>";
+		?>
 	  	
 	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>

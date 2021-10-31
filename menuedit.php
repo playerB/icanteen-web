@@ -57,7 +57,7 @@ extract($row);
 			<div style="width: 300px; height: 80px;" class="form-group">
 				<label for="menu_name">Menu name :</label>
 					<input type="text" class="form-control" name="menu_name" id="menu_name" placeholder="<?php echo $menu_name; ?>" value="<?php echo $menu_name; ?>" required="required"/><br/><br/>
-	enu		</div>
+			</div>
 			<div style="width: 300px; height: 80px;" class="form-group">
 				<label for="restaurant_id">Restaurant :</label>
 					<select type="text" class="custom-select" name="restaurant_id" id="restaurant_id" required="required">
