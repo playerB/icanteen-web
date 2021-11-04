@@ -14,6 +14,11 @@ if (!$_SESSION["user_name"]){  //check session
 	}
 	else if ($_SESSION["user_role"]=="admin") { 
 
+        $report_id = mysqli_real_escape_string($conn,$_GET['report_id']);
+        $sql = "SELECT * FROM report WHERE report_id='$report_id' " or die("Error:" . mysqli_error()); 
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,47 +87,22 @@ if (!$_SESSION["user_name"]){  //check session
 			</ul>
 		  </div>
 	</nav>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>All report</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">User ID</th>
-                            <th scope="col">Problem Type</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Datetime</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            $sql = "SELECT * FROM report";
-                            $result = $conn->query($sql);
-                            if ($result->num_rows > 0) {
-                                while($row = $result->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>".$row["report_id"]."</td>";
-                                    echo "<td>".$row["user_id"]."</td>";
-                                    echo "<td>".$row["report_type"]."</td>";
-                                    echo "<td>".$row["report_title"]."</td>";
-                                    echo "<td>".$row["report_timestamp"]."</td>";
-                                    echo "<td>".$row["report_status"]."</td>";
-									echo "<td><a href='selectreport.php?report_id=".$row["report_id"]."' class='btn btn-warning btn-sm'>check</a></td> ";
-                                    echo "</tr>";
-                                }
-                            }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="jumbotron" style="padding-top: 30px;">
+		<?php
+		echo "<div class='row'>";
+		echo "<div class='col-12 col-md-4'>";
+		echo "<h1 class='display-5'>" .$row["report_title"] .  "</h1>";
+	  	//echo "<img src='report_picture/".$row["report_picture"]." 'class='menu-img'>";
+		echo "</div>";
+		echo "<div class='col-12 col-md-8'>";
+	  	echo "<h2 style='padding-top: 10px;'>เลขที่ " .$row["report_id"] .  "</h2> ";
+		echo "<h4 style='padding-top: 10px;'>ประเภท : " .$row["report_type"]. "</h4> ";
+		echo "<p style='padding-top: 10px;'>รายละเอียด : " .$row["report_detail"]. "</p> ";
+		echo "<div style='padding-top: 20px;'><a class='btn btn-success btn-lg'  href='fixreport.php?report_id=".$row["report_id"]."' role='button'>แก้ไขแล้ว </a></div>";
+		echo "</div></div>";
+		?>
+	  	
+	</div>
     
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

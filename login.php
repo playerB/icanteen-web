@@ -21,21 +21,21 @@ session_start();
                       $_SESSION["user_balance"] = $row["user_balance"];
 
 
-                      if($_SESSION["user_role"]=="admin"){ //ถ้าเป็น admin ให้กระโดดไปหน้า admin_page.php
+                      if($_SESSION["user_role"]=="admin"){ //ถ้าเป็น admin ให้กระโดดไปหน้า showreport.php
 
-                        Header("Location: admin_page.php");
+                        Header("Location: showreport.php");
 
                       }
 
                       else if ($_SESSION["user_role"]=="member"){  //ถ้าเป็น member ให้กระโดดไปหน้า usermenu.php
 
-                        Header("Location: usermenu.php");
+                        Header("Location: myorder.php");
 
                       }
 
                       else if ($_SESSION["user_role"]=="vendor"){  //ถ้าเป็น vendor ให้กระโดดไปหน้า usermenu.php
 
-                        Header("Location: usermenu.php");
+                        Header("Location: restaurantmanage.php");
 
                       }
                       $_SESSION["Loggedin"] = true;
