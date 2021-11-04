@@ -11,7 +11,7 @@ include('Connections/condb.php');?>
 	<link href="css.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand">
+	<nav class="navbar navbar-expand">
 		  <a class="navbar-brand" href="index.php">
 			<img src="Materials/homepage/cropped-cu-eng-logo.png" width="130" height="18" class="d-inline-block align-top" alt="">
 		  </a>
@@ -66,6 +66,49 @@ include('Connections/condb.php');?>
 				<?php } ?>
 			</ul>
 		  </div>
-		</nav>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>My Order</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Order ID</th>
+							<th>Menu</th>
+							<th>Order Time</th>
+							<th>Total Price</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+							$sql = "SELECT * FROM orderhistory INNER JOIN menu ON menu.menu_id=orderhistory.menu_id WHERE user_id = '".$_SESSION["user_id"]."'";
+							$result = $conn->query($sql);
+							if ($result->num_rows > 0) {
+								while($row = $result->fetch_assoc()) {
+									echo "<tr>";
+									echo "<td><img src='menu_picture/".$row["menu_picture"]." 'height='80'></td>";
+									echo "<td>".$row["menu_name"]."</td>";
+									echo "<td>".$row["order_timestamp"]."</td>";
+									echo "<td>".$row["order_amount"]*$row["menu_price"]."฿</td>";
+									echo "<td>".$row["order_status"]."</td>";
+									echo "</tr>";
+								}
+							}
+						?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>
