@@ -164,9 +164,6 @@ include('Connections/condb.php');?>
 	  </div>
 	<div style="display: inline; font-size: 30px">
 		<div class="container-fluid d-none d-md-block">เมนูประจำสัปดาห์</div>
-		<a href = "usermenu.php">
-			<img src = "Materials/homepage/button.png" class="rounded mx-auto d-block" width="300px" alt = "menubutton">
-		</a>
 	</div>
 	  <div class="container-fluid" style="align-content: center">
 			<div class="row">
