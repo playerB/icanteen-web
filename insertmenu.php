@@ -22,20 +22,20 @@ if(isset($_POST['submitbtn'])){
 	if(!empty($_FILES['image']['name'])) {
 		$filename = md5($_FILES['image']['name'].time());
 		$ext = explode('.',$_FILES['image']['name']);
-		$path = "m_image/";
+		$path = "menu_picture/";
 		$path_copy = $path.$filename;
 		
 		move_uploaded_file($_FILES['image']['tmp_name'],$path_copy);  	
 	}
 	
-	$menuname = mysqli_real_escape_string($conn, $_POST['menuname']);
-	$resname = mysqli_real_escape_string($conn, $_POST['resname']);
-	$price = mysqli_real_escape_string($conn, $_POST['price']);
-	$cate = mysqli_real_escape_string($conn, $_POST['cate']);
-	$info = mysqli_real_escape_string($conn, $_POST['info']);
+	$menu_name = mysqli_real_escape_string($conn, $_POST['menu_name']);
+	$restaurant_id = mysqli_real_escape_string($conn, $_POST['restaurant_id']);
+	$menu_price = mysqli_real_escape_string($conn, $_POST['menu_price']);
+	$menu_category = mysqli_real_escape_string($conn, $_POST['menu_category']);
+	$menu_detail = mysqli_real_escape_string($conn, $_POST['menu_detail']);
 
-	$sql = "INSERT INTO icanteen_menu (m_name, m_resname, m_price, m_cate, m_info, m_image)
-	VALUES ('$menuname','$resname','$price','$cate','$info','$filename')";
+	$sql = "INSERT INTO menu (menu_name, restaurant_id, menu_price, menu_category, menu_detail, menu_picture)
+	VALUES ('$menu_name','$restaurant_id','$menu_price','$menu_category','$menu_detail','$filename')";
 
 	if ($conn->query($sql) === TRUE) {
 	}
@@ -59,38 +59,38 @@ mysqli_close($conn);
 				<hr/>
 		<form action="" method="post" enctype="multipart/form-data">
 			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="menuname">Menu name :</label>
-					<input type="text" class="form-control" name="menuname" id="menuname" required="required" /><br /><br />
+				<label for="menu_name">Menu name :</label>
+					<input type="text" class="form-control" name="menu_name" id="menu_name" required="required" /><br /><br />
 			</div>
 			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="resname">Restaurant :</label>
-					<select type="text" class="custom-select" name="resname" id="resname" required="required">
-					<option selected value="1.สุชาดา น้ำผลไม้">1.สุชาดา น้ำผลไม้</option>
-					<option value="2.ส้ม อาหารชุด">2.ส้ม อาหารชุด</option>
-					<option value="3.รุจิศรี เส้นเล็กต้มยำ">3.รุจิศรี เส้นเล็กต้มยำ</option>
-					<option value="4.อรวรรณ">4.อรวรรณ</option>
-					<option value="5.ข้าวเหนียวอักษร สาขา2">5.ข้าวเหนียวอักษร สาขา2</option>
-					<option value="6.รัตน์ จานด่วน">6.รัตน์ จานด่วน</option>
-					<option value="7.ลุงเหนอ ก๋วยเตี๋ยวทรงเครื่อง">7.ลุงเหนอ ก๋วยเตี๋ยวทรงเครื่อง</option>
-					<option value="8.ข้าวราดแกงป้าหลง">8.ข้าวราดแกงป้าหลง</option>
-					<option value="9.ข้าว-มัน-ไก่ น้ากวาง">9.ข้าว-มัน-ไก่ น้ากวาง</option>
-					<option value="10.ขนมหวานเย็น">10.ขนมหวานเย็น</option>
-					<option value="11.ทูเดย์สเต็ก">11.ทูเดย์สเต็ก</option>
+				<label for="restaurant_id">Restaurant :</label>
+					<select type="text" class="custom-select" name="restaurant_id" id="restaurant_id" required="required">
+					<option value="1">1.สุชาดา น้ำผลไม้</option>
+					<option value="2">2.ส้ม อาหารชุด</option>
+					<option value="3">3.รุจิศรี เส้นเล็กต้มยำ</option>
+					<option value="4">4.อรวรรณ</option>
+					<option value="5">5.ข้าวเหนียวอักษร สาขา2</option>
+					<option value="6">6.รัตน์ จานด่วน</option>
+					<option value="7">7.ลุงเหนอ ก๋วยเตี๋ยวทรงเครื่อง</option>
+					<option value="8">8.ข้าวราดแกงป้าหลง</option>
+					<option value="9">9.ข้าว-มัน-ไก่ น้ากวาง</option>
+					<option value="10">10.ขนมหวานเย็น</option>
+					<option value="11">11.ทูเดย์สเต็ก</option>
 					</select>
 					<br /><br />
 			</div>
 			<div style="width: 300px; height: 60px;">
 			<div class="input-group">
-				<label for="price">Price :</label>
-					<input type="float" class="form-control" name="price" id="price"  required="required"/>
+				<label for="menu_price">Price :</label>
+					<input type="float" class="form-control" name="menu_price" id="menu_price"  required="required"/>
 				<div class="input-group-append">
 					<span class="input-group-text">฿</span>
 				</div>
 			</div>
 			</div>
 			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="cate">Category :</label>
-					<select type="text" class="custom-select" name="cate" id="cate" required="required">
+				<label for="menu_category">Category :</label>
+					<select type="text" class="custom-select" name="menu_category" id="menu_category" required="required">
 					<option selected value="ข้าว">ข้าว</option>
 					<option value="เส้น">เส้น</option>
 					<option value="ของทอด">ของทอด</option>
@@ -103,12 +103,12 @@ mysqli_close($conn);
 					<br /><br />
 			</div>
 			<div style="width: 300px; height: 60px;" class="form-group">
-				<label for="info">Description :</label>
-					<input type="text" class="form-control" name="info" id="info" /><br/><br/>
+				<label for="menu_detail">Description :</label>
+					<input type="text" class="form-control" name="menu_detail" id="menu_detail" /><br/><br/>
 			</div>
 			<div style="width: 300px; height: 20px;" class="form-group">
-				<label for="image">Picture :</label>
-					<input type="file" class="form-control-file" name="image" id="image"/><br/><br />
+				<label for="menu_picture">Picture :</label>
+					<input type="file" class="form-control-file" name="menu_picture" id="menu_picture"/><br/><br />
 					<input type="submit" value=" Submit " name="submitbtn" class="btn btn-success"/>
 				 	<a class='btn btn-outline-primary' href='showmenu.php' role='button'>Show all menu</a>
 				  	<a class='btn btn-outline-primary' href='index.php' role='button'>Main</a>
