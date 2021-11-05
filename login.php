@@ -42,7 +42,6 @@ session_start();
 
                   }else{
                     echo "<script>";
-                        echo "alert(\".$sql.\");";
                         //echo "window.history.back()";
                     echo "</script>";
 

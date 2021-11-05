@@ -4,6 +4,30 @@ if ($_SESSION["user_name"]){
 	echo "alert(\"You are already logged in!\");";
 	echo "window.history.back()";
 	echo "</script>";
+} else {
+    require('Connections/condb.php');
+    if (isset($_POST['submitbtn'])) {
+
+        $user_name = mysqli_real_escape_string($conn, $_POST['Username']);
+        $user_email = mysqli_real_escape_string($conn, $_POST['Email']);
+        $user_password = md5($_POST['Password']);
+        $user_balance = 0;
+        $user_role = 'member';
+    
+        $sql = "INSERT INTO user (user_name, user_email, user_password, user_balance, user_role)
+        VALUES ('$user_name','$user_email','$user_password','$user_balance','$user_role')";
+    
+        if ($conn->query($sql) === TRUE) {
+            echo "<script>";
+            echo "alert(\"Register Success!\");";
+            echo "window.location = 'form_login.php'; ";
+            echo "</script>";
+        }
+        else {
+        echo "<script type= 'text/javascript'>alert('Error: ".$conn->error."');</script>";
+        }
+        mysqli_close($conn);
+    }
 }
 ?>
 <html>
@@ -72,7 +96,11 @@ if ($_SESSION["user_name"]){
 		</div>
 	</nav>
   <div id="register" align="center" class="container-fluid">
-      <form name="frmlogin"  method="post" action="login.php">
+      <form name="frmregister"  method="post" action="" enctype="multipart/form-data">
+        <div style="width: 300px; height: 60px;" class="form-group">
+			<label for="menuname">Email :</label>
+				<input type="text" class="form-control" name="Email" id="Email" required="required" placeholder="Username" /><br /><br />
+		</div>
         <div style="width: 300px; height: 60px;" class="form-group">
 			<label for="menuname">Username :</label>
 				<input type="text" class="form-control" name="Username" id="Username" required="required" placeholder="Username" /><br /><br />
@@ -81,11 +109,7 @@ if ($_SESSION["user_name"]){
 			<label for="menuname">Password :</label>
 				<input type="password" class="form-control" name="Password" id="Password" required="required" placeholder="Password" /><br /><br />
 		<div style="width: 300px; height: 80px;" class="form-group">
-			<input type="submit" value=" Login " name="submitbtn" class="btn btn-success"/>
-			<input type="reset" value=" Reset " name="resetbtn" class="btn btn-outline-secondary"/>
-		</div>
-		<div>Don't have an account? 
-			<a href="register.php" name="register" class="btn btn-outline-primary">Register</a>
+			<input type="submit" value=" Register " name="submitbtn" class="btn btn-outline-primary"/>
 		</div>
       </form>
   </div>
