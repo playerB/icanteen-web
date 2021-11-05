@@ -1,50 +1,45 @@
-<?php session_start();?>
-<?php 
+<?php session_start(); error_reporting(~E_NOTICE );
+    include('Connections/condb.php');
 
-if (!$_SESSION["user_name"]){  //check session
-	Header("Location: form_login.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า form_login.php 
+    if (!$_SESSION["user_name"]){  //check session
+        Header("Location: form_login.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า form_login.php 
 
-}else{
-if ($_SESSION["user_role"]!="admin"){
-	echo "<script>";
-	echo "alert(\"You do not have access to this page\");"; 
-	echo "window.history.back()";
-	echo "</script>";
+    } else {
+        if ($_SESSION["user_role"]!="vendor") {
+            echo "<script>";
+            echo "alert(\"You do not have access to this page\");"; 
+            echo "window.history.back()";
+            echo "</script>";
 
-}
-if ($_SESSION["user_role"]=="admin"){
+        } else if ($_SESSION["user_role"]=="vendor") { 
+           
+			if(isset($_POST['submitbtn'])){
+				
+				if(!empty($_FILES['image']['name'])) {
+					$filename = md5($_FILES['image']['name'].time());
+					$ext = explode('.',$_FILES['image']['name']);
+					$path = "menu_picture/";
+					$path_copy = $path.$filename;
+					
+					move_uploaded_file($_FILES['image']['tmp_name'],$path_copy);  	
+				}
+				
+				$menu_name = mysqli_real_escape_string($conn, $_POST['menu_name']);
+				$restaurant_id = mysqli_real_escape_string($conn, $_POST['restaurant_id']);
+				$menu_price = mysqli_real_escape_string($conn, $_POST['menu_price']);
+				$menu_category = mysqli_real_escape_string($conn, $_POST['menu_category']);
+				$menu_detail = mysqli_real_escape_string($conn, $_POST['menu_detail']);
 
-include('Connections/condb.php');
+				$sql = "INSERT INTO menu (menu_name, restaurant_id, menu_price, menu_category, menu_detail, menu_picture)
+				VALUES ('$menu_name','$restaurant_id','$menu_price','$menu_category','$menu_detail','$filename')";
 
-error_reporting(~E_NOTICE );
-if(isset($_POST['submitbtn'])){
-	
-	if(!empty($_FILES['image']['name'])) {
-		$filename = md5($_FILES['image']['name'].time());
-		$ext = explode('.',$_FILES['image']['name']);
-		$path = "menu_picture/";
-		$path_copy = $path.$filename;
-		
-		move_uploaded_file($_FILES['image']['tmp_name'],$path_copy);  	
-	}
-	
-	$menu_name = mysqli_real_escape_string($conn, $_POST['menu_name']);
-	$restaurant_id = mysqli_real_escape_string($conn, $_POST['restaurant_id']);
-	$menu_price = mysqli_real_escape_string($conn, $_POST['menu_price']);
-	$menu_category = mysqli_real_escape_string($conn, $_POST['menu_category']);
-	$menu_detail = mysqli_real_escape_string($conn, $_POST['menu_detail']);
-
-	$sql = "INSERT INTO menu (menu_name, restaurant_id, menu_price, menu_category, menu_detail, menu_picture)
-	VALUES ('$menu_name','$restaurant_id','$menu_price','$menu_category','$menu_detail','$filename')";
-
-	if ($conn->query($sql) === TRUE) {
-	}
-	else {
-	echo "<script type= 'text/javascript'>alert('Error: " . $sql . "<br>" . $conn->error."');</script>";
-	}
-mysqli_close($conn);
-}
-?>
+				if ($conn->query($sql) === TRUE) {
+				} else {
+				echo "<script type= 'text/javascript'>alert('Error: " . $sql . "<br>" . $conn->error."');</script>";
+				}
+			mysqli_close($conn);
+			}
+			?>
 
 <html>
 	<head>

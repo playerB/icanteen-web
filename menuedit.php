@@ -1,18 +1,19 @@
-<?php session_start();?>
-<?php 
+<?php session_start(); error_reporting(~E_NOTICE );
+    include('Connections/condb.php');
 
-if (!$_SESSION["user_name"]){  //check session
-	Header("Location: form_login.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า form_login.php 
+    if (!$_SESSION["user_name"]){  //check session
+        Header("Location: form_login.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า form_login.php 
 
-}else{
-if ($_SESSION["user_role"]!="admin"){
-	echo "<script>";
-	echo "alert(\"You do not have access to this page\");"; 
-	echo "window.history.back()";
-	echo "</script>";
+    } else {
+        if ($_SESSION["user_role"]!="vendor") {
+            echo "<script>";
+            echo "alert(\"You do not have access to this page\");"; 
+            echo "window.history.back()";
+            echo "</script>";
 
-}
-if ($_SESSION["user_role"]=="admin"){ ?>
+        } else if ($_SESSION["user_role"]=="vendor") { 
+           
+?>
 <!doctype html>
 <html>
 <head></head>
