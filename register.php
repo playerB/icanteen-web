@@ -99,7 +99,7 @@ if ($_SESSION["user_name"]){
       <form name="frmregister"  method="post" action="" enctype="multipart/form-data">
         <div style="width: 300px; height: 60px;" class="form-group">
 			<label for="menuname">Email :</label>
-				<input type="text" class="form-control" name="Email" id="Email" required="required" placeholder="Username" /><br /><br />
+				<input type="text" class="form-control" name="Email" id="Email" required="required" placeholder="Email" /><br /><br />
 		</div>
         <div style="width: 300px; height: 60px;" class="form-group">
 			<label for="menuname">Username :</label>
