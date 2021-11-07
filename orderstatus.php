@@ -22,7 +22,7 @@
                 $query = "UPDATE orderhistory SET order_status='ถูกยกเลิก' WHERE order_id=$order_id" or die("Error:" . mysqli_error());
                 
             } else if ($_GET['order_status'] == 'finish' && isset($_GET['order_id'])) {
-                $query = "UPDATE orderhistory SET order_status='อาหารเสร็จแล้ว' WHERE order_id=$order_id" or die("Error:" . mysqli_error());
+                $query = "UPDATE orderhistory SET order_status='อาหารเสร็จแล้ว', finish_timestamp=now(), time_diff=TIMESTAMPDIFF(MINUTE, order_timestamp, now()) WHERE order_id=$order_id" or die("Error:" . mysqli_error());
 
             } else {
                 echo "<script>";
