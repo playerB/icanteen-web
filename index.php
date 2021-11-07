@@ -68,6 +68,9 @@ include('Connections/condb.php');?>
 	<div class="container-fluid" style="align-content: center">
 		<div class="row">
 			<div class="col-12 col-md-6">
+				<div style="display: inline; font-size: 30px">
+					<div class="container-fluid d-none d-md-block">เมนูประจำสัปดาห์</div>
+				</div>
 				<div id="carouselFood" class="carousel slide" data-interval="3000" data-ride="carousel">
 				  <ol class="carousel-indicators">
 					<li data-target="#carouselFood" data-slide-to="0" class="active"></li>
@@ -85,8 +88,7 @@ include('Connections/condb.php');?>
 					</div>
 				  </div>
 				  <div class="carousel-item">
-					<img src="menu_picture/	
-		db7bb7c5507b5f3421d96323b609ac2c" class="d-block w-100" alt="">
+					<img src="menu_picture/db7bb7c5507b5f3421d96323b609ac2c" class="d-block w-100" alt="">
 					<div class="carousel-caption d-none d-block">
 					  <h5><span style="background-color: #7f1d17;">&nbsp;สปาเก็ตตี้คาโบนารา&nbsp;</span></h5>
 					  <p>ร้านรัตน์ จานด่วน</p>
@@ -125,18 +127,20 @@ include('Connections/condb.php');?>
 				</div>
 			</div>
 			<div class="col-12 col-md-6">
+				<div style="display: inline; font-size: 30px">
+					<div class="container-fluid d-none d-md-block">เมนูใหม่ชวนลองชิม</div>
+				</div>
 				<div class="row">
 					<div class="card card-hz mb-3">
 					  <div class="row no-gutters">
 						<div class="col-5">
-						  <img src="n_image/4d5307e5af046411059dce8545c1040b" class="card-img " alt="">
+						  <img src="menu_picture/5a71aa7312af9fd1cd1a8bddec9f0780" class="card-img " alt="">
 						</div>
 						<div class="col-7">
 						  <div class="card-body card-body-hz">
-							<h5 class="card-title">ลด 10% ทุกเมนู!</h5>
-							<div class="card-text">ร้านส้ม อาหารชุด จัดโปรเด็ดเอาใจเหล่าวิศวะ อิ่มอร่อยกันได้ตั้งแต่วันนี้</div>
-							<div class="card-caption"><small class="text-muted">1 ต.ค. 62</small></div>
-							<a href="#" class="btn btn-success">รับเลย</a>
+							<h5 class="card-title">ข้าวคัตสึด้ง ไข่ข้นราดไข่</h5>
+							<div class="card-text">คัตสึด้งร้อนๆ พร้อมไข่ข้นแสนอร่อย ผสมกันอย่างลงตัว</div>
+							<a href="addtoorder.php?menu_id=24" class="btn btn-success">สั่งเลย</a>
 						  </div>
 						</div>
 					  </div>
@@ -146,30 +150,31 @@ include('Connections/condb.php');?>
 					<div class="card card-hz mb-3">
 					  <div class="row no-gutters">
 						<div class="col-5">
-						  <img src="n_image/39bc5bb73fc571fda1fae134b93d118d" class="card-img" alt="">
+						  <img src="menu_picture/6f3574ae10f520915f2483b38375a4f5" class="card-img" alt="">
 						</div>
 						<div class="col-7">
 						  <div class="card-body card-body-hz">
-							<h5 class="card-title">รับโค้ดส่วนลดฟรี ที่นี่!</h5>
-							<div class="card-text">แจกส่วนลดสำหรับร้านรัตน์ จานด่วน ใช้ได้กับเมนูไก่</div>
-							<div class="card-caption"><small class="text-muted">15 ต.ค. 62</small></div>
-							<a href="#" class="btn btn-success">รับเลย</a>
+							<h5 class="card-title">ข้าวหมูญี่ปุ่น</h5>
+							<div class="card-text">ข้าวหมูคากิสูตรต้นตำรับจากญี่ปุ่น</div>
+							<a href="addtoorder.php?menu_id=28" class="btn btn-success">สั่งเลย</a>
 						  </div>
 						</div>
 					  </div>
 					</div>
 				</div>
+				<a href="usermenu.php" class="btn btn-danger btn-lg">ดูเมนูทั้งหมด</a>
 			</div>
 		 </div>
 	  </div>
-	<div style="display: inline; font-size: 30px">
-		<div class="container-fluid d-none d-md-block">เมนูประจำสัปดาห์</div>
-	</div>
+	
+	  <div style="display: inline; font-size: 30px">
+		  <div class="container-fluid d-none d-md-block">ข่าวประชาสัมพันธ์</div>
+	  </div>
 	  <div class="container-fluid" style="align-content: center">
 			<div class="row">
 				<div class="col-12 col-md-3">
 					<div class="card">
-					  <img src="n_image/69283e3ccb04cf1251a10d0779130794" class="card-img-top" alt="">
+					  <img src="news_picture/69283e3ccb04cf1251a10d0779130794" class="card-img-top" alt="">
 					  <div class="card-body">
 						<h5 class="card-title">ต่อแถวให้เป็นระเบียบกันเถอะ!</h5>
 						<p class="card-text">ร่วมต่อแถวให้เป็นระเบียบ ลดความวุ่นวายใน i-canteen</p>
@@ -179,7 +184,7 @@ include('Connections/condb.php');?>
 				</div>
 				<div class="col-12 col-md-3">
 					<div class="card">
-					  <img src="n_image/92c4cda8117406ff53a7591371911eba" class="card-img-top" alt="" style="width: 18.5rem; height: 12rem;">
+					  <img src="news_picture/92c4cda8117406ff53a7591371911eba" class="card-img-top" alt="" style="width: 18.5rem; height: 12rem;">
 					  <div class="card-body">
 						<h5 class="card-title">แยกขยะถูกที่ ทิ้งให้ลงถัง</h5>
 						<p class="card-text">ช่วยกันรีไซเคิลขยะ ลดโลกร้อน</p>
@@ -189,20 +194,20 @@ include('Connections/condb.php');?>
 				</div>
 				<div class="col-12 col-md-3">
 					<div class="card">
-					  <img src="n_image/c5cda3432e730e3537f8e7b6a4755640" class="card-img-top" alt="">
+					  <img src="news_picture/c5cda3432e730e3537f8e7b6a4755640" class="card-img-top" alt="">
 					  <div class="card-body">
 						<h5 class="card-title">น้ำมันทอดซ้ำ อันตรายอย่างไร</h5>
-						<p class="card-text"></p>
+						<p class="card-text">รู้จักกับภัยเงียบของน้ำมันทอดใช้ซ้ำ</p>
 						<a href="#" class="btn btn-primary">อ่านต่อ</a>
 					  </div>
 					</div>
 				</div>
 				<div class="col-12 col-md-3">
 					<div class="card">
-					  <img src="n_image/2934332ae41562988b7a489b8b31fe8b" class="card-img-top" alt="">
+					  <img src="news_picture/2934332ae41562988b7a489b8b31fe8b" class="card-img-top" alt="">
 					  <div class="card-body">
 						<h5 class="card-title">ตรวจสอบความปลอดภัยอาหาร</h5>
-						<p class="card-text"></p>
+						<p class="card-text">คณะอาจารย์ได้เข้ามาตรวจสอบความปลอดภัยของอาหารใน i-canteen ประจำปี</p>
 						<a href="#" class="btn btn-primary">อ่านต่อ</a>
 					  </div>
 					</div>

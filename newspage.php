@@ -1,5 +1,12 @@
 <?php session_start(); error_reporting(~E_NOTICE );
+
 include('Connections/condb.php');
+
+$query = "SELECT * FROM news ORDER BY news_id ASC" or die("Error:" . mysqli_error()); 
+
+$result = mysqli_query($conn, $query);
+
+
 ?>
 <html>
 <head>
@@ -69,74 +76,26 @@ include('Connections/condb.php');
 	</nav>
 	<div class="container-fluid row">
 		<div class="container-fluid d-block" style="font-size: 2rem">News</div>
-		<div class="col-12 col-md-6">
-			<div class="card card-hz mb-3">
-			  <div class="row no-gutters">
-				<div class="col-5">
-				  <img src="Materials/homepage/news1.png" class="card-img " alt="">
+		<?php
+		while($row = mysqli_fetch_array($result)) { ?>
+			<div class="col-12 col-md-6">
+				<div class="card card-hz mb-3">
+				<div class="row no-gutters">
+					<div class="col-5">
+					<img src="news_picture/<?php echo $row['news_picture']; ?>" class="card-img " alt="">
+					</div>
+					<div class="col-7">
+					<div class="card-body card-body-hz">
+						<h5 class="card-title"><?php echo $row['news_headline']; ?></h5>
+						<div class="card-text"><?php echo $row['news_content']; ?></div>
+						<a href="#" class="btn btn-primary">อ่านต่อ</a>
+					</div>
+					</div>
 				</div>
-				<div class="col-7">
-				  <div class="card-body card-body-hz">
-					<h5 class="card-title">ต่อแถวให้เป็นระเบียบกันเถอะ!</h5>
-					<div class="card-text">ร่วมต่อแถวให้เป็นระเบียบ ลดความวุ่นวายใน i-canteen</div>
-					<div class="card-caption"><small class="text-muted">23 ต.ค. 62</small></div>
-					<a href="#" class="btn btn-primary">อ่านต่อ</a>
-				  </div>
 				</div>
-			  </div>
 			</div>
-		</div>
-		<div class="col-12 col-md-6">
-			<div class="card card-hz mb-3">
-			  <div class="row no-gutters">
-				<div class="col-5">
-				  <img src="Materials/homepage/news2.png" class="card-img" alt="">
-				</div>
-				<div class="col-7">
-				  <div class="card-body card-body-hz">
-					<h5 class="card-title">แยกขยะถูกที่ ทิ้งให้ลงถัง</h5>
-					<div class="card-text">ช่วยกันรีไซเคิลขยะ ลดโลกร้อน</div>
-					<div class="card-caption"><small class="text-muted">14 ต.ค. 62</small></div>
-					<a href="#" class="btn btn-primary">อ่านต่อ</a>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		</div>
-		<div class="col-12 col-md-6">
-			<div class="card card-hz mb-3">
-			  <div class="row no-gutters">
-				<div class="col-5">
-				  <img src="Materials/homepage/news3.png" class="card-img " alt="">
-				</div>
-				<div class="col-7">
-				  <div class="card-body card-body-hz">
-					<h5 class="card-title">น้ำมันทอดซ้ำ อันตรายอย่างไร</h5>
-					<div class="card-text">-------------------</div>
-					<div class="card-caption"><small class="text-muted">24 ก.ย. 62</small></div>
-					<a href="#" class="btn btn-primary">อ่านต่อ</a>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		</div>
-		<div class="col-12 col-md-6">
-			<div class="card card-hz mb-3">
-			  <div class="row no-gutters">
-				<div class="col-5">
-				  <img src="Materials/homepage/news4.png" class="card-img" alt="">
-				</div>
-				<div class="col-7">
-				  <div class="card-body card-body-hz">
-					<h5 class="card-title">ตรวจสอบความปลอดภัยอาหาร</h5>
-					<div class="card-text">--------------------</div>
-					<div class="card-caption"><small class="text-muted">5 ก.ย. 62</small></div>
-					<a href="#" class="btn btn-primary">อ่านต่อ</a>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		</div>
+			
+		<?php } ?>
 	</div>
 	<footer style="background-color: #cccccc">
 			<div class="container">
