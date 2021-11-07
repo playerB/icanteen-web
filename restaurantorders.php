@@ -12,7 +12,15 @@
             echo "</script>";
 
         } else if ($_SESSION["user_role"]=="vendor") { 
-           
+            $owner_id = $_SESSION["user_id"];
+
+            $query1 = "SELECT * FROM menu, restaurant, orderhistory WHERE menu.restaurant_id = restaurant.restaurant_id 
+            AND restaurant.owner_id=$owner_id AND menu.menu_id= orderhistory.menu_id AND orderhistory.order_status IN ('รอร้านรับคำสั่งซื้อ', 'กำลังเตรียมอาหาร') " 
+
+            or die("Error:" . mysqli_error()); 
+
+            $result = mysqli_query($conn, $query1); 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,9 +89,32 @@
         </ul>
         </div>
     </nav>
-    
-    <a href="showmenu.php" class="btn btn-primary">Show my menu</a>
-    <a href="restaurantorders.php" class="btn btn-primary">Order list</a>
+
+    <div class='table-responsive'>
+        <table class='table table-striped table-hover'>
+            <thead class='thead-dark' align='center' bgcolor='#CCCCCC'><tr><th scope='col'>Order ID</th><th scope='col'>Name</th><th scope='col'>User ID</th><th scope='col'>Price</th><th scope='col'>Timestamp</th><th scope='col'>Status</th><th colspan='2'>Order Action</th></tr></thead>
+            <?php
+            while($row = mysqli_fetch_array($result)) { 
+                $total_price = $row["menu_price"] * $row["order_amount"];
+                echo "<tbody>";
+                echo "<td align='center'>" .$row["order_id"] .  "</td> ";
+                echo "<td align='center'>" .$row["menu_name"] .  "</td> ";
+                echo "<td align='center'>" .$row["user_id"] .  "</td> ";
+                echo "<td align='center'>" .$total_price.  "</td> ";
+                echo "<td align='center'>" .$row["order_timestamp"] .  "</td> ";
+                echo "<td align='center'>" .$row["order_status"] .  "</td> ";
+                //แก้ไขข้อมูล
+                if ($row["order_status"] == 'รอร้านรับคำสั่งซื้อ') {
+                    echo "<td align='center'><a href='orderstatus.php?order_id=" .$row["order_id"]. "&order_status=accept' class='btn btn-primary btn-sm'>accept</a></td> ";
+                    echo "<td align='center'><a href='orderstatus.php?order_id=" .$row["order_id"]. "&order_status=reject' class='btn btn-danger btn-sm'>reject</a></td> ";
+                } else if ($row["order_status"] == 'กำลังเตรียมอาหาร') {
+                    echo "<td align='center' colspan='8'><a href='orderstatus.php?order_id=" .$row["order_id"]. "&order_status=finish' class='btn btn-success btn-sm'>finish order</a></td> ";
+                }
+                echo "</tbody>";
+            }?>
+        </table>
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
