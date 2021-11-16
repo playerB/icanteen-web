@@ -1,5 +1,4 @@
 <?php session_start(); error_reporting(~E_NOTICE );
-    include('Connections/condb.php');
 
     if (!$_SESSION["user_name"]){  //check session
         Header("Location: form_login.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า form_login.php 
@@ -12,6 +11,8 @@
             echo "</script>";
 
         } else if ($_SESSION["user_role"]=="vendor") { 
+            include('Connections/condb.php');
+
             $owner_id = $_SESSION["user_id"];
             $query = "SELECT * FROM menu, restaurant WHERE menu.restaurant_id = restaurant.restaurant_id AND restaurant.owner_id=$owner_id ORDER BY menu_id ASC" or die("Error:" . mysqli_error()); 
             $result = mysqli_query($conn, $query); 

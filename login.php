@@ -23,7 +23,7 @@ session_start();
 
                       if($_SESSION["user_role"]=="admin"){ //ถ้าเป็น admin ให้กระโดดไปหน้า showreport.php
 
-                        Header("Location: showreport.php");
+                        Header("Location: admin_page.php");
 
                       }
 
