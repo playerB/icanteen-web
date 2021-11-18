@@ -42,15 +42,16 @@ session_start();
 
                   }else{
                     echo "<script>";
-                        //echo "window.history.back()";
+                    echo "alert('Invalid username or password. Back to login');";
+				            echo "window.location = 'form_login.php'; ";
                     echo "</script>";
 
                   }
 
         }else{
-
-
-             Header("Location: form_login.php"); //user & password incorrect back to login again
-
+          echo "<script>";
+          echo "alert('Invalid username or password. Back to login');";
+          echo "window.location = 'form_login.php'; ";
+          echo "</script>";
         }
 ?>
