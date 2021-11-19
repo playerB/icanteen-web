@@ -28,9 +28,6 @@ $query = "SELECT * FROM news ORDER BY news_id asc" or die("Error:" . mysqli_erro
 $result = mysqli_query($conn, $query); 
 
 ?>
-<div class="container-fluid" style="display: inline;">
-	Logged in as : <?php print_r($_SESSION["user_name"]);?> <a class='btn btn-danger' href='logout.php' role='button'>Log out</a> <a class='btn btn-primary' href='insertnews.php' role='button'>+News</a>
-</div>
 <div class='table-responsive'>
 <table class='table table-striped table-hover'>
 

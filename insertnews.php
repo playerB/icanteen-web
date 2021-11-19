@@ -22,18 +22,18 @@ if(isset($_POST['submitbtn'])){
 	if(!empty($_FILES['image']['name'])) {
 		$filename = md5($_FILES['image']['name'].time());
 		$ext = explode('.',$_FILES['image']['name']);
-		$path = "n_image/";
+		$path = "news_picture/";
 		$path_copy = $path.$filename;
 		
 		move_uploaded_file($_FILES['image']['tmp_name'],$path_copy);  	
 	}
 	
-	$headline = mysqli_real_escape_string($conn, $_POST['headline']);
-	$news = mysqli_real_escape_string($conn, $_POST['news']);
+	$news_headline = mysqli_real_escape_string($conn, $_POST['news_headline']);
+	$news_content = mysqli_real_escape_string($conn, $_POST['news_content']);
 	$type = mysqli_real_escape_string($conn, $_POST['type']);
 
-	$sql = "INSERT INTO news (n_head, n_news, n_type, n_image)
-	VALUES ('$headline','$news','$type','$filename')";
+	$sql = "INSERT INTO news (n_head, n_news, n_type, news_picture)
+	VALUES ('$news_headline','$news_content','$type','$filename')";
 
 	if ($conn->query($sql) === TRUE) {
 	}
@@ -57,27 +57,18 @@ mysqli_close($conn);
 				<hr/>
 		<form action="" method="post" enctype="multipart/form-data">
 			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="headline">News headline :</label>
-					<input type="text" class="form-control" name="headline" id="headline" required="required" /><br /><br />
+				<label for="news_headline">News headline :</label>
+					<input type="text" class="form-control" name="news_headline" id="news_headline" required="required" /><br /><br />
 			</div>
 			<div style="width: 300px; height: 60px;" class="form-group">
-				<label for="news">News :</label>
-					<input type="text" class="form-control" name="news" id="news"  required="required"/><br /><br />
-			</div>
-			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="type">Type :</label>
-					<select type="text" class="custom-select" name="type" id="type" required="required">
-					<option selected value="P">Promotion</option>
-					<option value="N">Other news</option>
-					</select>
-					<br /><br />
+				<label for="news_content">News content :</label>
+					<input type="text" class="form-control" name="news_content" id="news_content"  required="required"/><br /><br />
 			</div>
 			<div style="width: 300px; height: 20px;" class="form-group">
 				<label for="image">Picture :</label>
 					<input type="file" class="form-control-file" name="image" id="image"/><br/><br />
 					<input type="submit" value=" Submit " name="submitbtn" class="btn btn-success"/>
-				 	<a class='btn btn-outline-primary' href='shownews.php' role='button'>Show all news</a>
-				  	<a class='btn btn-outline-primary' href='index.php' role='button'>Main</a>
+				 	<a class='btn btn-outline-primary' href='newspage.php' role='button'>Show all news</a>
 			</div>
 		  </form>
 			<script>
