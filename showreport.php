@@ -83,6 +83,11 @@ if (!$_SESSION["user_name"]){  //check session
 		  </div>
 	</nav>
     <div class="container">
+		<div class="row">
+            <div class="col-md-12">
+				<a href="admin_page.php" class="btn btn-primary">Show dashboard overview</a>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <h1>All report</h1>
