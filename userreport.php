@@ -1,5 +1,23 @@
 <?php session_start(); error_reporting(~E_NOTICE );
-include('Connections/condb.php');?>
+include('Connections/condb.php');
+if(isset($_POST['submit'])){
+	
+	$report_title = mysqli_real_escape_string($conn, $_POST['report_title']);
+	$report_detail = mysqli_real_escape_string($conn, $_POST['report_detail']);
+	$report_type = mysqli_real_escape_string($conn, $_POST['report_type']);
+
+	$sql = "INSERT INTO report (report_title, report_detail, report_type)
+	VALUES ('$report_title','$report_detail','$report_type')";
+
+	if ($conn->query($sql) === TRUE) {
+	}
+	else {
+	echo "<script type= 'text/javascript'>alert('Error: " . $sql . "<br>" . $conn->error."');</script>";
+	}
+    mysqli_close($conn);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

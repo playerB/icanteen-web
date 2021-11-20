@@ -30,10 +30,9 @@ if(isset($_POST['submitbtn'])){
 	
 	$news_headline = mysqli_real_escape_string($conn, $_POST['news_headline']);
 	$news_content = mysqli_real_escape_string($conn, $_POST['news_content']);
-	$type = mysqli_real_escape_string($conn, $_POST['type']);
 
-	$sql = "INSERT INTO news (n_head, n_news, n_type, news_picture)
-	VALUES ('$news_headline','$news_content','$type','$filename')";
+	$sql = "INSERT INTO news (news_headline, news_content, news_picture)
+	VALUES ('$news_headline','$news_content','$filename')";
 
 	if ($conn->query($sql) === TRUE) {
 	}
