@@ -35,7 +35,6 @@ body {
     object-fit: cover;
 }
 .card-img {
-    width: 10rem;
     height: 12rem;
     object-fit: cover;
 }
@@ -67,7 +66,6 @@ body {
     height: 12rem;
     }
     .card-img {
-    width: 16rem;
     height: 12rem;
     object-fit: cover;
     }

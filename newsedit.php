@@ -35,7 +35,7 @@ echo "</script>";
 $news_id = mysqli_real_escape_string($conn,$_GET['news_id']);
 
 //2. query ข้อมูลจากตาราง: 
-$sql = "SELECT * FROM news WHERE news_id='$news_id' ";
+$sql = "SELECT * FROM news WHERE news_id=$news_id ";
 $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_error());
 $row = mysqli_fetch_array($result);
 $news_headline = $row["news_headline"];
@@ -55,9 +55,9 @@ extract($row);
 				<label for="news_headline">Headline :</label>
 					<input type="text" class="form-control" name="news_headline" id="news_headline" placeholder="<?php echo $news_headline; ?>" value="<?php echo $news_headline; ?>" required="required"/><br/><br/>
 			</div>
-			<div style="width: 300px; height: 60px;" class="form-group">
-				<label for="news_content">News :</label>
-					<input type="text" class="form-control" name="news_content" id="news_content" placeholder="<?php echo $news_content; ?>" value="<?php echo $news_content; ?>" required="required"/>
+			<div style="width: 300px; " class="form-group">
+				<label for="news_content">News content:</label>
+					<textarea class="form-control" name="news_content" id="news_content" rows="5" placeholder="<?php echo $news_content; ?>" value="<?php echo $news_content; ?>" required="required"> </textarea>
 			</div>
 			<div style="width: 300px; height: 60px;" class="form-group">
 					<input type="file" class="form-control-file" name="news_picture" id="news_picture" /><br/><br/>

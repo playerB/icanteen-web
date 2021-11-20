@@ -2,17 +2,19 @@
 include('Connections/condb.php');
 if(isset($_POST['submit'])){
 	
+    $user_id = $_SESSION["user_id"];
 	$report_title = mysqli_real_escape_string($conn, $_POST['report_title']);
 	$report_detail = mysqli_real_escape_string($conn, $_POST['report_detail']);
 	$report_type = mysqli_real_escape_string($conn, $_POST['report_type']);
 
-	$sql = "INSERT INTO report (report_title, report_detail, report_type)
-	VALUES ('$report_title','$report_detail','$report_type')";
+	$sql = "INSERT INTO report (user_id, report_title, report_detail, report_type, report_status)
+	VALUES ('$user_id', '$report_title','$report_detail','$report_type', 'ยังไม่แก้ไข')";
 
 	if ($conn->query($sql) === TRUE) {
+        echo "<script type= 'text/javascript'>alert('Report recieved! We are sorry for your in convenience');</script>";
 	}
 	else {
-	echo "<script type= 'text/javascript'>alert('Error: " . $sql . "<br>" . $conn->error."');</script>";
+	    echo "<script type= 'text/javascript'>alert('Error: " . $sql . "<br>" . $conn->error."');</script>";
 	}
     mysqli_close($conn);
 }

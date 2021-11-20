@@ -30,7 +30,7 @@ echo "</script>";
 	} else {
 		$sql = "UPDATE news SET 
 			news_headline='$news_headline', 
-			news_content='$news_content', 
+			news_content='$news_content' 
 			WHERE news_id=$news_id";
 	}
 #error_reporting(~E_NOTICE );

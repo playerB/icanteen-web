@@ -59,9 +59,9 @@ mysqli_close($conn);
 				<label for="news_headline">News headline :</label>
 					<input type="text" class="form-control" name="news_headline" id="news_headline" required="required" /><br /><br />
 			</div>
-			<div style="width: 300px; height: 60px;" class="form-group">
+			<div style="width: 300px;" class="form-group">
 				<label for="news_content">News content :</label>
-					<input type="text" class="form-control" name="news_content" id="news_content"  required="required"/><br /><br />
+					<textarea class="form-control" name="news_content" id="news_content"  required="required" rows="5"></textarea> <br /><br />
 			</div>
 			<div style="width: 300px; height: 20px;" class="form-group">
 				<label for="image">Picture :</label>
