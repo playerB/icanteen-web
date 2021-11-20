@@ -12,6 +12,8 @@
             echo "</script>";
 
         } else if ($_SESSION["user_role"]=="vendor" && isset($_GET['order_id'])) { 
+            $vendor_id = $_SESSION["user_id"];
+            $vendor_balance = $_SESSION["user_balance"];
 
             $requestinfo = "SELECT *, order_amount*menu_price AS order_total FROM orderhistory, menu WHERE menu.menu_id = orderhistory.menu_id AND orderhistory.order_id=".$_GET['order_id'] or die("Error:" . mysqli_error());
 		    $orderinfo = mysqli_fetch_array(mysqli_query($conn, $requestinfo));
@@ -22,8 +24,11 @@
             $order_id = $_GET['order_id'];
 
             $requestuserinfo = "SELECT * FROM user WHERE user.user_id = $order_user_id" or die("Error:" . mysqli_error());
-		    $userinfo = mysqli_fetch_array(mysqli_query($conn, $requestinfo));
+		    $userinfo = mysqli_fetch_array(mysqli_query($conn, $requestuserinfo));
             $order_user_balance = $userinfo['user_balance'];
+
+            $requestvendorinfo = "SELECT * FROM user WHERE user.user_id = $vendor_id" or die("Error:" . mysqli_error());
+		    $vendorinfo = mysqli_fetch_array(mysqli_query($conn, $requestvendorinfo));
             
             if ($_GET['order_status'] == 'accept' ) {
                 $query = "UPDATE orderhistory SET order_status='กำลังเตรียมอาหาร' WHERE order_id=$order_id" or die("Error:" . mysqli_error());
@@ -34,7 +39,10 @@
                 UPDATE user SET user_balance=$new_balance WHERE user_id=$order_user_id;" or die("Error:" . mysqli_error());
                 
             } else if ($_GET['order_status'] == 'finish' ) {
-                $query = "UPDATE orderhistory SET order_status='อาหารเสร็จแล้ว', finish_timestamp=now(), time_diff=TIMESTAMPDIFF(MINUTE, order_timestamp, now()) WHERE order_id=$order_id" or die("Error:" . mysqli_error());
+                $new_vendor_balance = $vendor_balance + $order_total;
+                $query = "UPDATE orderhistory SET order_status='อาหารเสร็จแล้ว', finish_timestamp=now(), time_diff=TIMESTAMPDIFF(MINUTE, order_timestamp, now()) WHERE order_id=$order_id;
+                UPDATE user SET user_balance=$new_vendor_balance WHERE user_id=$vendor_id " or die("Error:" . mysqli_error());
+                
 
             } else {
                 echo "<script>";
@@ -47,7 +55,8 @@
 
             if($result){
                 echo "<script>";
-                echo "alert(\"เปลี่ยนสถานะออเดอร์เรียบร้อยแล้ว\");"; 
+                echo "alert(\"เปลี่ยนสถานะออเดอร์เรียบร้อยแล้ว\");";
+                $_SESSION["user_balance"] = $new_vendor_balance; 
                 echo "window.history.back()";
                 echo "</script>";
             } else {
