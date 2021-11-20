@@ -35,9 +35,12 @@ if(isset($_POST['submitbtn'])){
 	VALUES ('$news_headline','$news_content','$filename')";
 
 	if ($conn->query($sql) === TRUE) {
-	}
-	else {
-	echo "<script type= 'text/javascript'>alert('Error: " . $sql . "<br>" . $conn->error."');</script>";
+		echo "<script>";
+		echo "alert('Insert Successfully');"; 
+		echo "window.history.back()";
+		echo "</script>";
+	} else {
+		echo "<script type= 'text/javascript'>alert('Error: " . $sql . "<br>" . $conn->error."');</script>";
 	}
 mysqli_close($conn);
 }
