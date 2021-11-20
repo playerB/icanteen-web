@@ -38,7 +38,10 @@ echo "</script>";
         }
 
     } else {
-        echo "Error: insufficient balance";
+        echo "<script type='text/javascript'>"; 
+        echo "alert('Error: insufficient balance');"; 
+        echo "window.location = 'myorder.php'; "; 
+        echo "</script>";
     }
 }
 
