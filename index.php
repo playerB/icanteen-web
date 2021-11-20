@@ -1,5 +1,11 @@
 <?php session_start(); error_reporting(~E_NOTICE );
-include('Connections/condb.php');?>
+include('Connections/condb.php');
+
+$query = "SELECT * FROM news ORDER BY news_id ASC" or die("Error:" . mysqli_error()); 
+
+$result = mysqli_query($conn, $query);
+
+?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -170,50 +176,25 @@ include('Connections/condb.php');?>
 	  <div style="display: inline; font-size: 30px">
 		  <div class="container-fluid d-none d-md-block">ข่าวประชาสัมพันธ์</div>
 	  </div>
-	  <div class="container-fluid" style="align-content: center">
+	  	<div class="container-fluid" style="align-content: center">
 			<div class="row">
-				<div class="col-12 col-md-3">
-					<div class="card">
-					  <img src="news_picture/69283e3ccb04cf1251a10d0779130794" class="card-img-top" alt="">
-					  <div class="card-body">
-						<h5 class="card-title">ต่อแถวให้เป็นระเบียบกันเถอะ!</h5>
-						<p class="card-text">ร่วมต่อแถวให้เป็นระเบียบ ลดความวุ่นวายใน i-canteen</p>
-						<a href="#" class="btn btn-primary">อ่านต่อ</a>
-					  </div>
+			<?php
+				while($row = mysqli_fetch_array($result)) { ?>
+					<div class="col-12 col-md-3">
+						<div class="card">
+							<img src="news_picture/<?php echo $row['news_picture']; ?>" class="card-img" alt="">
+							<div class="card-body">
+								<h5 class="card-title"><?php echo $row['news_headline']; ?></h5>
+								<div class="card-text"><?php echo $row['news_content']; ?></div>
+								<?php 
+								echo '<a href="selectnews.php?news_id='.$row['news_id'].'" class="btn btn-primary">อ่านต่อ</a>';
+								?>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="col-12 col-md-3">
-					<div class="card">
-					  <img src="news_picture/92c4cda8117406ff53a7591371911eba" class="card-img-top" alt="" style="width: 18.5rem; height: 12rem;">
-					  <div class="card-body">
-						<h5 class="card-title">แยกขยะถูกที่ ทิ้งให้ลงถัง</h5>
-						<p class="card-text">ช่วยกันรีไซเคิลขยะ ลดโลกร้อน</p>
-						<a href="#" class="btn btn-primary">อ่านต่อ</a>
-					  </div>
-					</div>
-				</div>
-				<div class="col-12 col-md-3">
-					<div class="card">
-					  <img src="news_picture/c5cda3432e730e3537f8e7b6a4755640" class="card-img-top" alt="">
-					  <div class="card-body">
-						<h5 class="card-title">น้ำมันทอดซ้ำ อันตรายอย่างไร</h5>
-						<p class="card-text">รู้จักกับภัยเงียบของน้ำมันทอดใช้ซ้ำ</p>
-						<a href="#" class="btn btn-primary">อ่านต่อ</a>
-					  </div>
-					</div>
-				</div>
-				<div class="col-12 col-md-3">
-					<div class="card">
-					  <img src="news_picture/2934332ae41562988b7a489b8b31fe8b" class="card-img-top" alt="">
-					  <div class="card-body">
-						<h5 class="card-title">ตรวจสอบความปลอดภัยอาหาร</h5>
-						<p class="card-text">คณะอาจารย์ได้เข้ามาตรวจสอบความปลอดภัยของอาหารใน i-canteen ประจำปี</p>
-						<a href="#" class="btn btn-primary">อ่านต่อ</a>
-					  </div>
-					</div>
-				</div>
+			<?php } ?>
 			</div>
-        </div>
+		</div>
         <footer style="background-color: #cccccc">
 			<div class="container">
 				<p id = "btext"><br>
