@@ -41,6 +41,11 @@
             $result07 = mysqli_fetch_array(mysqli_query($conn, $query07));
             //$restaurant_maxrev =$result07[0];
             $restaurant_rev_count = $result07[1];
+
+            $query08 = "SELECT menu_name, SUM(order_amount*menu_price) FROM orderhistory,menu WHERE menu.menu_id = orderhistory.menu_id AND restaurant_id = $restaurant_id AND order_status IN ('อาหารเสร็จแล้ว', 'กำลังเตรียมอาหาร') GROUP BY menu_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
+            $result08 = mysqli_fetch_array(mysqli_query($conn, $query08));
+            $best_selling_menu = $result08[0];
+            $best_selling_menu_rev_count = $result08[1];
            
 ?>
 <!DOCTYPE html>
@@ -146,6 +151,10 @@
 			</div>
 			<div class="alert alert-primary col-4" style="font-size: 18px;" role="alert">
 				Total revenue ฿: <?php echo $restaurant_rev_count; ?>
+			</div>
+			<div class="alert alert-primary col-4" style="font-size: 18px;" role="alert">
+				Best selling menu ฿: <?php echo $best_selling_menu; ?> <br>
+				Total sold ฿: <?php echo $best_selling_menu_rev_count; ?>
 			</div>
 		</div>
 	</div>
