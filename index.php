@@ -91,35 +91,35 @@ $result = mysqli_query($conn, $query);
 				  </ol>
 				  <div class="carousel-inner">
 				  <div class="carousel-item active">
-					<img src="menu_picture/20b2a45e15e915848f88fbbe3bf00e31" class="d-block w-100" alt="">
+					<a href="selectmenu.php?menu_id=56"><img src="menu_picture/20b2a45e15e915848f88fbbe3bf00e31" class="d-block w-100" alt=""></a>	
 					<div class="carousel-caption d-none d-block">
 					  <h5><span style="background-color: #7f1d17;">&nbsp;ข้าวเหนียวไก่ทอด&nbsp;</span></h5>
 					  <p>ร้านข้าวเหนียวไก่อักษร สาขา 2</p>
 					</div>
 				  </div>
 				  <div class="carousel-item">
-					<img src="menu_picture/db7bb7c5507b5f3421d96323b609ac2c" class="d-block w-100" alt="">
+					<a href="selectmenu.php?menu_id=95"><img src="menu_picture/db7bb7c5507b5f3421d96323b609ac2c" class="d-block w-100" alt=""></a>
 					<div class="carousel-caption d-none d-block">
 					  <h5><span style="background-color: #7f1d17;">&nbsp;สปาเก็ตตี้คาโบนารา&nbsp;</span></h5>
 					  <p>ร้านรัตน์ จานด่วน</p>
 					</div>
 				  </div>
 				  <div class="carousel-item">
-					<img src="menu_picture/329e045ba08e9254008ad7a1b241688d" class="d-block w-100" alt="">
+					<a href="selectmenu.php?menu_id=60"><img src="menu_picture/329e045ba08e9254008ad7a1b241688d" class="d-block w-100" alt=""></a>
 					<div class="carousel-caption d-none d-block">
 					  <h5><span style="background-color: #7f1d17;">&nbsp;น้ำตกหมู&nbsp;</span></h5>
 					  <p>ร้านข้าวเหนียวไก่อักษร สาขา 2</p>
 					</div>
 				  </div>
 				  <div class="carousel-item">
-					<img src="menu_picture/a10f29e7720ccd8d609d10b57772b231" class="d-block w-100" alt="">
+					<a href="selectmenu.php?menu_id=164"><img src="menu_picture/a10f29e7720ccd8d609d10b57772b231" class="d-block w-100" alt=""></a>
 					<div class="carousel-caption d-none d-block">
 					  <h5><span style="background-color: #7f1d17;">&nbsp;เสต็กหมูพริกไทยดำ&nbsp;</span></h5>
 					  <p>ร้านทูเดย์เสต็ก</p>
 					</div>
 				  </div>
 				  <div class="carousel-item">
-					<img src="menu_picture/294d92ff2acf64813cd569560b376955" class="d-block w-100" alt="">
+					<a href="selectmenu.php?menu_id=31"><img src="menu_picture/294d92ff2acf64813cd569560b376955" class="d-block w-100" alt=""></a>
 					<div class="carousel-caption d-none d-block">
 					  <h5><span style="background-color: #7f1d17;">&nbsp;ไข่กระทะ&nbsp;</span></h5>
 					  <p>ร้านส้ม อาหารชุด</p>
@@ -150,7 +150,7 @@ $result = mysqli_query($conn, $query);
 						  <div class="card-body card-body-hz">
 							<h5 class="card-title">ข้าวคัตสึด้ง ไข่ข้นราดไข่</h5>
 							<div class="card-text">คัตสึด้งร้อนๆ พร้อมไข่ข้นแสนอร่อย ผสมกันอย่างลงตัว</div>
-							<a href="addtoorder.php?menu_id=24" class="btn btn-success">สั่งเลย</a>
+							<a href="selectmenu.php?menu_id=24" class="btn btn-success">ดูรายละเอียด</a>
 						  </div>
 						</div>
 					  </div>
@@ -166,7 +166,7 @@ $result = mysqli_query($conn, $query);
 						  <div class="card-body card-body-hz">
 							<h5 class="card-title">ข้าวหมูญี่ปุ่น</h5>
 							<div class="card-text">ข้าวหมูคากิสูตรต้นตำรับจากญี่ปุ่น</div>
-							<a href="addtoorder.php?menu_id=28" class="btn btn-success">สั่งเลย</a>
+							<a href="selectmenu.php?menu_id=28" class="btn btn-success">ดูรายละเอียด</a>
 						  </div>
 						</div>
 					  </div>
