@@ -115,7 +115,7 @@ $row = mysqli_fetch_array($result);
 		echo "<h4 style='padding-top: 10px;'>ประเภท : " .$row["menu_category"] .  "</h4> ";
 		echo "<p style='padding-top: 10px;'>รายละเอียด : " .  "</p> ";
 		if ($_SESSION["user_role"]=="member") {
-		echo "<div style='padding-top: 20px;'><a class='btn btn-success btn-lg'  href='addtoorder.php?menu_id=.$menu_id.' role='button'>สั่งเลย! </a></div>";
+		echo "<div style='padding-top: 20px;'><a class='btn btn-success btn-lg'  href='addtoorder.php?menu_id=$menu_id' role='button'>สั่งเลย! </a></div>";
 		}
 		echo "</div></div>";
 		?>

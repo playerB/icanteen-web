@@ -11,27 +11,39 @@
             echo "window.history.back()";
             echo "</script>";
 
-        } else if ($_SESSION["user_role"]=="vendor") { 
+        } else if ($_SESSION["user_role"]=="vendor" && isset($_GET['order_id'])) { 
+
+            $requestinfo = "SELECT *, order_amount*menu_price AS order_total FROM orderhistory, menu WHERE menu.menu_id = orderhistory.menu_id AND orderhistory.order_id=".$_GET['order_id'] or die("Error:" . mysqli_error());
+		    $orderinfo = mysqli_fetch_array(mysqli_query($conn, $requestinfo));
+            $order_user_id = $orderinfo['user_id'];
+            $order_total = $orderinfo['order_total'];
+            
             $order_status = $_GET['order_status'];
             $order_id = $_GET['order_id'];
 
-            if ($_GET['order_status'] == 'accept' && isset($_GET['order_id'])) {
+            $requestuserinfo = "SELECT * FROM user WHERE user.user_id = $order_user_id" or die("Error:" . mysqli_error());
+		    $userinfo = mysqli_fetch_array(mysqli_query($conn, $requestinfo));
+            $order_user_balance = $userinfo['user_balance'];
+            
+            if ($_GET['order_status'] == 'accept' ) {
                 $query = "UPDATE orderhistory SET order_status='กำลังเตรียมอาหาร' WHERE order_id=$order_id" or die("Error:" . mysqli_error());
                 
-            } else if ($_GET['order_status'] == 'reject' && isset($_GET['order_id'])) {
-                $query = "UPDATE orderhistory SET order_status='ถูกยกเลิก' WHERE order_id=$order_id" or die("Error:" . mysqli_error());
+            } else if ($_GET['order_status'] == 'reject' ) {
+                $new_balance = $order_user_balance + $order_total;
+                $query = "UPDATE orderhistory SET order_status='ถูกยกเลิก' WHERE order_id=$order_id;
+                UPDATE user SET user_balance=$new_balance WHERE user_id=$order_user_id;" or die("Error:" . mysqli_error());
                 
-            } else if ($_GET['order_status'] == 'finish' && isset($_GET['order_id'])) {
+            } else if ($_GET['order_status'] == 'finish' ) {
                 $query = "UPDATE orderhistory SET order_status='อาหารเสร็จแล้ว', finish_timestamp=now(), time_diff=TIMESTAMPDIFF(MINUTE, order_timestamp, now()) WHERE order_id=$order_id" or die("Error:" . mysqli_error());
 
             } else {
                 echo "<script>";
-                echo "alert(\"Error\");"; 
+                echo "alert(\"Error $conn->error\");"; 
                 echo "window.history.back()";
                 echo "</script>";
             }
         
-            $result = mysqli_query($conn, $query); 
+            $result = mysqli_multi_query($conn, $query); 
 
             if($result){
                 echo "<script>";
@@ -40,7 +52,7 @@
                 echo "</script>";
             } else {
                 echo "<script>";
-                echo "alert(\"Error\");"; 
+                echo "alert(\"Error $conn->error\");"; 
                 echo "window.history.back()";
                 echo "</script>";
             }
