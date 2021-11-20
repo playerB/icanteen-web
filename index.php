@@ -56,11 +56,15 @@ $result = mysqli_query($conn, $query);
 						<?php print_r($_SESSION["user_name"]); ?>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">Balance: <?php print_r($_SESSION["user_balance"]); ?> ฿</a>
-						<a class="dropdown-item" href="topup.php">Topup</a>
-						<a class="dropdown-item" href="userreport.php">Report problem</a>
-						<a class="dropdown-item" href="logout.php">Logout</a>
-					</div>
+                    <a class="dropdown-item" href="#">Balance: <?php print_r($_SESSION["user_balance"]); ?> ฿</a>
+                    <?php if($_SESSION["user_role"]=="member") {?>
+                        <a class="dropdown-item" href="topup.php">Topup</a>
+                        <a class="dropdown-item" href="userreport.php">Report problem</a>
+                    <?php }  elseif($_SESSION["user_role"]=="vendor") {?>
+                        <a class="dropdown-item" href="withdraw.php">Withdraw</a>
+                    <?php } ?>
+                    <a class="dropdown-item" href="logout.php">Logout</a>
+                </div>
 				</div>
 				</li>
 				<?php } else{ ?>
