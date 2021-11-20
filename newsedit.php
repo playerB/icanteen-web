@@ -45,22 +45,22 @@ extract($row);
 ?>
 	<div id="register" style="position: absolute; top: 20px; left: 20px;">
 		<h2>EDIT NEWS</h2><hr/>
-		<form action="menuupdate_db.php" method="post" enctype="multipart/form-data">
+		<form action="newsupdate_db.php" method="post" enctype="multipart/form-data">
 			<div style="width: 300px; height: 60px;" class="form-group">
 				<label for="news_id">ID :</label>
 					<input class="form-control" type="text" name="news_id" value="<?php echo $news_id; ?>" readonly/><br /><br />
 					<input type="hidden" name="news_id" value="<?php echo $news_id; ?>" />
 			</div>
 			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="headline">Headline :</label>
-					<input type="text" class="form-control" name="headline" id="headline" placeholder="<?php echo $news_headline; ?>" value="<?php echo $news_headline; ?>" required="required"/><br/><br/>
+				<label for="news_headline">Headline :</label>
+					<input type="text" class="form-control" name="news_headline" id="news_headline" placeholder="<?php echo $news_headline; ?>" value="<?php echo $news_headline; ?>" required="required"/><br/><br/>
 			</div>
 			<div style="width: 300px; height: 60px;" class="form-group">
-				<label for="news">News :</label>
-					<input type="text" class="form-control" name="news" id="news" placeholder="<?php echo $news_content; ?>" value="<?php echo $news_content; ?>" required="required"/>
+				<label for="news_content">News :</label>
+					<input type="text" class="form-control" name="news_content" id="news_content" placeholder="<?php echo $news_content; ?>" value="<?php echo $news_content; ?>" required="required"/>
 			</div>
 			<div style="width: 300px; height: 60px;" class="form-group">
-					<input type="file" class="form-control-file" name="image" id="image" /><br/><br/>
+					<input type="file" class="form-control-file" name="news_picture" id="news_picture" /><br/><br/>
 			</div>
 			<div style="height: 200px;" class="form-group">
 				<?php

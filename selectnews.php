@@ -113,7 +113,7 @@ $row = mysqli_fetch_array($result);
 			echo "</div>";
 		}
 		echo "<h1 class='display-5'>" .$row["news_headline"] .  "</h1>";
-		echo "<img src='news_picture/".$row["news_picture"]." 'class='menu-img'>";
+		echo "<img src='news_picture/".$row["news_picture"]." '>";
 		echo "<p style='padding-top: 10px;'>รายละเอียด : " .$row["news_content"].  "</p> ";
 		echo "</div></div>";
 		?>

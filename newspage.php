@@ -89,7 +89,7 @@ $result = mysqli_query($conn, $query);
 				<div class="card card-hz mb-3">
 				<div class="row no-gutters">
 					<div class="col-5">
-					<img src="news_picture/<?php echo $row['news_picture']; ?>" class="card-img " alt="">
+						<img src="news_picture/<?php echo $row['news_picture']; ?>" class="card-img" alt="">
 					</div>
 					<div class="col-7">
 					<div class="card-body card-body-hz">
