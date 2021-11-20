@@ -72,15 +72,16 @@ include('Connections/condb.php');?>
         </div>
     </nav>
     <div class="container-fluid">
-        เติมเงินเข้าบัญชี <?php print_r($_SESSION["user_name"])?>
+        ถอนเงินออกจากบัญชี <?php print_r($_SESSION["user_name"])?>
         <br>
         ปัจจุบันคุณมีเงิน <?php print_r($_SESSION["user_balance"]); ?> บาท
-        <form action="topup_process.php" method="post">
+        <form action="updatebalance.php" method="post">
             <div class="form-group">
                 <label for="amount">จำนวนเงิน</label>
-                <input type="number" class="form-control" id="amount" name="amount" placeholder="จำนวนเงิน">
+                <input type="number" class="form-control" id="amount" name="amount">
+                <input type="hidden" id="actiontoupdate" value="withdraw" />
             </div>
-            <button type="submit" class="btn btn-primary">เติมเงิน</button>
+            <button type="submit" class="btn btn-warning">ถอนเงิน</button>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

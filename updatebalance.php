@@ -15,9 +15,22 @@
         
         $username = $_SESSION['user_name'];
         $newbalance = (float)$_SESSION["user_balance"] + (float)$_POST['amount'];
+        $action = $_POST['actiontoupdate'];
 
-        $sql = "UPDATE user SET "."user_balance=$newbalance "."WHERE user_name='$username'";
-
+        if ($action == "add"){
+            $newbalance = (float)$_SESSION["user_balance"] + (float)$_POST['amount'];
+            $sql = "UPDATE user SET user_balance = $newbalance WHERE user_name=$username";
+        } else if ($action == "withdraw"){
+            $newbalance = (float)$_SESSION["user_balance"] - (float)$_POST['amount'];
+            if ($newbalance < 0){
+                echo "<script type='text/javascript'>";
+                echo "alert('Error back to topup again');";
+                echo "window.history.back();";
+                echo "</script>";
+            } else {
+                $sql = "UPDATE user SET user_balance=$newbalance WHERE user_name=$username";
+            }
+        }
 
         $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_error($conn));
     
@@ -33,7 +46,7 @@
         } else{
             echo "<script type='text/javascript'>";
             echo "alert('Error back to topup again');";
-                echo "window.location = 'topup.php'; ";
+            echo "window.history.back();";
             echo "</script>";
         }
 

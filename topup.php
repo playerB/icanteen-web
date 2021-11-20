@@ -75,10 +75,11 @@ include('Connections/condb.php');?>
         เติมเงินเข้าบัญชี <?php print_r($_SESSION["user_name"])?>
         <br>
         ปัจจุบันคุณมีเงิน <?php print_r($_SESSION["user_balance"]); ?> บาท
-        <form action="topup_process.php" method="post">
+        <form action="updatebalance.php" method="post">
             <div class="form-group">
                 <label for="amount">จำนวนเงิน</label>
-                <input type="number" class="form-control" id="amount" name="amount" placeholder="จำนวนเงิน">
+                <input type="number" class="form-control" id="amount" name="amount">
+                <input type="hidden" id="actiontoupdate" value="topup" />
             </div>
             <button type="submit" class="btn btn-primary">เติมเงิน</button>
         </form>
