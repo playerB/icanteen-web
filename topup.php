@@ -79,7 +79,7 @@ include('Connections/condb.php');?>
             <div class="form-group">
                 <label for="amount">จำนวนเงิน</label>
                 <input type="number" class="form-control" id="amount" name="amount">
-                <input type="hidden" id="actiontoupdate" value="topup" />
+                <input type="hidden" name="actiontoupdate" value="topup" />
             </div>
             <button type="submit" class="btn btn-primary">เติมเงิน</button>
         </form>

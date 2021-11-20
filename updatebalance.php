@@ -15,11 +15,11 @@
         
         $username = $_SESSION['user_name'];
         $newbalance = (float)$_SESSION["user_balance"] + (float)$_POST['amount'];
-        $action = $_POST['actiontoupdate'];
+        $action = $_POST["actiontoupdate"];
 
-        if ($action == "add"){
+        if ($action == "topup"){
             $newbalance = (float)$_SESSION["user_balance"] + (float)$_POST['amount'];
-            $sql = "UPDATE user SET user_balance = $newbalance WHERE user_name=$username";
+            $sql = "UPDATE user SET user_balance = $newbalance WHERE user_name='$username'";
         } else if ($action == "withdraw"){
             $newbalance = (float)$_SESSION["user_balance"] - (float)$_POST['amount'];
             if ($newbalance < 0){
@@ -28,7 +28,7 @@
                 echo "window.history.back();";
                 echo "</script>";
             } else {
-                $sql = "UPDATE user SET user_balance=$newbalance WHERE user_name=$username";
+                $sql = "UPDATE user SET user_balance=$newbalance WHERE user_name='$username'";
             }
         }
 
