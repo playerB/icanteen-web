@@ -2,8 +2,9 @@
 include('Connections/condb.php');
 
 $query = "SELECT * FROM news ORDER BY news_id ASC" or die("Error:" . mysqli_error()); 
-
 $result = mysqli_query($conn, $query);
+$query2 = "SELECT COUNT(*), menu.menu_id, menu_name, menu_picture, restaurant_name FROM orderhistory, menu, restaurant WHERE menu.menu_id = orderhistory.menu_id AND menu.restaurant_id = restaurant.restaurant_id GROUP BY menu.menu_id ORDER BY 1 DESC LIMIT 5" or die("Error:" . mysqli_error());
+$result2 = mysqli_query($conn, $query2);
 
 ?>
 <html>
@@ -76,56 +77,55 @@ $result = mysqli_query($conn, $query);
 		  </div>
 		</nav>
 	<div class="container-fluid" style="align-content: center">
-		<div class="row">
-			<div class="col-12 col-md-6">
+		<div class="row justify-content-center">
+			<div class="col-6">
 				<div style="display: inline; font-size: 30px">
-					<div class="container-fluid d-none d-md-block">เมนูประจำสัปดาห์</div>
+					<div class="container-fluid d-none d-md-block">เมนูขายดีที่สุด</div>
 				</div>
 				<div id="carouselFood" class="carousel slide" data-interval="3000" data-ride="carousel">
-				  <ol class="carousel-indicators">
-					<li data-target="#carouselFood" data-slide-to="0" class="active"></li>
-					<li data-target="#carouselFood" data-slide-to="1"></li>
-					<li data-target="#carouselFood" data-slide-to="2"></li>
-					<li data-target="#carouselFood" data-slide-to="3"></li>
-					<li data-target="#carouselFood" data-slide-to="4"></li>
-				  </ol>
-				  <div class="carousel-inner">
-				  <div class="carousel-item active">
-					<a href="selectmenu.php?menu_id=56"><img src="menu_picture/20b2a45e15e915848f88fbbe3bf00e31" class="d-block w-100" alt=""></a>	
-					<div class="carousel-caption d-none d-block">
-					  <h5><span style="background-color: #7f1d17;">&nbsp;ข้าวเหนียวไก่ทอด&nbsp;</span></h5>
-					  <p>ร้านข้าวเหนียวไก่อักษร สาขา 2</p>
-					</div>
-				  </div>
-				  <div class="carousel-item">
-					<a href="selectmenu.php?menu_id=95"><img src="menu_picture/db7bb7c5507b5f3421d96323b609ac2c" class="d-block w-100" alt=""></a>
-					<div class="carousel-caption d-none d-block">
-					  <h5><span style="background-color: #7f1d17;">&nbsp;สปาเก็ตตี้คาโบนารา&nbsp;</span></h5>
-					  <p>ร้านรัตน์ จานด่วน</p>
-					</div>
-				  </div>
-				  <div class="carousel-item">
-					<a href="selectmenu.php?menu_id=60"><img src="menu_picture/329e045ba08e9254008ad7a1b241688d" class="d-block w-100" alt=""></a>
-					<div class="carousel-caption d-none d-block">
-					  <h5><span style="background-color: #7f1d17;">&nbsp;น้ำตกหมู&nbsp;</span></h5>
-					  <p>ร้านข้าวเหนียวไก่อักษร สาขา 2</p>
-					</div>
-				  </div>
-				  <div class="carousel-item">
-					<a href="selectmenu.php?menu_id=164"><img src="menu_picture/a10f29e7720ccd8d609d10b57772b231" class="d-block w-100" alt=""></a>
-					<div class="carousel-caption d-none d-block">
-					  <h5><span style="background-color: #7f1d17;">&nbsp;เสต็กหมูพริกไทยดำ&nbsp;</span></h5>
-					  <p>ร้านทูเดย์เสต็ก</p>
-					</div>
-				  </div>
-				  <div class="carousel-item">
-					<a href="selectmenu.php?menu_id=31"><img src="menu_picture/294d92ff2acf64813cd569560b376955" class="d-block w-100" alt=""></a>
-					<div class="carousel-caption d-none d-block">
-					  <h5><span style="background-color: #7f1d17;">&nbsp;ไข่กระทะ&nbsp;</span></h5>
-					  <p>ร้านส้ม อาหารชุด</p>
-					</div>
-				  </div>
-				  </div>
+					<ol class="carousel-indicators">
+						<li data-target="#carouselFood" data-slide-to="0" class="active"></li>
+						<li data-target="#carouselFood" data-slide-to="1"></li>
+						<li data-target="#carouselFood" data-slide-to="2"></li>
+						<li data-target="#carouselFood" data-slide-to="3"></li>
+						<li data-target="#carouselFood" data-slide-to="4"></li>
+					</ol>
+				  	<div class="carousel-inner">
+					<?php 
+						$topmenu = mysqli_fetch_array($result2);
+						$topmenu_id = $topmenu["menu_id"];
+						$topmenu_picture = $topmenu["menu_picture"];
+						$topmenu_name = $topmenu["menu_name"];
+						$topmenu_restaurant = $topmenu["restaurant_name"];
+						
+						echo '
+						<div class="carousel-item active" style="height: 30rem; object-fit: cover;">
+							<a href="selectmenu.php?menu_id='.$topmenu_id.'"><img src="menu_picture/'.$topmenu_picture.'" style="width: 50rem; object-fit: cover;" alt=""></a>	
+								<div class="carousel-caption d-none d-block">
+									<h5><span style="background-color: #7f1d17;">&nbsp;'.$topmenu_name.'&nbsp;</span></h5>
+									<p>'.$topmenu_restaurant.'</p>
+								</div>
+							</div>
+						';
+
+						while($showmenu = mysqli_fetch_array($result2)) {
+							$showmenu_id = $showmenu["menu_id"];
+							$showmenu_picture = $showmenu["menu_picture"];
+							$showmenu_name = $showmenu["menu_name"];
+							$showmenu_restaurant = $showmenu["restaurant_name"];
+							
+							echo '
+							<div class="carousel-item" style="height: 30rem; object-fit: cover;">
+								<a href="selectmenu.php?menu_id='.$showmenu_id.'"><img src="menu_picture/'.$showmenu_picture.'" style="width: 50rem; object-fit: cover;" alt=""></a>	
+									<div class="carousel-caption d-none d-block">
+										<h5><span style="background-color: #7f1d17;">&nbsp;'.$showmenu_name.'&nbsp;</span></h5>
+										<p>'.$showmenu_restaurant.'</p>
+									</div>
+								</div>
+							';
+						}
+					?>
+				  	</div>
 				  <a class="carousel-control-prev" href="#carouselFood" role="button" data-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 					<span class="sr-only">Previous</span>
@@ -138,35 +138,19 @@ $result = mysqli_query($conn, $query);
 			</div>
 			<div class="col-12 col-md-6">
 				<div style="display: inline; font-size: 30px">
-					<div class="container-fluid d-none d-md-block">เมนูใหม่ชวนลองชิม</div>
+					<div class="container-fluid d-none d-md-block">เมนูประจำคณะ</div>
 				</div>
 				<div class="row">
 					<div class="card card-hz mb-3">
 					  <div class="row no-gutters">
 						<div class="col-5">
-						  <img src="menu_picture/5a71aa7312af9fd1cd1a8bddec9f0780" class="card-img " alt="">
+						  <img src="menu_picture/d968f109078b81a707d0637f12a7b1b7" class="card-img " alt="">
 						</div>
 						<div class="col-7">
 						  <div class="card-body card-body-hz">
-							<h5 class="card-title">ข้าวคัตสึด้ง ไข่ข้นราดไข่</h5>
-							<div class="card-text">คัตสึด้งร้อนๆ พร้อมไข่ข้นแสนอร่อย ผสมกันอย่างลงตัว</div>
-							<a href="selectmenu.php?menu_id=24" class="btn btn-success">ดูรายละเอียด</a>
-						  </div>
-						</div>
-					  </div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="card card-hz mb-3">
-					  <div class="row no-gutters">
-						<div class="col-5">
-						  <img src="menu_picture/6f3574ae10f520915f2483b38375a4f5" class="card-img" alt="">
-						</div>
-						<div class="col-7">
-						  <div class="card-body card-body-hz">
-							<h5 class="card-title">ข้าวหมูญี่ปุ่น</h5>
-							<div class="card-text">ข้าวหมูคากิสูตรต้นตำรับจากญี่ปุ่น</div>
-							<a href="selectmenu.php?menu_id=28" class="btn btn-success">ดูรายละเอียด</a>
+							<h5 class="card-title">ข้าวเหนียวไก่ทอด</h5>
+							<div class="card-text">ข้าวเหนียวไก่ทอดอักษร สาขา 2 ในตำนาน ที่ใครๆ ก็ต้องมากิน</div>
+							<a href="selectmenu.php?menu_id=56" class="btn btn-success">ดูรายละเอียด</a>
 						  </div>
 						</div>
 					  </div>
