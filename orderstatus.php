@@ -19,6 +19,7 @@
 		    $orderinfo = mysqli_fetch_array(mysqli_query($conn, $requestinfo));
             $order_user_id = $orderinfo['user_id'];
             $order_total = $orderinfo['order_total'];
+            $current_order_status = $orderinfo['order_status'];
             
             $order_status = $_GET['order_status'];
             $order_id = $_GET['order_id'];
@@ -29,16 +30,22 @@
 
             $requestvendorinfo = "SELECT * FROM user WHERE user.user_id = $vendor_id" or die("Error:" . mysqli_error());
 		    $vendorinfo = mysqli_fetch_array(mysqli_query($conn, $requestvendorinfo));
-            
-            if ($_GET['order_status'] == 'accept' ) {
-                $query = "UPDATE orderhistory SET order_status='กำลังเตรียมอาหาร' WHERE order_id=$order_id" or die("Error:" . mysqli_error());
-                
-            } else if ($_GET['order_status'] == 'reject' ) {
-                $new_balance = $order_user_balance + $order_total;
-                $query = "UPDATE orderhistory SET order_status='ถูกยกเลิก' WHERE order_id=$order_id;
-                UPDATE user SET user_balance=$new_balance WHERE user_id=$order_user_id;" or die("Error:" . mysqli_error());
-                
-            } else if ($_GET['order_status'] == 'finish' ) {
+            if ($current_order_status == 'รอร้านรับคำสั่งซื้อ') {
+                if ($_GET['order_status'] == 'accept' ) {
+                    $query = "UPDATE orderhistory SET order_status='กำลังเตรียมอาหาร' WHERE order_id=$order_id" or die("Error:" . mysqli_error());
+                    
+                } elseif ($_GET['order_status'] == 'reject' ) {
+                    $new_balance = $order_user_balance + $order_total;
+                    $query = "UPDATE orderhistory SET order_status='ถูกยกเลิก' WHERE order_id=$order_id;
+                    UPDATE user SET user_balance=$new_balance WHERE user_id=$order_user_id;" or die("Error:" . mysqli_error());
+                    
+                } else {
+                    echo "<script type='text/javascript'>"; 
+                    echo "alert('Error: unable to update status, please try again');"; 
+                    echo "window.location = 'restaurantorders.php'; "; 
+                    echo "</script>";
+                }
+            } elseif ($_GET['order_status'] == 'finish' ) {
                 $new_vendor_balance = $vendor_balance + $order_total;
                 $query = "UPDATE orderhistory SET order_status='อาหารเสร็จแล้ว', finish_timestamp=now(), time_diff=TIMESTAMPDIFF(MINUTE, order_timestamp, now()) WHERE order_id=$order_id;
                 UPDATE user SET user_balance=$new_vendor_balance WHERE user_id=$vendor_id " or die("Error:" . mysqli_error());

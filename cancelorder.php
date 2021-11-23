@@ -9,6 +9,13 @@ $requestinfo = "SELECT *, order_amount*menu_price AS order_total FROM orderhisto
 $orderinfo = mysqli_fetch_array(mysqli_query($conn, $requestinfo));
 $order_user_id = $orderinfo['user_id'];
 $order_total = $orderinfo['order_total'];
+$order_status = $orderinfo['order_status']; 
+if ($order_status != 'รอร้านรับคำสั่งซื้อ') {
+    echo "<script type='text/javascript'>"; 
+    echo "alert('Error: ไม่สามารถยกเลิกได้');"; 
+    echo "window.location = 'myorder.php'; "; 
+    echo "</script>";
+}
 
 $order_id = $_GET['order_id'];
 
