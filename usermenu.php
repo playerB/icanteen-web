@@ -2,12 +2,8 @@
 		
 include('Connections/condb.php');
 
-$query = "SELECT * FROM menu ORDER BY menu_id asc" or die("Error:" . mysqli_error()); 
-
-for ($x = 1; $x <= 11; $x++) {
-  $result[$x] = mysqli_query($conn, $query);
-}
-
+$query = "SELECT * FROM restaurant ORDER BY restaurant_id ASC" or die("Error:" . mysqli_error()); 
+$result= mysqli_query($conn, $query);
 ?>
 <html lang="en">
 <head>
@@ -160,184 +156,28 @@ for ($x = 1; $x <= 11; $x++) {
 		  </div>
 	</nav>
 	<div class="container-fluid">
-		<label style="font-size: 1.5rem">1.สุชาดา น้ำผลไม้</label>
-		<div class="scrolling-wrapper">
-		<?php while($row = mysqli_fetch_array($result[1])) { if($row["restaurant_id"]==1) {?>
-			<div class="card card-box mr-2 mb-2">
-				<?php
-				echo "<a href='selectmenu.php?menu_id=$row[0]'>";
-				echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
-				echo "<span class='price-badge'>".$row["menu_price"].".-</span></a>";
-				echo "<div class='card-body'>";
-				echo "<p class='card-title'>".$row["menu_name"]."</p>";
+		<?php 
+		while($row = mysqli_fetch_array($result)) {
+			$restaurant_id = $row["restaurant_id"];
+			$restaurant_name = $row['restaurant_name'];
+			echo "<label style='font-size: 1.5rem'>".$restaurant_id.". ".$restaurant_name."</label>";
+			echo "<div class='scrolling-wrapper'>";
+			$sql2 = "SELECT * FROM menu WHERE restaurant_id = '$restaurant_id'";
+			$menuresult = mysqli_query($conn, $sql2);
+			while($menurow = mysqli_fetch_array($menuresult)) {
+				echo "<div class='card card-box mr-2 mb-2'>";
+					echo "<a href='selectmenu.php?menu_id=$menurow[0]'>";
+					echo "<img src='menu_picture/".$menurow["menu_picture"]."' class='card-img card-img-box' alt=''>";
+					echo "<span class='price-badge'>".$menurow["menu_price"].".-</span></a>";
+					echo "<div class='card-body'>";
+					echo "<p class='card-title'>".$menurow["menu_name"]."</p>";
+					echo "</div>";
 				echo "</div>";
-				?>
-			</div>
-		<?php } }?>
-		</div>
+				}
+			echo "</div>" ;
+		}?>
 	</div>
-	<div class="container-fluid">
-		<label style="font-size: 1.5rem">2.ส้ม อาหารชุด</label>
-		<div class="scrolling-wrapper">
-		<?php while($row = mysqli_fetch_array($result[2])) { if($row["restaurant_id"]==2) {?>
-			<div class="card card-box mr-2 mb-2">
-				<?php
-				echo "<a href='selectmenu.php?menu_id=$row[0]'>";
-				echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
-				echo "<span class='price-badge'>".$row["menu_price"].".-</span></a>";
-				echo "<div class='card-body'>";
-				echo "<p class='card-title'>".$row["menu_name"]."</p>";
-				echo "</div>";
-				?>
-			</div>
-		<?php } }?>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<label style="font-size: 1.5rem">3.รุจิศรี เส้นเล็กต้มยำ</label>
-		<div class="scrolling-wrapper">
-		<?php while($row = mysqli_fetch_array($result[3])) { if($row["restaurant_id"]==3) {?>
-			<div class="card card-box mr-2 mb-2">
-				<?php
-				echo "<a href='selectmenu.php?menu_id=$row[0]'>";
-				echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
-				echo "<span class='price-badge'>".$row["menu_price"].".-</span></a>";
-				echo "<div class='card-body'>";
-				echo "<p class='card-title'>".$row["menu_name"]."</p>";
-				echo "</div>";
-				?>
-			</div>
-		<?php } }?>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<label style="font-size: 1.5rem">4.อรวรรณ</label>
-		<div class="scrolling-wrapper">
-		<?php while($row = mysqli_fetch_array($result[4])) { if($row["restaurant_id"]==4) {?>
-			<div class="card card-box mr-2 mb-2">
-				<?php
-				echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
-				echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
-				echo "<div class='card-body'>";
-				echo "<p class='card-title'>".$row["menu_name"]."</p>";
-				echo "</div>";
-				?>
-			</div>
-		<?php } }?>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<label style="font-size: 1.5rem">5.ข้าวเหนียวอักษร สาขา2</label>
-		<div class="scrolling-wrapper">
-		<?php while($row = mysqli_fetch_array($result[5])) { if($row["restaurant_id"]==5) {?>
-			<div class="card card-box mr-2 mb-2">
-				<?php
-				echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
-				echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
-				echo "<div class='card-body'>";
-				echo "<p class='card-title'>".$row["menu_name"]."</p>";
-				echo "</div>";
-				?>
-			</div>
-		<?php } }?>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<label style="font-size: 1.5rem">6.รัตน์ จานด่วน</label>
-		<div class="scrolling-wrapper">
-		<?php while($row = mysqli_fetch_array($result[6])) { if($row["restaurant_id"]==6) {?>
-			<div class="card card-box mr-2 mb-2">
-				<?php
-				echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
-				echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
-				echo "<div class='card-body'>";
-				echo "<p class='card-title'>".$row["menu_name"]."</p>";
-				echo "</div>";
-				?>
-			</div>
-		<?php } }?>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<label style="font-size: 1.5rem">7.ลุงเหนอ ก๋วยเตี๋ยวทรงเครื่อง</label>
-		<div class="scrolling-wrapper">
-		<?php while($row = mysqli_fetch_array($result[7])) { if($row["restaurant_id"]==7) {?>
-			<div class="card card-box mr-2 mb-2">
-				<?php
-				echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
-				echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
-				echo "<div class='card-body'>";
-				echo "<p class='card-title'>".$row["menu_name"]."</p>";
-				echo "</div>";
-				?>
-			</div>
-		<?php } }?>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<label style="font-size: 1.5rem">8.ข้าวราดแกงป้าหลง</label>
-		<div class="scrolling-wrapper">
-		<?php while($row = mysqli_fetch_array($result[8])) { if($row["restaurant_id"]==8) {?>
-			<div class="card card-box mr-2 mb-2">
-				<?php
-				echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
-				echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
-				echo "<div class='card-body'>";
-				echo "<p class='card-title'>".$row["menu_name"]."</p>";
-				echo "</div>";
-				?>
-			</div>
-		<?php } }?>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<label style="font-size: 1.5rem">9.ข้าว-มัน-ไก่ น้ากวาง</label>
-		<div class="scrolling-wrapper">
-		<?php while($row = mysqli_fetch_array($result[9])) { if($row["restaurant_id"]==9) {?>
-			<div class="card card-box mr-2 mb-2">
-				<?php
-				echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
-				echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
-				echo "<div class='card-body'>";
-				echo "<p class='card-title'>".$row["menu_name"]."</p>";
-				echo "</div>";
-				?>
-			</div>
-		<?php } }?>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<label style="font-size: 1.5rem">10.ขนมหวานเย็น</label>
-		<div class="scrolling-wrapper">
-		<?php while($row = mysqli_fetch_array($result[10])) { if($row["restaurant_id"]==10) {?>
-			<div class="card card-box mr-2 mb-2">
-				<?php
-				echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
-				echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
-				echo "<div class='card-body'>";
-				echo "<p class='card-title'>".$row["menu_name"]."</p>";
-				echo "</div>";
-				?>
-			</div>
-		<?php } }?>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<label style="font-size: 1.5rem">11.ทูเดย์สเต็ก</label>
-		<div class="scrolling-wrapper">
-		<?php while($row = mysqli_fetch_array($result[11])) { if($row["restaurant_id"]==11) {?>
-			<div class="card card-box mr-2 mb-2">
-				<?php
-				echo "<img src='menu_picture/".$row["menu_picture"]."' class='card-img card-img-box' alt=''>";
-				echo "<span class='price-badge'>".$row["menu_price"].".-</span>";
-				echo "<div class='card-body'>";
-				echo "<p class='card-title'>".$row["menu_name"]."</p>";
-				echo "</div>";
-				?>
-			</div>
-		<?php } }?>
-		</div>
-	</div>
+	
 	<footer style="background-color: #cccccc">
 		<div class="container">
 			<p id = "btext"><br>
