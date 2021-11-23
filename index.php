@@ -3,7 +3,7 @@ include('Connections/condb.php');
 
 $query = "SELECT * FROM news ORDER BY news_id ASC" or die("Error:" . mysqli_error()); 
 $result = mysqli_query($conn, $query);
-$query2 = "SELECT COUNT(*), menu.menu_id, menu_name, menu_picture, restaurant_name FROM orderhistory, menu, restaurant WHERE menu.menu_id = orderhistory.menu_id AND menu.restaurant_id = restaurant.restaurant_id GROUP BY menu.menu_id ORDER BY 1 DESC LIMIT 5" or die("Error:" . mysqli_error());
+$query2 = "SELECT SUM(order_amount), menu.menu_id, menu_name, menu_picture, restaurant_name FROM orderhistory, menu, restaurant WHERE menu.menu_id = orderhistory.menu_id AND menu.restaurant_id = restaurant.restaurant_id GROUP BY menu.menu_id ORDER BY 1 DESC LIMIT 5" or die("Error:" . mysqli_error());
 $result2 = mysqli_query($conn, $query2);
 
 ?>
