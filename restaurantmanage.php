@@ -1,4 +1,5 @@
-<?php session_start(); error_reporting(~E_NOTICE );
+<?php session_start();
+error_reporting(~E_WARNING);
     include('Connections/condb.php');
 
     if (!$_SESSION["user_name"]){  //check session
@@ -37,7 +38,7 @@
             $member_maxspent = $result06[0];
             $member_maxspent_count = $result06[1];
 
-            $query07 = "SELECT restaurant_id, SUM(order_amount*menu_price) FROM orderhistory,menu WHERE menu.menu_id = orderhistory.menu_id AND restaurant_id = $restaurant_id AND order_status IN ('อาหารเสร็จแล้ว', 'กำลังเตรียมอาหาร')" or die("Error:" . mysqli_error());
+            $query07 = "SELECT restaurant_id, SUM(order_amount*menu_price) FROM orderhistory,menu WHERE menu.menu_id = orderhistory.menu_id AND restaurant_id = $restaurant_id AND order_status IN ('อาหารเสร็จแล้ว')" or die("Error:" . mysqli_error());
             $result07 = mysqli_fetch_array(mysqli_query($conn, $query07));
             //$restaurant_maxrev =$result07[0];
             $restaurant_rev_count = $result07[1];

@@ -29,12 +29,12 @@ if (!$_SESSION["user_name"]){  //check session
 		$query05 = "SELECT COUNT(menu_id) FROM menu" or die("Error:" . mysqli_error());
 		$menu_count = mysqli_fetch_array(mysqli_query($conn, $query05))[0];
 
-		$query06 = "SELECT user_name, SUM(order_amount*menu_price) FROM orderhistory,menu,user WHERE menu.menu_id = orderhistory.menu_id AND user.user_id = orderhistory.user_id GROUP BY user_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
+		$query06 = "SELECT user_name, SUM(order_amount*menu_price) FROM orderhistory,menu,user WHERE menu.menu_id = orderhistory.menu_id AND user.user_id = orderhistory.user_id AND order_status IN ('อาหารเสร็จแล้ว', 'กำลังเตรียมอาหาร') GROUP BY user_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
 		$result06 = mysqli_fetch_array(mysqli_query($conn, $query06));
 		$member_maxspent = $result06[0];
 		$member_maxspent_count = $result06[1];
 
-		$query07 = "SELECT restaurant_name, SUM(order_amount*menu_price) FROM orderhistory,menu,restaurant WHERE menu.menu_id = orderhistory.menu_id AND restaurant.restaurant_id = menu.restaurant_id GROUP BY restaurant_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
+		$query07 = "SELECT restaurant_name, SUM(order_amount*menu_price) FROM orderhistory,menu,restaurant WHERE menu.menu_id = orderhistory.menu_id AND restaurant.restaurant_id = menu.restaurant_id AND order_status IN ('อาหารเสร็จแล้ว', 'กำลังเตรียมอาหาร') GROUP BY restaurant_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
 		$result07 = mysqli_fetch_array(mysqli_query($conn, $query07));
 		$restaurant_maxrev =$result07[0];
 		$restaurant_maxrev_count = $result07[1];
@@ -112,6 +112,7 @@ if (!$_SESSION["user_name"]){  //check session
 		</ul>
 		</div>
 	</nav>
+	<a href="insertrestaurant.php" class="btn btn-primary">+ Add new restaurant</a> <br>
 	<div class="container" style="display: inline; font-size: 36px;">
 	Admin dashboard
 		<div class="alert alert-info col-4" style="font-size: 18px;" role="alert">
