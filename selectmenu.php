@@ -117,9 +117,16 @@ $row = mysqli_fetch_array($result);
 	  	echo "<h2 style='padding-top: 10px;'>ร้าน " .$row["restaurant_id"] .  "</h2> ";
 		echo "<h2 style='padding-top: 10px;'>ราคา <span class='price-badge'>".$row["menu_price"]." ฿</span></h2> ";
 		echo "<h4 style='padding-top: 10px;'>ประเภท : " .$row["menu_category"] .  "</h4> ";
-		echo "<p style='padding-top: 10px;'>รายละเอียด : " .  "</p> ";
+		echo "<p style='padding-top: 10px;'>รายละเอียด : " .$row["menu_detail"].  "</p> ";
 		if ($_SESSION["user_role"]=="member") {
-		echo "<div style='padding-top: 20px;'><a class='btn btn-success btn-lg'  href='addtoorder.php?menu_id=$menu_id' role='button'>สั่งเลย! </a></div>";
+		echo "<form action='addtoorder.php' method='get'>";
+			echo "<label for='menu_amount'>ใส่จำนวน</label>";
+			echo "<input type='number' name='menu_amount' id='menu_amount' value=1 />";
+			echo "<input type='hidden' name='menu_id' id='menu_id' value=$menu_id />";
+			echo "<div style='padding-top: 20px;'><input type='submit' class='btn btn-success btn-lg' value='สั่งเลย!' name='submitbtn'/></div>";
+		echo "</form>";
+		} else {
+		echo "<div style='padding-top: 20px;'><button class='btn btn-success btn-lg'  href='#' role='button' disabled>ต้อง loginเป็น member ก่อนเพื่อสั่งอาหาร </button></div>";
 		}
 		echo "</div></div>";
 		?>

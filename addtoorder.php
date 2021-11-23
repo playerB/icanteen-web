@@ -6,19 +6,19 @@ echo "<script type='text/javascript'>";
 echo "alert('Error Contact Admin !!');"; 
 echo "window.location = 'index.php'; "; 
 echo "</script>"; 
-} else if (!$_SESSION["user_name"]) {
-    Header("Location: form_login.php");
+} elseif ($_SESSION["user_role"]!="member"){  //check session
+	Header("Location: form_login.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า form_login.php 
 } else {
 
     $menu_id = mysqli_real_escape_string($conn,$_GET['menu_id']);
     $user_id = mysqli_real_escape_string($conn,$_SESSION['user_id']);
     $user_balance = mysqli_real_escape_string($conn,$_SESSION['user_balance']);
-    $order_amount = 1;
+    $order_amount = mysqli_real_escape_string($conn,$_GET['menu_amount']);
     $order_status = 'รอร้านรับคำสั่งซื้อ';
     $requestinfo = "SELECT * FROM menu WHERE menu_id=$menu_id" or die("Error:" . mysqli_error());
 	$menuinfo = mysqli_fetch_array(mysqli_query($conn, $requestinfo));
-    $menu_price = $menuinfo['menu_price'];
-    $leftover_balance = $user_balance - $menu_price;
+    $order_price = $menuinfo['menu_price']*$order_amount;
+    $leftover_balance = $user_balance - $order_price;
     
     if ($leftover_balance >= 0) {
         $sql = "INSERT INTO orderhistory (menu_id,user_id,order_amount,order_status)
