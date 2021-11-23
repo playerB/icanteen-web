@@ -9,7 +9,7 @@ echo "</script>";
 }
 
 $menu_id = mysqli_real_escape_string($conn,$_GET['menu_id']);
-$sql = "SELECT * FROM menu WHERE menu_id='$menu_id' " or die("Error:" . mysqli_error()); 
+$sql = "SELECT * FROM menu, restaurant WHERE menu_id='$menu_id' AND restaurant.restaurant_id = menu.restaurant_id " or die("Error:" . mysqli_error()); 
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 
@@ -114,7 +114,7 @@ $row = mysqli_fetch_array($result);
 	  	echo "<img src='menu_picture/".$row["menu_picture"]." 'class='menu-img'>";
 		echo "</div>";
 		echo "<div class='col-12 col-md-8'>";
-	  	echo "<h2 style='padding-top: 10px;'>ร้าน " .$row["restaurant_id"] .  "</h2> ";
+	  	echo "<h2 style='padding-top: 10px;'>ร้าน " .$row["restaurant_name"] .  "</h2> ";
 		echo "<h2 style='padding-top: 10px;'>ราคา <span class='price-badge'>".$row["menu_price"]." ฿</span></h2> ";
 		echo "<h4 style='padding-top: 10px;'>ประเภท : " .$row["menu_category"] .  "</h4> ";
 		echo "<p style='padding-top: 10px;'>รายละเอียด : " .$row["menu_detail"].  "</p> ";
