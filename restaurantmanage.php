@@ -32,12 +32,12 @@
             $query05 = "SELECT COUNT(menu_id) FROM menu WHERE restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
             $menu_count = mysqli_fetch_array(mysqli_query($conn, $query05))[0];
 
-            $query06 = "SELECT user_name, SUM(order_amount*menu_price) FROM orderhistory,menu,user WHERE menu.menu_id = orderhistory.menu_id AND user.user_id = orderhistory.user_id AND restaurant_id = $restaurant_id GROUP BY user_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
+            $query06 = "SELECT user_name, SUM(order_amount*menu_price) FROM orderhistory,menu,user WHERE menu.menu_id = orderhistory.menu_id AND user.user_id = orderhistory.user_id AND restaurant_id = $restaurant_id AND order_status IN ('อาหารเสร็จแล้ว', 'กำลังเตรียมอาหาร') GROUP BY user_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
             $result06 = mysqli_fetch_array(mysqli_query($conn, $query06));
             $member_maxspent = $result06[0];
             $member_maxspent_count = $result06[1];
 
-            $query07 = "SELECT restaurant_id, SUM(order_amount*menu_price) FROM orderhistory,menu WHERE menu.menu_id = orderhistory.menu_id AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
+            $query07 = "SELECT restaurant_id, SUM(order_amount*menu_price) FROM orderhistory,menu WHERE menu.menu_id = orderhistory.menu_id AND restaurant_id = $restaurant_id AND order_status IN ('อาหารเสร็จแล้ว', 'กำลังเตรียมอาหาร')" or die("Error:" . mysqli_error());
             $result07 = mysqli_fetch_array(mysqli_query($conn, $query07));
             //$restaurant_maxrev =$result07[0];
             $restaurant_rev_count = $result07[1];
@@ -133,9 +133,9 @@
 				Total order count: <?php echo $order_count; ?>
 			</div>
 			<div class="alert alert-success col-4" style="font-size: 18px;" role="alert">
-				Total order succeed: <?php echo $order_count_success; ?>
+				Total order finished: <?php echo $order_count_success; ?>
 			</div>
-			<div class="alert alert-warning col-4" style="font-size: 18px;" role="alert">
+			<div class="alert alert-danger col-4" style="font-size: 18px;" role="alert">
 				Total order cancelled: <?php echo $order_count_cancel; ?>
 			</div>
 		</div>

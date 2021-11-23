@@ -21,6 +21,13 @@
 
             $result = mysqli_query($conn, $query1); 
 
+            $query2 = "SELECT * FROM menu, restaurant, orderhistory WHERE menu.restaurant_id = restaurant.restaurant_id 
+            AND restaurant.owner_id=$owner_id AND menu.menu_id= orderhistory.menu_id AND orderhistory.order_status IN ('ถูกยกเลิก', 'อาหารเสร็จแล้ว') " 
+
+            or die("Error:" . mysqli_error()); 
+
+            $result2 = mysqli_query($conn, $query2); 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,10 +104,18 @@
     <div class='table-responsive'>
         <table class='table table-striped table-hover'>
             <thead class='thead-dark' align='center' bgcolor='#CCCCCC'><tr><th scope='col'>Order ID</th><th scope='col'>Name</th><th scope='col'>User ID</th><th scope='col'>Price</th><th scope='col'>Timestamp</th><th scope='col'>Status</th><th colspan='2'>Order Action</th></tr></thead>
+            <tbody>
             <?php
+            
             while($row = mysqli_fetch_array($result)) { 
+                $bgcolor = "#f5f5f5";
+                if($row["order_status"]=="รอร้านรับคำสั่งซื้อ"){
+                    $bgcolor = "#b2bec3";
+                } elseif($row["order_status"]=="กำลังเตรียมอาหาร"){
+                    $bgcolor = "#74b9ff";
+                }
                 $total_price = $row["menu_price"] * $row["order_amount"];
-                echo "<tbody>";
+                echo "<tr style='background-color: $bgcolor;'>";
                 echo "<td align='center'>" .$row["order_id"] .  "</td> ";
                 echo "<td align='center'>" .$row["menu_name"] .  "</td> ";
                 echo "<td align='center'>" .$row["user_id"] .  "</td> ";
@@ -114,8 +129,30 @@
                 } else if ($row["order_status"] == 'กำลังเตรียมอาหาร') {
                     echo "<td align='center' colspan='8'><a href='orderstatus.php?order_id=" .$row["order_id"]. "&order_status=finish' class='btn btn-success btn-sm'>finish order</a></td> ";
                 }
-                echo "</tbody>";
-            }?>
+                echo "</tr>";
+            } ?>
+            </tbody>
+            <thead class='thead-dark' align='center' bgcolor='#CCCCCC'><tr><th scope='col'>Order ID</th><th scope='col'>Name</th><th scope='col'>User ID</th><th scope='col'>Price</th><th scope='col'>Timestamp</th><th scope='col'>Status</th></tr></thead>
+            <tbody>
+            <?php
+            while($row = mysqli_fetch_array($result2)) { 
+                $bgcolor = "#f5f5f5";
+                if($row["order_status"]=="ถูกยกเลิก"){
+                    $bgcolor = "#ff7675";
+                } elseif($row["order_status"]=="อาหารเสร็จแล้ว") {
+                    $bgcolor = "#2ecc71";
+                }
+                $total_price = $row["menu_price"] * $row["order_amount"];
+                echo "<tr style='background-color: $bgcolor;'>";
+                echo "<td align='center'>" .$row["order_id"] .  "</td> ";
+                echo "<td align='center'>" .$row["menu_name"] .  "</td> ";
+                echo "<td align='center'>" .$row["user_id"] .  "</td> ";
+                echo "<td align='center'>" .$total_price.  "</td> ";
+                echo "<td align='center'>" .$row["order_timestamp"] .  "</td> ";
+                echo "<td align='center'>" .$row["order_status"] .  "</td> ";
+                echo "</tr>";
+            } ?>
+            </tbody>
         </table>
     </div>
 
