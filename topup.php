@@ -78,7 +78,7 @@ include('Connections/condb.php');?>
         <form action="updatebalance.php" method="post">
             <div class="form-group">
                 <label for="amount">จำนวนเงิน</label>
-                <input type="number" class="form-control" id="amount" name="amount">
+                <input type="number" class="form-control" id="amount" name="amount" min='0'/>
                 <input type="hidden" name="actiontoupdate" value="topup" />
             </div>
             <button type="submit" class="btn btn-primary">เติมเงิน</button>
