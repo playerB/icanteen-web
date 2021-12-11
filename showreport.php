@@ -90,6 +90,7 @@ if (!$_SESSION["user_name"]){  //check session
 		<div class="row">
             <div class="col-md-12">
 				<a href="admin_page.php" class="btn btn-primary">Show dashboard overview</a>
+				<a href="allorders.php" class="btn btn-primary">Show all orders log</a>
             </div>
         </div>
         <div class="row">

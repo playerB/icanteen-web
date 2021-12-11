@@ -29,12 +29,12 @@ if (!$_SESSION["user_name"]){  //check session
 		$query05 = "SELECT COUNT(menu_id) FROM menu" or die("Error:" . mysqli_error());
 		$menu_count = mysqli_fetch_array(mysqli_query($conn, $query05))[0];
 
-		$query06 = "SELECT user_name, SUM(order_amount*menu_price) FROM orderhistory,menu,user WHERE menu.menu_id = orderhistory.menu_id AND user.user_id = orderhistory.user_id AND order_status IN ('อาหารเสร็จแล้ว', 'กำลังเตรียมอาหาร') GROUP BY user_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
+		$query06 = "SELECT user_name, SUM(order_amount*menu_price) FROM orderhistory,menu,user WHERE menu.menu_id = orderhistory.menu_id AND user.user_id = orderhistory.user_id AND order_status IN ('อาหารเสร็จแล้ว') GROUP BY user_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
 		$result06 = mysqli_fetch_array(mysqli_query($conn, $query06));
 		$member_maxspent = $result06[0];
 		$member_maxspent_count = $result06[1];
 
-		$query07 = "SELECT restaurant_name, SUM(order_amount*menu_price) FROM orderhistory,menu,restaurant WHERE menu.menu_id = orderhistory.menu_id AND restaurant.restaurant_id = menu.restaurant_id AND order_status IN ('อาหารเสร็จแล้ว', 'กำลังเตรียมอาหาร') GROUP BY restaurant_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
+		$query07 = "SELECT restaurant_name, SUM(order_amount*menu_price) FROM orderhistory,menu,restaurant WHERE menu.menu_id = orderhistory.menu_id AND restaurant.restaurant_id = menu.restaurant_id AND order_status IN ('อาหารเสร็จแล้ว') GROUP BY restaurant_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
 		$result07 = mysqli_fetch_array(mysqli_query($conn, $query07));
 		$restaurant_maxrev =$result07[0];
 		$restaurant_maxrev_count = $result07[1];
@@ -52,67 +52,10 @@ if (!$_SESSION["user_name"]){  //check session
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<nav class="navbar navbar-expand">
-		<a class="navbar-brand" href="index.php">
-		<img src="Materials/homepage/cropped-cu-eng-logo.png" width="130" height="18" class="d-inline-block align-top" alt="">
-		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item">
-				<a class="nav-link" href="index.php" style="color: #7f1d17">Home</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="usermenu.php" style="color: #7f1d17">Menu</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="newspage.php" style="color: #7f1d17">News</a>
-			</li>
-			<?php if($_SESSION["user_role"]=="member") {?>
-			<li class="nav-item">
-				<a class="nav-link" href="myorder.php" style="color: #7f1d17">Order</a>
-			</li>
-			<?php } elseif($_SESSION["user_role"]=="admin") {?>
-			<li class="nav-item">
-				<a class="nav-link" href="showreport.php" style="color: #7f1d17">Report</a>
-			</li>
-			<?php } elseif($_SESSION["user_role"]=="vendor") {?>
-			<li class="nav-item">
-				<a class="nav-link" href="restaurantmanage.php" style="color: #7f1d17">Manage</a>
-			</li>
-			<?php } ?>
-
-			<?php if($_SESSION["Loggedin"]){ ?>
-
-			<li class="nav-item rightaligned">
-			<div class="dropdown">
-				<button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<?php print_r($_SESSION["user_name"]); ?>
-				</button>
-				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Balance: <?php print_r($_SESSION["user_balance"]); ?> ฿</a>
-                    <?php if($_SESSION["user_role"]=="member") {?>
-                        <a class="dropdown-item" href="topup.php">Topup</a>
-                        <a class="dropdown-item" href="userreport.php">Report problem</a>
-                    <?php }  elseif($_SESSION["user_role"]=="vendor") {?>
-                        <a class="dropdown-item" href="withdraw.php">Withdraw</a>
-                    <?php } ?>
-                    <a class="dropdown-item" href="logout.php">Logout</a>
-                </div>
-			</div>
-			</li>
-			<?php } else{ ?>
-			<li class="nav-item rightaligned">
-				<a class="btn btn-danger" href="form_login.php" style="color: white">Login</a>
-			</li>
-			<?php } ?>
-		</ul>
-		</div>
-	</nav>
-	<a href="insertrestaurant.php" class="btn btn-primary">+ Add new restaurant</a> <br>
+<?php include("navbar.php"); ?>
+	<a href="insertrestaurant.php" class="btn btn-primary">+ Add new restaurant</a>
+	<a href="allorders.php" class="btn btn-primary">Show all orders log</a>
+	<br>
 	<div class="container" style="display: inline; font-size: 36px;">
 	Admin dashboard
 		<div class="alert alert-info col-4" style="font-size: 18px;" role="alert">
