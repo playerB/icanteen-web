@@ -14,6 +14,7 @@
         } else if ($_SESSION["user_role"]=="vendor" && isset($_GET['order_id'])) { 
             $vendor_id = $_SESSION["user_id"];
             $vendor_balance = $_SESSION["user_balance"];
+            $new_vendor_balance = $vendor_balance;
 
             $requestinfo = "SELECT *, order_amount*menu_price AS order_total FROM orderhistory, menu WHERE menu.menu_id = orderhistory.menu_id AND orderhistory.order_id=".$_GET['order_id'] or die("Error:" . mysqli_error());
 		    $orderinfo = mysqli_fetch_array(mysqli_query($conn, $requestinfo));
