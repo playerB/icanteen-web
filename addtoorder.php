@@ -14,6 +14,7 @@ echo "</script>";
     $user_id = mysqli_real_escape_string($conn,$_SESSION['user_id']);
     $user_balance = mysqli_real_escape_string($conn,$_SESSION['user_balance']);
     $order_amount = mysqli_real_escape_string($conn,$_GET['menu_amount']);
+    $note = mysqli_real_escape_string($conn,$_GET['note']);
     $order_status = 'รอร้านรับคำสั่งซื้อ';
     $requestinfo = "SELECT * FROM menu WHERE menu_id=$menu_id" or die("Error:" . mysqli_error());
 	$menuinfo = mysqli_fetch_array(mysqli_query($conn, $requestinfo));
@@ -21,8 +22,8 @@ echo "</script>";
     $leftover_balance = $user_balance - $order_price;
     
     if ($leftover_balance >= 0) {
-        $sql = "INSERT INTO orderhistory (menu_id,user_id,order_amount,order_status)
-        VALUES ('$menu_id','$user_id','$order_amount','$order_status');
+        $sql = "INSERT INTO orderhistory (menu_id,user_id,order_amount,order_status,note)
+        VALUES ('$menu_id','$user_id','$order_amount','$order_status','$note');
         UPDATE user SET user_balance=$leftover_balance WHERE user_id=$user_id";
 
         $result = mysqli_multi_query($conn, $sql);

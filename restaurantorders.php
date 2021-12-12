@@ -44,7 +44,7 @@
 
     <div class='table-responsive'>
         <table class='table table-striped table-hover'>
-            <thead class='thead-dark' align='center' bgcolor='#CCCCCC'><tr><th scope='col'>Order ID</th><th scope='col'>User ID</th><th scope='col'>Name</th><th scope='col'>Amount</th><th scope='col'>Price</th><th scope='col'>Timestamp</th><th scope='col'>Status</th><th colspan='2'>Order Action</th></tr></thead>
+            <thead class='thead-dark' align='center' bgcolor='#CCCCCC'><tr><th scope='col'>Order ID</th><th scope='col'>User ID</th><th scope='col'>Name</th><th scope='col'>Amount</th><th scope='col'>Note</th><th scope='col'>Total Price</th><th scope='col'>Timestamp</th><th scope='col'>Status</th><th colspan='2'>Order Action</th></tr></thead>
             <tbody>
             <?php
             
@@ -61,6 +61,7 @@
                 echo "<td align='center'>" .$row["user_id"] .  "</td> ";
                 echo "<td align='center'>" .$row["menu_name"] .  "</td> ";
                 echo "<td align='center'>" .$row["order_amount"] .  "</td> ";
+                echo "<td align='center'>" .$row["note"] .  "</td> ";
                 echo "<td align='center'>" .$total_price.  "</td> ";
                 echo "<td align='center'>" .$row["order_timestamp"] .  "</td> ";
                 echo "<td align='center'>" .$row["order_status"] .  "</td> ";
@@ -74,7 +75,7 @@
                 echo "</tr>";
             } ?>
             </tbody>
-            <thead class='thead-dark' align='center' bgcolor='#CCCCCC'><tr><th scope='col'>Order ID</th><th scope='col'>User ID</th><th scope='col'>Name</th><th scope='col'>Amount</th><th scope='col'>Price</th><th scope='col'>Timestamp</th><th scope='col'>Status</th></tr></thead>
+            <thead class='thead-dark' align='center' bgcolor='#CCCCCC'><tr><th scope='col'>Order ID</th><th scope='col'>User ID</th><th scope='col'>Name</th><th scope='col'>Amount</th><th scope='col'>Note</th><th scope='col'>Price</th><th scope='col'>Timestamp</th><th scope='col'>Status</th></tr></thead>
             <tbody>
             <?php
             while($row = mysqli_fetch_array($result2)) { 
@@ -90,6 +91,7 @@
                 echo "<td align='center'>" .$row["user_id"] .  "</td> ";
                 echo "<td align='center'>" .$row["menu_name"] .  "</td> ";
                 echo "<td align='center'>" .$row["order_amount"] .  "</td> ";
+                echo "<td align='center'>" .$row["note"] .  "</td> ";
                 echo "<td align='center'>" .$total_price.  "</td> ";
                 echo "<td align='center'>" .$row["order_timestamp"] .  "</td> ";
                 echo "<td align='center'>" .$row["order_status"] .  "</td> ";

@@ -34,6 +34,7 @@ if ($_SESSION["user_role"]!="member"){  //check session
 							<th>Menu</th>
 							<th>Order Time</th>
 							<th>Amount</th>
+							<th>Note</th>
 							<th>Total Price</th>
 							<th>Status</th>
 						</tr>
@@ -62,6 +63,7 @@ if ($_SESSION["user_role"]!="member"){  //check session
 									echo "<td>".$row["menu_name"]."</td>";
 									echo "<td>".$row["order_timestamp"]."</td>";
 									echo "<td>x".$row["order_amount"]."</td>";
+									echo "<td>".$row["note"]."</td>";
 									echo "<td>".$row["order_amount"]*$row["menu_price"]."฿</td>";
 									echo "<td>".$row["order_status"]."</td>";
 									if ($row["order_status"]=="รอร้านรับคำสั่งซื้อ") {

@@ -14,7 +14,7 @@
         } else if ($_SESSION["user_role"]=="admin") { 
             $owner_id = $_SESSION["user_id"];
 
-            $query1 = "SELECT order_id, user_name, menu_name, restaurant_name, menu_price, order_amount, order_timestamp, order_status, finish_timestamp  FROM menu, orderhistory, user, restaurant WHERE 
+            $query1 = "SELECT * FROM menu, orderhistory, user, restaurant WHERE 
             menu.menu_id= orderhistory.menu_id AND user.user_id = orderhistory.user_id AND menu.restaurant_id = restaurant.restaurant_id ORDER BY order_timestamp DESC" 
 
             or die("Error:" . mysqli_error()); 
@@ -47,6 +47,7 @@
                     <th scope='col'>Restaurant name</th>
                     <th scope='col'>Price</th>
                     <th scope='col'>Amount</th>
+                    <th scope='col'>Note</th>
                     <th scope='col'>Order timestamp</th>
                     <th scope='col'>Finish timestamp</th>
                     <th scope='col'>Status</th>
@@ -74,6 +75,7 @@
                 echo "<td align='center'>" .$row["restaurant_name"] .  "</td> ";
                 echo "<td align='center'>" .$total_price.  "</td> ";
                 echo "<td align='center'>" .$row["order_amount"] .  "</td> ";
+                echo "<td align='center'>" .$row["note"] .  "</td> ";
                 echo "<td align='center'>" .$row["order_timestamp"] .  "</td> ";
                 echo "<td align='center'>" .$row["finish_timestamp"] .  "</td> ";
                 echo "<td align='center'>" .$row["order_status"] .  "</td> ";

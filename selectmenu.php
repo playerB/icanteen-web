@@ -62,7 +62,8 @@ $row = mysqli_fetch_array($result);
 		if ($_SESSION["user_role"]=="member") {
 		echo "<form action='addtoorder.php' method='get'>";
 			echo "<label for='menu_amount'>ใส่จำนวน</label>";
-			echo "<input type='number' name='menu_amount' id='menu_amount' value=1 min='0' step='1'/>";
+			echo "<input type='number' name='menu_amount' id='menu_amount' value=1 min='0' step='1'/> <br>";
+			echo "<input type='text' name='note' id='note' placeholder='หมายเหตุ เช่น สิ่งที่แพ้/ไม่ใส่...' /> <br>";
 			echo "<input type='hidden' name='menu_id' id='menu_id' value=$menu_id />";
 			echo "<div style='padding-top: 20px;'><input type='submit' class='btn btn-success btn-lg' value='สั่งเลย!' name='submitbtn'/></div>";
 		echo "</form>";
