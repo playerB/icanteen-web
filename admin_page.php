@@ -69,12 +69,14 @@ if (!$_SESSION["user_name"]){  //check session
 			array_push($user_spent, array("y" => $row[1], "label" => $row[0]));
 		}
 
-		$query07 = "SELECT restaurant_name, SUM(order_amount*menu_price) FROM orderhistory,menu,restaurant WHERE menu.menu_id = orderhistory.menu_id AND restaurant.restaurant_id = menu.restaurant_id AND order_status IN ('อาหารเสร็จแล้ว') GROUP BY restaurant_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
-		$result07 = mysqli_fetch_array(mysqli_query($conn, $query07));
-		$restaurant_maxrev =$result07[0];
-		$restaurant_maxrev_count = $result07[1];
+		$report_summary = array();
+		$query_report_summary = "SELECT report_type, COUNT(*) FROM report WHERE report.report_timestamp >= DATE(NOW()) - INTERVAL 30 DAY
+		GROUP BY report_type ORDER BY 2" or die("Error:" . mysqli_error());
+		$result_report_summary = mysqli_query($conn, $query_report_summary);
 
-
+		while($row = mysqli_fetch_array($result_report_summary)) {
+			array_push($report_summary, array("y" => $row[1], "label" => $row[0]));
+		}
 ?>
 <!doctype html>
 <html>
@@ -141,6 +143,24 @@ if (!$_SESSION["user_name"]){  //check session
         });
         userSpentChart.render();
 
+		var reportSummaryChart = new CanvasJS.Chart("reportSummaryChart", {
+            animationEnabled: true,
+            title: {
+                fontFamily: "Mitr",
+                text: "Report Categorized by Type"
+            },
+            subtitles: [{
+                fontFamily: "Mitr",
+                text: "only this month"
+            }],
+            data: [{
+                type: "pie",
+                indexLabel: "{label} ({y})",
+                dataPoints: <?php echo json_encode($report_summary, JSON_NUMERIC_CHECK); ?>
+            }]
+        });
+        reportSummaryChart.render();
+
         }
     </script>
 </head>
@@ -159,6 +179,7 @@ if (!$_SESSION["user_name"]){  //check session
 		<div class="row">
             &nbsp;
             <div id="userSpentChart" style="height: 400px; width: 45%;"></div>
+            <div id="reportSummaryChart" style="height: 400px; width: 45%;"></div>
         </div>
 		&nbsp; This week order statistics:
 		<div class="row">
