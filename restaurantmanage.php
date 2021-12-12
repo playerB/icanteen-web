@@ -18,16 +18,16 @@ error_reporting(~E_WARNING);
             $query00 = "SELECT restaurant_id FROM restaurant WHERE restaurant.owner_id=$owner_id" or die("Error:" . mysqli_error()); 
             $restaurant_id = mysqli_fetch_array(mysqli_query($conn, $query00))[0]; 
 
-            $query01 = "SELECT AVG(time_diff) FROM orderhistory, menu WHERE time_diff IS NOT NULL AND orderhistory.menu_id = menu.menu_id AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 7 DAY AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
+            $query01 = "SELECT AVG(time_diff) FROM orderhistory, menu WHERE time_diff IS NOT NULL AND orderhistory.menu_id = menu.menu_id AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 0 WEEK AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
             $time_diff_avg = mysqli_fetch_array(mysqli_query($conn, $query01))[0];
 
-            $query02 = "SELECT COUNT(order_id) FROM orderhistory, menu WHERE orderhistory.menu_id = menu.menu_id AND orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 7 DAY AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
+            $query02 = "SELECT COUNT(order_id) FROM orderhistory, menu WHERE orderhistory.menu_id = menu.menu_id AND orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 0 WEEK AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
             $order_count = mysqli_fetch_array(mysqli_query($conn, $query02))[0];
 
-            $query03 = "SELECT COUNT(order_id) FROM orderhistory, menu WHERE time_diff IS NOT NULL AND order_status = 'อาหารเสร็จแล้ว' AND orderhistory.menu_id = menu.menu_id AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 7 DAY AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
+            $query03 = "SELECT COUNT(order_id) FROM orderhistory, menu WHERE time_diff IS NOT NULL AND order_status = 'อาหารเสร็จแล้ว' AND orderhistory.menu_id = menu.menu_id AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 0 WEEK AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
             $order_count_success = mysqli_fetch_array(mysqli_query($conn, $query03))[0];
 
-            $query04 = "SELECT COUNT(order_id) FROM orderhistory, menu WHERE order_status = 'ถูกยกเลิก' AND orderhistory.menu_id = menu.menu_id AND orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 7 DAY AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
+            $query04 = "SELECT COUNT(order_id) FROM orderhistory, menu WHERE order_status = 'ถูกยกเลิก' AND orderhistory.menu_id = menu.menu_id AND orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 0 WEEK AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
             $order_count_cancel = mysqli_fetch_array(mysqli_query($conn, $query04))[0];
 
             // collect total revenue of this restaurant for each week (last 1 to 8 weeks)

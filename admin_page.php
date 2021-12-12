@@ -14,16 +14,16 @@ if (!$_SESSION["user_name"]){  //check session
     }
 	if ($_SESSION["user_role"]=="admin"){ 
 		include('Connections/condb.php');
-		$query01 = "SELECT AVG(time_diff) FROM orderhistory WHERE time_diff IS NOT NULL AND orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 7 DAY" or die("Error:" . mysqli_error());
+		$query01 = "SELECT AVG(time_diff) FROM orderhistory WHERE time_diff IS NOT NULL AND orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 0 WEEK" or die("Error:" . mysqli_error());
 		$time_diff_avg = mysqli_fetch_array(mysqli_query($conn, $query01))[0];
 
-		$query02 = "SELECT COUNT(order_id) FROM orderhistory WHERE orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 7 DAY" or die("Error:" . mysqli_error());
+		$query02 = "SELECT COUNT(order_id) FROM orderhistory WHERE orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 0 WEEK" or die("Error:" . mysqli_error());
 		$order_count = mysqli_fetch_array(mysqli_query($conn, $query02))[0];
 
-		$query03 = "SELECT COUNT(order_id) FROM orderhistory WHERE time_diff IS NOT NULL AND order_status = 'อาหารเสร็จแล้ว' AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 7 DAY" or die("Error:" . mysqli_error());
+		$query03 = "SELECT COUNT(order_id) FROM orderhistory WHERE time_diff IS NOT NULL AND order_status = 'อาหารเสร็จแล้ว' AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 0 WEEK" or die("Error:" . mysqli_error());
 		$order_count_success = mysqli_fetch_array(mysqli_query($conn, $query03))[0];
 
-		$query04 = "SELECT COUNT(order_id) FROM orderhistory WHERE order_status = 'ถูกยกเลิก' AND orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 7 DAY" or die("Error:" . mysqli_error());
+		$query04 = "SELECT COUNT(order_id) FROM orderhistory WHERE order_status = 'ถูกยกเลิก' AND orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 0 WEEK" or die("Error:" . mysqli_error());
 		$order_count_cancel = mysqli_fetch_array(mysqli_query($conn, $query04))[0];
 
 		$query05 = "SELECT COUNT(menu_id) FROM menu" or die("Error:" . mysqli_error());
@@ -59,11 +59,15 @@ if (!$_SESSION["user_name"]){  //check session
 			array_push($restaurant_share, array("y" => $row[1], "label" => $row[0]));
 		}
 
+		$user_spent = array();
+		$query_user_spent = "SELECT user_name, SUM(order_amount*menu_price) AS total_spent FROM orderhistory, menu, user WHERE menu.menu_id = orderhistory.menu_id AND user.user_id = orderhistory.user_id
+		AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 0 WEEK
+		AND order_status IN ('อาหารเสร็จแล้ว') GROUP BY user_name ORDER BY total_spent LIMIT 10" or die("Error:" . mysqli_error());
+		$result_user_spent = mysqli_query($conn, $query_user_spent);
 
-		$query06 = "SELECT user_name, SUM(order_amount*menu_price) FROM orderhistory,menu,user WHERE menu.menu_id = orderhistory.menu_id AND user.user_id = orderhistory.user_id AND order_status IN ('อาหารเสร็จแล้ว') GROUP BY user_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
-		$result06 = mysqli_fetch_array(mysqli_query($conn, $query06));
-		$member_maxspent = $result06[0];
-		$member_maxspent_count = $result06[1];
+		while($row = mysqli_fetch_array($result_user_spent)) {
+			array_push($user_spent, array("y" => $row[1], "label" => $row[0]));
+		}
 
 		$query07 = "SELECT restaurant_name, SUM(order_amount*menu_price) FROM orderhistory,menu,restaurant WHERE menu.menu_id = orderhistory.menu_id AND restaurant.restaurant_id = menu.restaurant_id AND order_status IN ('อาหารเสร็จแล้ว') GROUP BY restaurant_name ORDER BY 2 DESC" or die("Error:" . mysqli_error());
 		$result07 = mysqli_fetch_array(mysqli_query($conn, $query07));
@@ -118,6 +122,25 @@ if (!$_SESSION["user_name"]){  //check session
         });
         restaurantShareChart.render();
 
+		var userSpentChart = new CanvasJS.Chart("userSpentChart", {
+            animationEnabled: true,
+            title: {
+                fontFamily: "Mitr",
+                text: "Top 10 User Spending"
+            },
+            subtitles: [{
+                fontFamily: "Mitr",
+                text: "only this week"
+            }],
+            data: [{
+                type: "pie",
+                yValueFormatString: "#,##0.00\"฿\"",
+                indexLabel: "{label} ({y})",
+                dataPoints: <?php echo json_encode($user_spent, JSON_NUMERIC_CHECK); ?>
+            }]
+        });
+        userSpentChart.render();
+
         }
     </script>
 </head>
@@ -133,6 +156,10 @@ if (!$_SESSION["user_name"]){  //check session
             <div id="weeklySalesChart" style="height: 400px; width: 45%;"></div>
             <div id="restaurantShareChart" style="height: 400px; width: 45%;"></div>
         </div>
+		<div class="row">
+            &nbsp;
+            <div id="userSpentChart" style="height: 400px; width: 45%;"></div>
+        </div>
 		&nbsp; This week order statistics:
 		<div class="row">
 			<div class="alert alert-info col-4" style="font-size: 18px;" role="alert">
@@ -144,7 +171,7 @@ if (!$_SESSION["user_name"]){  //check session
 			<div class="alert alert-success col-2" style="font-size: 18px;" role="alert">
 				Total order succeed: <?php echo $order_count_success; ?>
 			</div>
-			<div class="alert alert-warning col-2" style="font-size: 18px;" role="alert">
+			<div class="alert alert-danger col-2" style="font-size: 18px;" role="alert">
 				Total order cancelled: <?php echo $order_count_cancel; ?>
 			</div>
 		</div>
