@@ -21,19 +21,15 @@ error_reporting(~E_WARNING);
             $query01 = "SELECT AVG(time_diff) FROM orderhistory, menu WHERE time_diff IS NOT NULL AND orderhistory.menu_id = menu.menu_id AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 7 DAY AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
             $time_diff_avg = mysqli_fetch_array(mysqli_query($conn, $query01))[0];
 
-            $query02 = "SELECT COUNT(order_id) FROM orderhistory, menu WHERE orderhistory.menu_id = menu.menu_id AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 7 DAY AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
+            $query02 = "SELECT COUNT(order_id) FROM orderhistory, menu WHERE orderhistory.menu_id = menu.menu_id AND orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 7 DAY AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
             $order_count = mysqli_fetch_array(mysqli_query($conn, $query02))[0];
 
             $query03 = "SELECT COUNT(order_id) FROM orderhistory, menu WHERE time_diff IS NOT NULL AND order_status = 'อาหารเสร็จแล้ว' AND orderhistory.menu_id = menu.menu_id AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 7 DAY AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
             $order_count_success = mysqli_fetch_array(mysqli_query($conn, $query03))[0];
 
-            $query04 = "SELECT COUNT(order_id) FROM orderhistory, menu WHERE order_status = 'ถูกยกเลิก' AND orderhistory.menu_id = menu.menu_id AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 7 DAY AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
+            $query04 = "SELECT COUNT(order_id) FROM orderhistory, menu WHERE order_status = 'ถูกยกเลิก' AND orderhistory.menu_id = menu.menu_id AND orderhistory.order_timestamp >= DATE(NOW()) - INTERVAL 7 DAY AND restaurant_id = $restaurant_id" or die("Error:" . mysqli_error());
             $order_count_cancel = mysqli_fetch_array(mysqli_query($conn, $query04))[0];
 
-            $query12 = "SELECT menu_name, SUM(order_amount*menu_price) FROM orderhistory,menu WHERE menu.menu_id = orderhistory.menu_id AND restaurant_id = $restaurant_id AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 7 DAY AND order_status IN ('อาหารเสร็จแล้ว') GROUP BY menu_name ORDER BY 2 DESC LIMIT 5" or die("Error:" . mysqli_error());
-            $result12 = mysqli_query($conn, $query12);
-
-            
             // collect total revenue of this restaurant for each week (last 1 to 8 weeks)
             $week_revenue = array();
             for ($i=0; $i <= 7; $i++) { 
@@ -57,7 +53,7 @@ error_reporting(~E_WARNING);
             // total sales of each menu in the last week
             $menu_share = array();
             $query_menu_share = "SELECT menu_name, SUM(order_amount*menu_price) AS total_menu_sale FROM orderhistory, menu WHERE menu.menu_id = orderhistory.menu_id
-                AND restaurant_id = $restaurant_id AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 1 WEEK 
+                AND restaurant_id = $restaurant_id AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 0 WEEK 
                 AND order_status IN ('อาหารเสร็จแล้ว') GROUP BY menu_name ORDER BY total_menu_sale" or die("Error:" . mysqli_error());
             $result_menu_share = mysqli_query($conn, $query_menu_share);
 
