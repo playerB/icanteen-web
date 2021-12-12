@@ -91,6 +91,17 @@ $result= mysqli_query($conn, $query);
 			padding: 3px 7px;
 			font-size: 14px;
 		}
+		.recommended-badge {
+			position: absolute;
+			left: 10px;
+			top: 10px;
+			background: #2ecc71;
+			text-align: center;
+			border-radius: 50px;
+			color: white;
+			padding: 3px 7px;
+			font-size: 14px;
+		}
 		
     </style>
 </head>
@@ -105,11 +116,18 @@ $result= mysqli_query($conn, $query);
 			echo "<div class='scrolling-wrapper'>";
 			$sql2 = "SELECT * FROM menu WHERE restaurant_id = '$restaurant_id'";
 			$menuresult = mysqli_query($conn, $sql2);
+			
 			while($menurow = mysqli_fetch_array($menuresult)) {
+				$sql3 = "SELECT SUM(order_amount) FROM orderhistory WHERE menu_id = $menurow[0] AND orderhistory.finish_timestamp >= DATE(NOW()) - INTERVAL 30 DAY";
+				$ispopular= mysqli_fetch_array(mysqli_query($conn, $sql3));
 				echo "<div class='card card-box mr-2 mb-2'>";
 					echo "<a href='selectmenu.php?menu_id=$menurow[0]'>";
 					echo "<img src='menu_picture/".$menurow["menu_picture"]."' class='card-img card-img-box' alt=''>";
-					echo "<span class='price-badge'>".$menurow["menu_price"].".-</span></a>";
+					if ($ispopular[0] >= 5) {
+						echo "<span class='recommended-badge'>Recommended!</span>";
+					}
+					echo "<span class='price-badge'>".$menurow["menu_price"].".-</span>";
+					echo "</a>";
 					echo "<div class='card-body'>";
 					echo "<p class='card-title'>".$menurow["menu_name"]."</p>";
 					echo "</div>";
@@ -122,9 +140,7 @@ $result= mysqli_query($conn, $query);
 	<footer style="background-color: #cccccc">
 		<div class="container">
 			<p id = "btext"><br>
-				คณะวิศวกรรมศาสตร์<br> 
-					คณะวิศวกรรมศาสตร์<br> 
-				คณะวิศวกรรมศาสตร์<br> 
+				คณะวิศวกรรมศาสตร์<br>
 				จุฬาลงกรณ์มหาวิทยาลัย<br>
 				ถนนพญาไท เเขวงวังใหม่<br>
 				เขตปทุมวัน กรุงเทพฯ 10400<br>
