@@ -14,7 +14,6 @@ echo "</script>";
 //สร้างตัวแปรสำหรับรับค่าที่นำมาแก้ไขจากฟอร์ม
 	$menu_id = $_POST["menu_id"];
 	$menu_name = $_POST["menu_name"];
-	$restaurant_id = $_POST["restaurant_id"];
 	$menu_price = $_POST["menu_price"];
 	$menu_category = $_POST["menu_category"];
 	$menu_detail = $_POST["menu_detail"];
@@ -27,7 +26,6 @@ echo "</script>";
 			move_uploaded_file($_FILES['menu_picture']['tmp_name'],$path_copy);  	
 		$sql = "UPDATE menu SET " 
 			."menu_name='$menu_name', "
-			."restaurant_id='$restaurant_id', "
 			."menu_price='$menu_price', "
 			."menu_category='$menu_category', "
 			."menu_detail='$menu_detail', "
@@ -36,7 +34,6 @@ echo "</script>";
 	} else { //ทำการปรับปรุงข้อมูลที่จะแก้ไขลงใน database
 		$sql = "UPDATE menu SET " 
 			."menu_name='$menu_name', "
-			."restaurant_id='$restaurant_id', "
 			."menu_price='$menu_price', "
 			."menu_category='$menu_category', "
 			."menu_detail='$menu_detail'

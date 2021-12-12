@@ -40,7 +40,6 @@ $sql = "SELECT * FROM menu WHERE menu_id='$menu_id' ";
 $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_error());
 $row = mysqli_fetch_array($result);
 $menu_name = $row["menu_name"];
-$restaurant_id = $row["restaurant_id"];
 $menu_price = $row["menu_price"];
 $menu_category = $row["menu_category"];
 $menu_detail = $row["menu_detail"];
@@ -58,24 +57,6 @@ extract($row);
 			<div style="width: 300px; height: 80px;" class="form-group">
 				<label for="menu_name">Menu name :</label>
 					<input type="text" class="form-control" name="menu_name" id="menu_name" placeholder="<?php echo $menu_name; ?>" value="<?php echo $menu_name; ?>" required="required"/><br/><br/>
-			</div>
-			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="restaurant_id">Restaurant :</label>
-					<select type="text" class="custom-select" name="restaurant_id" id="restaurant_id" required="required">
-					<option selected value="<?php echo $restaurant_id; ?>"><?php echo $restaurant_id; ?></option>
-					<option value="1">1.สุชาดา น้ำผลไม้</option>
-					<option value="2">2.ส้ม อาหารชุด</option>
-					<option value="3">3.รุจิศรี เส้นเล็กต้มยำ</option>
-					<option value="4">4.อรวรรณ</option>
-					<option value="5">5.ข้าวเหนียวอักษร สาขา2</option>
-					<option value="6">6.รัตน์ จานด่วน</option>
-					<option value="7">7.ลุงเหนอ ก๋วยเตี๋ยวทรงเครื่อง</option>
-					<option value="8">8.ข้าวราดแกงป้าหลง</option>
-					<option value="9">9.ข้าว-มัน-ไก่ น้ากวาง</option>
-					<option value="10">10.ขนมหวานเย็น</option>
-					<option value="11">11.ทูเดย์สเต็ก</option>
-					</select>
-					<br /><br />
 			</div>
 			<div style="width: 300px; height: 60px;">
 			<div class="input-group">

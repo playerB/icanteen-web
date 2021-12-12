@@ -25,7 +25,7 @@
 				}
 				
 				$menu_name = mysqli_real_escape_string($conn, $_POST['menu_name']);
-				$restaurant_id = mysqli_real_escape_string($conn, $_POST['restaurant_id']);
+				$restaurant_id = mysqli_fetch_array(mysqli_query($conn, "SELECT restaurant_id FROM restaurant WHERE owner_id = '".$_SESSION['user_id']."'"))['restaurant_id'];
 				$menu_price = mysqli_real_escape_string($conn, $_POST['menu_price']);
 				$menu_category = mysqli_real_escape_string($conn, $_POST['menu_category']);
 				$menu_detail = mysqli_real_escape_string($conn, $_POST['menu_detail']);
@@ -56,23 +56,6 @@
 			<div style="width: 300px; height: 80px;" class="form-group">
 				<label for="menu_name">Menu name :</label>
 					<input type="text" class="form-control" name="menu_name" id="menu_name" required="required" /><br /><br />
-			</div>
-			<div style="width: 300px; height: 80px;" class="form-group">
-				<label for="restaurant_id">Restaurant :</label>
-					<select type="text" class="custom-select" name="restaurant_id" id="restaurant_id" required="required">
-					<option value="1">1.สุชาดา น้ำผลไม้</option>
-					<option value="2">2.ส้ม อาหารชุด</option>
-					<option value="3">3.รุจิศรี เส้นเล็กต้มยำ</option>
-					<option value="4">4.อรวรรณ</option>
-					<option value="5">5.ข้าวเหนียวอักษร สาขา2</option>
-					<option value="6">6.รัตน์ จานด่วน</option>
-					<option value="7">7.ลุงเหนอ ก๋วยเตี๋ยวทรงเครื่อง</option>
-					<option value="8">8.ข้าวราดแกงป้าหลง</option>
-					<option value="9">9.ข้าว-มัน-ไก่ น้ากวาง</option>
-					<option value="10">10.ขนมหวานเย็น</option>
-					<option value="11">11.ทูเดย์สเต็ก</option>
-					</select>
-					<br /><br />
 			</div>
 			<div style="width: 300px; height: 60px;">
 			<div class="input-group">
